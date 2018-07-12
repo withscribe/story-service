@@ -1,0 +1,10 @@
+# import token from './generated/prisma.graphql'
+
+type Query {
+  tokens(searchString: String!): [Token!]!
+  token(searchString: String!): Token
+}
+
+type Mutation {
+  createToken(symbol: String!, address: String!, totalSupply:Int, name: String!, abi: String!, contract: String ): Token
+}

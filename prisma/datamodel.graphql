@@ -1,0 +1,8 @@
+type Token {
+  symbol: String! @unique
+  address: String! @unique
+  totalSupply: Int
+  name: String! 
+  abi: String!
+  contract: String
+}

@@ -1,0 +1,16 @@
+{
+  "name": "token-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-yoga": "^1.14.12",
+    "nodemon": "^1.17.5",
+    "prisma-binding": "^2.1.0"
+  }
+}

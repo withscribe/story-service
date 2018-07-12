@@ -1,0 +1,422 @@
+# source: http://localhost:4466
+# timestamp: Thu Jul 12 2018 14:49:47 GMT-0400 (EDT)
+
+type AggregateToken {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createToken(data: TokenCreateInput!): Token!
+  updateToken(data: TokenUpdateInput!, where: TokenWhereUniqueInput!): Token
+  deleteToken(where: TokenWhereUniqueInput!): Token
+  upsertToken(where: TokenWhereUniqueInput!, create: TokenCreateInput!, update: TokenUpdateInput!): Token!
+  updateManyTokens(data: TokenUpdateInput!, where: TokenWhereInput): BatchPayload!
+  deleteManyTokens(where: TokenWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  tokens(where: TokenWhereInput, orderBy: TokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Token]!
+  token(where: TokenWhereUniqueInput!): Token
+  tokensConnection(where: TokenWhereInput, orderBy: TokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TokenConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  token(where: TokenSubscriptionWhereInput): TokenSubscriptionPayload
+}
+
+type Token {
+  symbol: String!
+  address: String!
+  totalSupply: Int
+  name: String!
+  abi: String!
+  contract: String
+}
+
+"""A connection to a list of items."""
+type TokenConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TokenEdge]!
+  aggregate: AggregateToken!
+}
+
+input TokenCreateInput {
+  symbol: String!
+  address: String!
+  totalSupply: Int
+  name: String!
+  abi: String!
+  contract: String
+}
+
+"""An edge in a connection."""
+type TokenEdge {
+  """The item at the end of the edge."""
+  node: Token!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TokenOrderByInput {
+  symbol_ASC
+  symbol_DESC
+  address_ASC
+  address_DESC
+  totalSupply_ASC
+  totalSupply_DESC
+  name_ASC
+  name_DESC
+  abi_ASC
+  abi_DESC
+  contract_ASC
+  contract_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type TokenPreviousValues {
+  symbol: String!
+  address: String!
+  totalSupply: Int
+  name: String!
+  abi: String!
+  contract: String
+}
+
+type TokenSubscriptionPayload {
+  mutation: MutationType!
+  node: Token
+  updatedFields: [String!]
+  previousValues: TokenPreviousValues
+}
+
+input TokenSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TokenSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TokenSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TokenSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TokenWhereInput
+}
+
+input TokenUpdateInput {
+  symbol: String
+  address: String
+  totalSupply: Int
+  name: String
+  abi: String
+  contract: String
+}
+
+input TokenWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TokenWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TokenWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TokenWhereInput!]
+  symbol: String
+
+  """All values that are not equal to given value."""
+  symbol_not: String
+
+  """All values that are contained in given list."""
+  symbol_in: [String!]
+
+  """All values that are not contained in given list."""
+  symbol_not_in: [String!]
+
+  """All values less than the given value."""
+  symbol_lt: String
+
+  """All values less than or equal the given value."""
+  symbol_lte: String
+
+  """All values greater than the given value."""
+  symbol_gt: String
+
+  """All values greater than or equal the given value."""
+  symbol_gte: String
+
+  """All values containing the given string."""
+  symbol_contains: String
+
+  """All values not containing the given string."""
+  symbol_not_contains: String
+
+  """All values starting with the given string."""
+  symbol_starts_with: String
+
+  """All values not starting with the given string."""
+  symbol_not_starts_with: String
+
+  """All values ending with the given string."""
+  symbol_ends_with: String
+
+  """All values not ending with the given string."""
+  symbol_not_ends_with: String
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  totalSupply: Int
+
+  """All values that are not equal to given value."""
+  totalSupply_not: Int
+
+  """All values that are contained in given list."""
+  totalSupply_in: [Int!]
+
+  """All values that are not contained in given list."""
+  totalSupply_not_in: [Int!]
+
+  """All values less than the given value."""
+  totalSupply_lt: Int
+
+  """All values less than or equal the given value."""
+  totalSupply_lte: Int
+
+  """All values greater than the given value."""
+  totalSupply_gt: Int
+
+  """All values greater than or equal the given value."""
+  totalSupply_gte: Int
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  abi: String
+
+  """All values that are not equal to given value."""
+  abi_not: String
+
+  """All values that are contained in given list."""
+  abi_in: [String!]
+
+  """All values that are not contained in given list."""
+  abi_not_in: [String!]
+
+  """All values less than the given value."""
+  abi_lt: String
+
+  """All values less than or equal the given value."""
+  abi_lte: String
+
+  """All values greater than the given value."""
+  abi_gt: String
+
+  """All values greater than or equal the given value."""
+  abi_gte: String
+
+  """All values containing the given string."""
+  abi_contains: String
+
+  """All values not containing the given string."""
+  abi_not_contains: String
+
+  """All values starting with the given string."""
+  abi_starts_with: String
+
+  """All values not starting with the given string."""
+  abi_not_starts_with: String
+
+  """All values ending with the given string."""
+  abi_ends_with: String
+
+  """All values not ending with the given string."""
+  abi_not_ends_with: String
+  contract: String
+
+  """All values that are not equal to given value."""
+  contract_not: String
+
+  """All values that are contained in given list."""
+  contract_in: [String!]
+
+  """All values that are not contained in given list."""
+  contract_not_in: [String!]
+
+  """All values less than the given value."""
+  contract_lt: String
+
+  """All values less than or equal the given value."""
+  contract_lte: String
+
+  """All values greater than the given value."""
+  contract_gt: String
+
+  """All values greater than or equal the given value."""
+  contract_gte: String
+
+  """All values containing the given string."""
+  contract_contains: String
+
+  """All values not containing the given string."""
+  contract_not_contains: String
+
+  """All values starting with the given string."""
+  contract_starts_with: String
+
+  """All values not starting with the given string."""
+  contract_not_starts_with: String
+
+  """All values ending with the given string."""
+  contract_ends_with: String
+
+  """All values not ending with the given string."""
+  contract_not_ends_with: String
+}
+
+input TokenWhereUniqueInput {
+  symbol: String
+  address: String
+}
