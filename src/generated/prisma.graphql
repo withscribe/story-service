@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Jul 12 2018 14:49:47 GMT-0400 (EDT)
+# timestamp: Thu Jul 12 2018 20:29:14 GMT-0400 (EDT)
 
 type AggregateToken {
   count: Int!
@@ -70,11 +70,16 @@ type Subscription {
 
 type Token {
   symbol: String!
-  address: String!
-  totalSupply: Int
   name: String!
   abi: String!
-  contract: String
+  address: String!
+  totalSupply: Int
+  price: Float
+  holders: Int
+  officialSite: String
+  decimals: Int
+  marketCap: Float
+  circulatingSupply: Int
 }
 
 """A connection to a list of items."""
@@ -89,11 +94,16 @@ type TokenConnection {
 
 input TokenCreateInput {
   symbol: String!
-  address: String!
-  totalSupply: Int
   name: String!
   abi: String!
-  contract: String
+  address: String!
+  totalSupply: Int
+  price: Float
+  holders: Int
+  officialSite: String
+  decimals: Int
+  marketCap: Float
+  circulatingSupply: Int
 }
 
 """An edge in a connection."""
@@ -108,16 +118,26 @@ type TokenEdge {
 enum TokenOrderByInput {
   symbol_ASC
   symbol_DESC
-  address_ASC
-  address_DESC
-  totalSupply_ASC
-  totalSupply_DESC
   name_ASC
   name_DESC
   abi_ASC
   abi_DESC
-  contract_ASC
-  contract_DESC
+  address_ASC
+  address_DESC
+  totalSupply_ASC
+  totalSupply_DESC
+  price_ASC
+  price_DESC
+  holders_ASC
+  holders_DESC
+  officialSite_ASC
+  officialSite_DESC
+  decimals_ASC
+  decimals_DESC
+  marketCap_ASC
+  marketCap_DESC
+  circulatingSupply_ASC
+  circulatingSupply_DESC
   id_ASC
   id_DESC
   updatedAt_ASC
@@ -128,11 +148,16 @@ enum TokenOrderByInput {
 
 type TokenPreviousValues {
   symbol: String!
-  address: String!
-  totalSupply: Int
   name: String!
   abi: String!
-  contract: String
+  address: String!
+  totalSupply: Int
+  price: Float
+  holders: Int
+  officialSite: String
+  decimals: Int
+  marketCap: Float
+  circulatingSupply: Int
 }
 
 type TokenSubscriptionPayload {
@@ -176,11 +201,16 @@ input TokenSubscriptionWhereInput {
 
 input TokenUpdateInput {
   symbol: String
-  address: String
-  totalSupply: Int
   name: String
   abi: String
-  contract: String
+  address: String
+  totalSupply: Int
+  price: Float
+  holders: Int
+  officialSite: String
+  decimals: Int
+  marketCap: Float
+  circulatingSupply: Int
 }
 
 input TokenWhereInput {
@@ -232,68 +262,6 @@ input TokenWhereInput {
 
   """All values not ending with the given string."""
   symbol_not_ends_with: String
-  address: String
-
-  """All values that are not equal to given value."""
-  address_not: String
-
-  """All values that are contained in given list."""
-  address_in: [String!]
-
-  """All values that are not contained in given list."""
-  address_not_in: [String!]
-
-  """All values less than the given value."""
-  address_lt: String
-
-  """All values less than or equal the given value."""
-  address_lte: String
-
-  """All values greater than the given value."""
-  address_gt: String
-
-  """All values greater than or equal the given value."""
-  address_gte: String
-
-  """All values containing the given string."""
-  address_contains: String
-
-  """All values not containing the given string."""
-  address_not_contains: String
-
-  """All values starting with the given string."""
-  address_starts_with: String
-
-  """All values not starting with the given string."""
-  address_not_starts_with: String
-
-  """All values ending with the given string."""
-  address_ends_with: String
-
-  """All values not ending with the given string."""
-  address_not_ends_with: String
-  totalSupply: Int
-
-  """All values that are not equal to given value."""
-  totalSupply_not: Int
-
-  """All values that are contained in given list."""
-  totalSupply_in: [Int!]
-
-  """All values that are not contained in given list."""
-  totalSupply_not_in: [Int!]
-
-  """All values less than the given value."""
-  totalSupply_lt: Int
-
-  """All values less than or equal the given value."""
-  totalSupply_lte: Int
-
-  """All values greater than the given value."""
-  totalSupply_gt: Int
-
-  """All values greater than or equal the given value."""
-  totalSupply_gte: Int
   name: String
 
   """All values that are not equal to given value."""
@@ -374,46 +342,218 @@ input TokenWhereInput {
 
   """All values not ending with the given string."""
   abi_not_ends_with: String
-  contract: String
+  address: String
 
   """All values that are not equal to given value."""
-  contract_not: String
+  address_not: String
 
   """All values that are contained in given list."""
-  contract_in: [String!]
+  address_in: [String!]
 
   """All values that are not contained in given list."""
-  contract_not_in: [String!]
+  address_not_in: [String!]
 
   """All values less than the given value."""
-  contract_lt: String
+  address_lt: String
 
   """All values less than or equal the given value."""
-  contract_lte: String
+  address_lte: String
 
   """All values greater than the given value."""
-  contract_gt: String
+  address_gt: String
 
   """All values greater than or equal the given value."""
-  contract_gte: String
+  address_gte: String
 
   """All values containing the given string."""
-  contract_contains: String
+  address_contains: String
 
   """All values not containing the given string."""
-  contract_not_contains: String
+  address_not_contains: String
 
   """All values starting with the given string."""
-  contract_starts_with: String
+  address_starts_with: String
 
   """All values not starting with the given string."""
-  contract_not_starts_with: String
+  address_not_starts_with: String
 
   """All values ending with the given string."""
-  contract_ends_with: String
+  address_ends_with: String
 
   """All values not ending with the given string."""
-  contract_not_ends_with: String
+  address_not_ends_with: String
+  totalSupply: Int
+
+  """All values that are not equal to given value."""
+  totalSupply_not: Int
+
+  """All values that are contained in given list."""
+  totalSupply_in: [Int!]
+
+  """All values that are not contained in given list."""
+  totalSupply_not_in: [Int!]
+
+  """All values less than the given value."""
+  totalSupply_lt: Int
+
+  """All values less than or equal the given value."""
+  totalSupply_lte: Int
+
+  """All values greater than the given value."""
+  totalSupply_gt: Int
+
+  """All values greater than or equal the given value."""
+  totalSupply_gte: Int
+  price: Float
+
+  """All values that are not equal to given value."""
+  price_not: Float
+
+  """All values that are contained in given list."""
+  price_in: [Float!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Float!]
+
+  """All values less than the given value."""
+  price_lt: Float
+
+  """All values less than or equal the given value."""
+  price_lte: Float
+
+  """All values greater than the given value."""
+  price_gt: Float
+
+  """All values greater than or equal the given value."""
+  price_gte: Float
+  holders: Int
+
+  """All values that are not equal to given value."""
+  holders_not: Int
+
+  """All values that are contained in given list."""
+  holders_in: [Int!]
+
+  """All values that are not contained in given list."""
+  holders_not_in: [Int!]
+
+  """All values less than the given value."""
+  holders_lt: Int
+
+  """All values less than or equal the given value."""
+  holders_lte: Int
+
+  """All values greater than the given value."""
+  holders_gt: Int
+
+  """All values greater than or equal the given value."""
+  holders_gte: Int
+  officialSite: String
+
+  """All values that are not equal to given value."""
+  officialSite_not: String
+
+  """All values that are contained in given list."""
+  officialSite_in: [String!]
+
+  """All values that are not contained in given list."""
+  officialSite_not_in: [String!]
+
+  """All values less than the given value."""
+  officialSite_lt: String
+
+  """All values less than or equal the given value."""
+  officialSite_lte: String
+
+  """All values greater than the given value."""
+  officialSite_gt: String
+
+  """All values greater than or equal the given value."""
+  officialSite_gte: String
+
+  """All values containing the given string."""
+  officialSite_contains: String
+
+  """All values not containing the given string."""
+  officialSite_not_contains: String
+
+  """All values starting with the given string."""
+  officialSite_starts_with: String
+
+  """All values not starting with the given string."""
+  officialSite_not_starts_with: String
+
+  """All values ending with the given string."""
+  officialSite_ends_with: String
+
+  """All values not ending with the given string."""
+  officialSite_not_ends_with: String
+  decimals: Int
+
+  """All values that are not equal to given value."""
+  decimals_not: Int
+
+  """All values that are contained in given list."""
+  decimals_in: [Int!]
+
+  """All values that are not contained in given list."""
+  decimals_not_in: [Int!]
+
+  """All values less than the given value."""
+  decimals_lt: Int
+
+  """All values less than or equal the given value."""
+  decimals_lte: Int
+
+  """All values greater than the given value."""
+  decimals_gt: Int
+
+  """All values greater than or equal the given value."""
+  decimals_gte: Int
+  marketCap: Float
+
+  """All values that are not equal to given value."""
+  marketCap_not: Float
+
+  """All values that are contained in given list."""
+  marketCap_in: [Float!]
+
+  """All values that are not contained in given list."""
+  marketCap_not_in: [Float!]
+
+  """All values less than the given value."""
+  marketCap_lt: Float
+
+  """All values less than or equal the given value."""
+  marketCap_lte: Float
+
+  """All values greater than the given value."""
+  marketCap_gt: Float
+
+  """All values greater than or equal the given value."""
+  marketCap_gte: Float
+  circulatingSupply: Int
+
+  """All values that are not equal to given value."""
+  circulatingSupply_not: Int
+
+  """All values that are contained in given list."""
+  circulatingSupply_in: [Int!]
+
+  """All values that are not contained in given list."""
+  circulatingSupply_not_in: [Int!]
+
+  """All values less than the given value."""
+  circulatingSupply_lt: Int
+
+  """All values less than or equal the given value."""
+  circulatingSupply_lte: Int
+
+  """All values greater than the given value."""
+  circulatingSupply_gt: Int
+
+  """All values greater than or equal the given value."""
+  circulatingSupply_gte: Int
 }
 
 input TokenWhereUniqueInput {

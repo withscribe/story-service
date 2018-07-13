@@ -42,7 +42,7 @@ const resolvers = {
             info,
           )
     },
-  }
+  }, 
 }
 
 const server = new GraphQLServer({

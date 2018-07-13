@@ -1,8 +1,13 @@
 type Token {
   symbol: String! @unique
-  address: String! @unique
-  totalSupply: Int
   name: String! 
   abi: String!
-  contract: String
+  address: String! @unique
+  totalSupply: Int
+  price: Float
+  holders: Int
+  officialSite: String
+  decimals: Int
+  marketCap: Float
+  circulatingSupply: Int
 }
