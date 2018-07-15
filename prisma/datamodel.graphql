@@ -1,13 +1,7 @@
-type Token {
-  symbol: String! @unique
-  name: String! 
-  abi: String!
-  address: String! @unique
-  totalSupply: Int
-  price: Float
-  holders: Int
-  officialSite: String
-  decimals: Int
-  marketCap: Float
-  circulatingSupply: Int
+type Story {
+  title: String!
+  description: String! 
+  author: String!
+  likes: Int
+  genre: String
 }
