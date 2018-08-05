@@ -32,6 +32,7 @@ createBlocks = (submissionId, content) => {
       }
     }
     flagBadBlocks(block)
+    console.log(block.flags)
     blockCollection.blocks.push(block)
   }
   return blockCollection
@@ -43,10 +44,28 @@ flagBadBlocks = (block) => {
     var wordFlags = {}
     for (var badContentType in flaggedContent) {
       wordFlags.word = block.content[i];
+      const badWordList = identifyBadWord(block.content[i])      
       if (flaggedContent.hasOwnProperty(badContentType)) {
           wordFlags.type = badContentType;             
-          block.flags.push({ "type": wordFlags.type, "sentenceIndex": i})                
+          block.flags.push({ "type": wordFlags.type, "sentenceIndex": i, "badWordSet": badWordList})                
       }     
     }
   }
+}
+
+identifyBadWord = (flaggedSentence) => {
+  var words = flaggedSentence.split(" ");
+  let badWordList = []
+
+  for(var i = 0; i < words.length; i++) { 
+      var flaggedWords = swearjar.scorecard(words[i]);          
+      for (var badContentType in flaggedWords) {         
+          badWordList.push(words[i])       
+          // console.log(words[i])
+      }
+  }
+
+  // console.log(badWordList.length)
+
+  return badWordList
 }
