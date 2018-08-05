@@ -2,13 +2,20 @@ type Story {
   id: ID! @unique
   title: String!
   description: String! 
+  content: String
   approved: Boolean @default(value: "false")
-  submissionNumber: Int
+  # submissionID: Submission
   author: String
 }
 
-type Block {
-  submissionNumber: ID  @unique
+type Block { 
   blockNumber: Int!
   blockContent: String!
+  # submissionID: Submission
+}
+
+type Submission {
+  id: ID! @unique
+  flag: Boolean @default(value: "false")
+  # blocks: [Block!]!
 }

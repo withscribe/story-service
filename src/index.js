@@ -20,8 +20,7 @@ const resolvers = {
     },   
   },
   Mutation: {
-    createStory: (_, args, context, info) => {
-      //console.log(Validation.validate());
+    createStory: async (_, args, context, info) => {
 
       return context.prisma.mutation.createStory(
             {
@@ -33,7 +32,36 @@ const resolvers = {
             info,
           )
     },
-  }, 
+    uploadStory: async (_, args, context, info) => {
+      
+      const submissionID = await context.prisma.mutation.createSubmission({
+        data: {
+          flag: true
+        }
+      }, `{id}`)
+
+      console.log(Validation.validate(submissionID, args.content));
+      console.log(submissionID)
+
+
+      return context.prisma.mutation.createStory(
+        {
+          data: {
+            title: args.title,
+            description: args.description,              
+          },
+        },
+        info,
+      )
+
+
+    },
+
+
+  },
+  
+  
+
 }
 
 const server = new GraphQLServer({
@@ -43,7 +71,7 @@ const server = new GraphQLServer({
     ...req,
     prisma: new Prisma({
       typeDefs: 'src/generated/prisma.graphql',
-      endpoint: 'https://us1.prisma.sh/chrismfenos/abi-api/dev',
+      endpoint: 'http://localhost:4466',
     }),
   }),
 })

@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Aug 04 2018 21:05:35 GMT-0400 (EDT)
+# timestamp: Sat Aug 04 2018 23:39:20 GMT-0400 (EDT)
 
 type AggregateBlock {
   count: Int!
@@ -9,13 +9,16 @@ type AggregateStory {
   count: Int!
 }
 
+type AggregateSubmission {
+  count: Int!
+}
+
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
 }
 
 type Block {
-  submissionNumber: ID
   blockNumber: Int!
   blockContent: String!
 }
@@ -31,7 +34,6 @@ type BlockConnection {
 }
 
 input BlockCreateInput {
-  submissionNumber: ID
   blockNumber: Int!
   blockContent: String!
 }
@@ -46,8 +48,6 @@ type BlockEdge {
 }
 
 enum BlockOrderByInput {
-  submissionNumber_ASC
-  submissionNumber_DESC
   blockNumber_ASC
   blockNumber_DESC
   blockContent_ASC
@@ -61,7 +61,6 @@ enum BlockOrderByInput {
 }
 
 type BlockPreviousValues {
-  submissionNumber: ID
   blockNumber: Int!
   blockContent: String!
 }
@@ -106,7 +105,6 @@ input BlockSubscriptionWhereInput {
 }
 
 input BlockUpdateInput {
-  submissionNumber: ID
   blockNumber: Int
   blockContent: String
 }
@@ -120,46 +118,6 @@ input BlockWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [BlockWhereInput!]
-  submissionNumber: ID
-
-  """All values that are not equal to given value."""
-  submissionNumber_not: ID
-
-  """All values that are contained in given list."""
-  submissionNumber_in: [ID!]
-
-  """All values that are not contained in given list."""
-  submissionNumber_not_in: [ID!]
-
-  """All values less than the given value."""
-  submissionNumber_lt: ID
-
-  """All values less than or equal the given value."""
-  submissionNumber_lte: ID
-
-  """All values greater than the given value."""
-  submissionNumber_gt: ID
-
-  """All values greater than or equal the given value."""
-  submissionNumber_gte: ID
-
-  """All values containing the given string."""
-  submissionNumber_contains: ID
-
-  """All values not containing the given string."""
-  submissionNumber_not_contains: ID
-
-  """All values starting with the given string."""
-  submissionNumber_starts_with: ID
-
-  """All values not starting with the given string."""
-  submissionNumber_not_starts_with: ID
-
-  """All values ending with the given string."""
-  submissionNumber_ends_with: ID
-
-  """All values not ending with the given string."""
-  submissionNumber_not_ends_with: ID
   blockNumber: Int
 
   """All values that are not equal to given value."""
@@ -224,10 +182,6 @@ input BlockWhereInput {
   blockContent_not_ends_with: String
 }
 
-input BlockWhereUniqueInput {
-  submissionNumber: ID
-}
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -237,16 +191,19 @@ scalar Long
 type Mutation {
   createStory(data: StoryCreateInput!): Story!
   createBlock(data: BlockCreateInput!): Block!
+  createSubmission(data: SubmissionCreateInput!): Submission!
   updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
-  updateBlock(data: BlockUpdateInput!, where: BlockWhereUniqueInput!): Block
+  updateSubmission(data: SubmissionUpdateInput!, where: SubmissionWhereUniqueInput!): Submission
   deleteStory(where: StoryWhereUniqueInput!): Story
-  deleteBlock(where: BlockWhereUniqueInput!): Block
+  deleteSubmission(where: SubmissionWhereUniqueInput!): Submission
   upsertStory(where: StoryWhereUniqueInput!, create: StoryCreateInput!, update: StoryUpdateInput!): Story!
-  upsertBlock(where: BlockWhereUniqueInput!, create: BlockCreateInput!, update: BlockUpdateInput!): Block!
+  upsertSubmission(where: SubmissionWhereUniqueInput!, create: SubmissionCreateInput!, update: SubmissionUpdateInput!): Submission!
   updateManyStories(data: StoryUpdateInput!, where: StoryWhereInput): BatchPayload!
   updateManyBlocks(data: BlockUpdateInput!, where: BlockWhereInput): BatchPayload!
+  updateManySubmissions(data: SubmissionUpdateInput!, where: SubmissionWhereInput): BatchPayload!
   deleteManyStories(where: StoryWhereInput): BatchPayload!
   deleteManyBlocks(where: BlockWhereInput): BatchPayload!
+  deleteManySubmissions(where: SubmissionWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -279,10 +236,12 @@ type PageInfo {
 type Query {
   stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story]!
   blocks(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block]!
+  submissions(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Submission]!
   story(where: StoryWhereUniqueInput!): Story
-  block(where: BlockWhereUniqueInput!): Block
+  submission(where: SubmissionWhereUniqueInput!): Submission
   storiesConnection(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryConnection!
   blocksConnection(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BlockConnection!
+  submissionsConnection(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubmissionConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -295,8 +254,8 @@ type Story implements Node {
   id: ID!
   title: String!
   description: String!
+  content: String
   approved: Boolean
-  submissionNumber: Int
   author: String
 }
 
@@ -313,8 +272,8 @@ type StoryConnection {
 input StoryCreateInput {
   title: String!
   description: String!
+  content: String
   approved: Boolean
-  submissionNumber: Int
   author: String
 }
 
@@ -334,10 +293,10 @@ enum StoryOrderByInput {
   title_DESC
   description_ASC
   description_DESC
+  content_ASC
+  content_DESC
   approved_ASC
   approved_DESC
-  submissionNumber_ASC
-  submissionNumber_DESC
   author_ASC
   author_DESC
   updatedAt_ASC
@@ -350,8 +309,8 @@ type StoryPreviousValues {
   id: ID!
   title: String!
   description: String!
+  content: String
   approved: Boolean
-  submissionNumber: Int
   author: String
 }
 
@@ -397,8 +356,8 @@ input StorySubscriptionWhereInput {
 input StoryUpdateInput {
   title: String
   description: String
+  content: String
   approved: Boolean
-  submissionNumber: Int
   author: String
 }
 
@@ -531,32 +490,50 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  content: String
+
+  """All values that are not equal to given value."""
+  content_not: String
+
+  """All values that are contained in given list."""
+  content_in: [String!]
+
+  """All values that are not contained in given list."""
+  content_not_in: [String!]
+
+  """All values less than the given value."""
+  content_lt: String
+
+  """All values less than or equal the given value."""
+  content_lte: String
+
+  """All values greater than the given value."""
+  content_gt: String
+
+  """All values greater than or equal the given value."""
+  content_gte: String
+
+  """All values containing the given string."""
+  content_contains: String
+
+  """All values not containing the given string."""
+  content_not_contains: String
+
+  """All values starting with the given string."""
+  content_starts_with: String
+
+  """All values not starting with the given string."""
+  content_not_starts_with: String
+
+  """All values ending with the given string."""
+  content_ends_with: String
+
+  """All values not ending with the given string."""
+  content_not_ends_with: String
   approved: Boolean
 
   """All values that are not equal to given value."""
   approved_not: Boolean
-  submissionNumber: Int
-
-  """All values that are not equal to given value."""
-  submissionNumber_not: Int
-
-  """All values that are contained in given list."""
-  submissionNumber_in: [Int!]
-
-  """All values that are not contained in given list."""
-  submissionNumber_not_in: [Int!]
-
-  """All values less than the given value."""
-  submissionNumber_lt: Int
-
-  """All values less than or equal the given value."""
-  submissionNumber_lte: Int
-
-  """All values greater than the given value."""
-  submissionNumber_gt: Int
-
-  """All values greater than or equal the given value."""
-  submissionNumber_gte: Int
   author: String
 
   """All values that are not equal to given value."""
@@ -603,7 +580,154 @@ input StoryWhereUniqueInput {
   id: ID
 }
 
+type Submission implements Node {
+  id: ID!
+  flag: Boolean
+}
+
+"""A connection to a list of items."""
+type SubmissionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SubmissionEdge]!
+  aggregate: AggregateSubmission!
+}
+
+input SubmissionCreateInput {
+  flag: Boolean
+}
+
+"""An edge in a connection."""
+type SubmissionEdge {
+  """The item at the end of the edge."""
+  node: Submission!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SubmissionOrderByInput {
+  id_ASC
+  id_DESC
+  flag_ASC
+  flag_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SubmissionPreviousValues {
+  id: ID!
+  flag: Boolean
+}
+
+type SubmissionSubscriptionPayload {
+  mutation: MutationType!
+  node: Submission
+  updatedFields: [String!]
+  previousValues: SubmissionPreviousValues
+}
+
+input SubmissionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SubmissionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SubmissionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SubmissionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SubmissionWhereInput
+}
+
+input SubmissionUpdateInput {
+  flag: Boolean
+}
+
+input SubmissionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SubmissionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SubmissionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SubmissionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  flag: Boolean
+
+  """All values that are not equal to given value."""
+  flag_not: Boolean
+}
+
+input SubmissionWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
   story(where: StorySubscriptionWhereInput): StorySubscriptionPayload
   block(where: BlockSubscriptionWhereInput): BlockSubscriptionPayload
+  submission(where: SubmissionSubscriptionWhereInput): SubmissionSubscriptionPayload
 }

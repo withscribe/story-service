@@ -11,6 +11,7 @@
   "dependencies": {
     "graphql-yoga": "^1.14.12",
     "nodemon": "^1.17.5",
-    "prisma-binding": "^2.1.0"
+    "prisma-binding": "^2.1.0",
+    "swearjar": "^0.2.0"
   }
 }
