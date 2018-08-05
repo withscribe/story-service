@@ -56,16 +56,11 @@ flagBadBlocks = (block) => {
 identifyBadWord = (flaggedSentence) => {
   var words = flaggedSentence.split(" ");
   let badWordList = []
-
   for(var i = 0; i < words.length; i++) { 
       var flaggedWords = swearjar.scorecard(words[i]);          
       for (var badContentType in flaggedWords) {         
-          badWordList.push(words[i])       
-          // console.log(words[i])
+          badWordList.push(words[i])                 
       }
   }
-
-  // console.log(badWordList.length)
-
   return badWordList
 }
