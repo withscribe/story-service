@@ -1,10 +1,19 @@
-# import token from './generated/prisma.graphql'
+# import Story from './generated/prisma.graphql'
+# import Block from './generated/prisma.graphql'
+
 
 type Query {
-  tokens(searchString: String!): [Token!]!
-  token(searchString: String!): Token
+  stories(searchString: String!): [Story!]!
+  story(searchString: String!): Story
+  # blocks(searchString: String!): [Block!]!
+  # block(searchString: String!): Block
 }
 
 type Mutation {
-  createToken(symbol: String!, address: String!, totalSupply:Int, name: String!, abi: String!, contract: String ): Token
+  createStory(data: StoryCreateInput!): Story
+
+  # createStory(title: String!, description: String!, author: String! ): Story
+  #   createBlock(blockNumber: Int!, blockContent:String!): Block
+  #  createBlock(blockNumber: Int!, blockContent:String!): Block
 }
+

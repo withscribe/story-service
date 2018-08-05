@@ -1,42 +1,33 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
 
+var Validation = require('./validation/validation');
+
 const resolvers = {
-  Query: {
-    token: (_, args, context, info) => {
-      return context.prisma.query.token(
+  Query: {   
+    story: (_, args, context, info) => {
+      return context.prisma.query.story(
         {
           where: {
-              symbol: args.searchString,
+              OR:[
+                  {title: args.searchString},
+                  {description: args.searchString},                               
+              ]
           },
         },
         info,
       )
-    },
-    tokens: (_, args, context, info) => {
-        return context.prisma.query.tokens(
-          {
-            where: {
-                OR:[
-                    {symbol_contains: args.searchString},
-                    {address_contains: args.searchString},
-                    {name_contains: args.searchString},                 
-                ]
-            },
-          },
-          info,
-        )
-      },
+    },   
   },
   Mutation: {
-    createToken: (_, args, context, info) => {
-        return context.prisma.mutation.createToken(
+    createStory: (_, args, context, info) => {
+      //console.log(Validation.validate());
+
+      return context.prisma.mutation.createStory(
             {
               data: {
-                symbol: args.symbol,
-                address: args.address,
-                name: args.name,
-                abi: args.abi
+                title: args.title,
+                description: args.description,              
               },
             },
             info,

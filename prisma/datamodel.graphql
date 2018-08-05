@@ -1,7 +1,14 @@
 type Story {
+  id: ID! @unique
   title: String!
   description: String! 
-  author: String!
-  likes: Int
-  genre: String
+  approved: Boolean @default(value: "false")
+  submissionNumber: Int
+  author: String
+}
+
+type Block {
+  submissionNumber: ID  @unique
+  blockNumber: Int!
+  blockContent: String!
 }

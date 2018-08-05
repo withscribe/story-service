@@ -1,13 +1,231 @@
 # source: http://localhost:4466
-# timestamp: Thu Jul 12 2018 20:29:14 GMT-0400 (EDT)
+# timestamp: Sat Aug 04 2018 21:05:35 GMT-0400 (EDT)
 
-type AggregateToken {
+type AggregateBlock {
+  count: Int!
+}
+
+type AggregateStory {
   count: Int!
 }
 
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type Block {
+  submissionNumber: ID
+  blockNumber: Int!
+  blockContent: String!
+}
+
+"""A connection to a list of items."""
+type BlockConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BlockEdge]!
+  aggregate: AggregateBlock!
+}
+
+input BlockCreateInput {
+  submissionNumber: ID
+  blockNumber: Int!
+  blockContent: String!
+}
+
+"""An edge in a connection."""
+type BlockEdge {
+  """The item at the end of the edge."""
+  node: Block!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum BlockOrderByInput {
+  submissionNumber_ASC
+  submissionNumber_DESC
+  blockNumber_ASC
+  blockNumber_DESC
+  blockContent_ASC
+  blockContent_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type BlockPreviousValues {
+  submissionNumber: ID
+  blockNumber: Int!
+  blockContent: String!
+}
+
+type BlockSubscriptionPayload {
+  mutation: MutationType!
+  node: Block
+  updatedFields: [String!]
+  previousValues: BlockPreviousValues
+}
+
+input BlockSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BlockSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BlockSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BlockSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BlockWhereInput
+}
+
+input BlockUpdateInput {
+  submissionNumber: ID
+  blockNumber: Int
+  blockContent: String
+}
+
+input BlockWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BlockWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BlockWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BlockWhereInput!]
+  submissionNumber: ID
+
+  """All values that are not equal to given value."""
+  submissionNumber_not: ID
+
+  """All values that are contained in given list."""
+  submissionNumber_in: [ID!]
+
+  """All values that are not contained in given list."""
+  submissionNumber_not_in: [ID!]
+
+  """All values less than the given value."""
+  submissionNumber_lt: ID
+
+  """All values less than or equal the given value."""
+  submissionNumber_lte: ID
+
+  """All values greater than the given value."""
+  submissionNumber_gt: ID
+
+  """All values greater than or equal the given value."""
+  submissionNumber_gte: ID
+
+  """All values containing the given string."""
+  submissionNumber_contains: ID
+
+  """All values not containing the given string."""
+  submissionNumber_not_contains: ID
+
+  """All values starting with the given string."""
+  submissionNumber_starts_with: ID
+
+  """All values not starting with the given string."""
+  submissionNumber_not_starts_with: ID
+
+  """All values ending with the given string."""
+  submissionNumber_ends_with: ID
+
+  """All values not ending with the given string."""
+  submissionNumber_not_ends_with: ID
+  blockNumber: Int
+
+  """All values that are not equal to given value."""
+  blockNumber_not: Int
+
+  """All values that are contained in given list."""
+  blockNumber_in: [Int!]
+
+  """All values that are not contained in given list."""
+  blockNumber_not_in: [Int!]
+
+  """All values less than the given value."""
+  blockNumber_lt: Int
+
+  """All values less than or equal the given value."""
+  blockNumber_lte: Int
+
+  """All values greater than the given value."""
+  blockNumber_gt: Int
+
+  """All values greater than or equal the given value."""
+  blockNumber_gte: Int
+  blockContent: String
+
+  """All values that are not equal to given value."""
+  blockContent_not: String
+
+  """All values that are contained in given list."""
+  blockContent_in: [String!]
+
+  """All values that are not contained in given list."""
+  blockContent_not_in: [String!]
+
+  """All values less than the given value."""
+  blockContent_lt: String
+
+  """All values less than or equal the given value."""
+  blockContent_lte: String
+
+  """All values greater than the given value."""
+  blockContent_gt: String
+
+  """All values greater than or equal the given value."""
+  blockContent_gte: String
+
+  """All values containing the given string."""
+  blockContent_contains: String
+
+  """All values not containing the given string."""
+  blockContent_not_contains: String
+
+  """All values starting with the given string."""
+  blockContent_starts_with: String
+
+  """All values not starting with the given string."""
+  blockContent_not_starts_with: String
+
+  """All values ending with the given string."""
+  blockContent_ends_with: String
+
+  """All values not ending with the given string."""
+  blockContent_not_ends_with: String
+}
+
+input BlockWhereUniqueInput {
+  submissionNumber: ID
 }
 
 """
@@ -17,12 +235,18 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createToken(data: TokenCreateInput!): Token!
-  updateToken(data: TokenUpdateInput!, where: TokenWhereUniqueInput!): Token
-  deleteToken(where: TokenWhereUniqueInput!): Token
-  upsertToken(where: TokenWhereUniqueInput!, create: TokenCreateInput!, update: TokenUpdateInput!): Token!
-  updateManyTokens(data: TokenUpdateInput!, where: TokenWhereInput): BatchPayload!
-  deleteManyTokens(where: TokenWhereInput): BatchPayload!
+  createStory(data: StoryCreateInput!): Story!
+  createBlock(data: BlockCreateInput!): Block!
+  updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
+  updateBlock(data: BlockUpdateInput!, where: BlockWhereUniqueInput!): Block
+  deleteStory(where: StoryWhereUniqueInput!): Story
+  deleteBlock(where: BlockWhereUniqueInput!): Block
+  upsertStory(where: StoryWhereUniqueInput!, create: StoryCreateInput!, update: StoryUpdateInput!): Story!
+  upsertBlock(where: BlockWhereUniqueInput!, create: BlockCreateInput!, update: BlockUpdateInput!): Block!
+  updateManyStories(data: StoryUpdateInput!, where: StoryWhereInput): BatchPayload!
+  updateManyBlocks(data: BlockUpdateInput!, where: BlockWhereInput): BatchPayload!
+  deleteManyStories(where: StoryWhereInput): BatchPayload!
+  deleteManyBlocks(where: BlockWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -53,9 +277,12 @@ type PageInfo {
 }
 
 type Query {
-  tokens(where: TokenWhereInput, orderBy: TokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Token]!
-  token(where: TokenWhereUniqueInput!): Token
-  tokensConnection(where: TokenWhereInput, orderBy: TokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TokenConnection!
+  stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story]!
+  blocks(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block]!
+  story(where: StoryWhereUniqueInput!): Story
+  block(where: BlockWhereUniqueInput!): Block
+  storiesConnection(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryConnection!
+  blocksConnection(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BlockConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -64,118 +291,86 @@ type Query {
   ): Node
 }
 
-type Subscription {
-  token(where: TokenSubscriptionWhereInput): TokenSubscriptionPayload
-}
-
-type Token {
-  symbol: String!
-  name: String!
-  abi: String!
-  address: String!
-  totalSupply: Int
-  price: Float
-  holders: Int
-  officialSite: String
-  decimals: Int
-  marketCap: Float
-  circulatingSupply: Int
+type Story implements Node {
+  id: ID!
+  title: String!
+  description: String!
+  approved: Boolean
+  submissionNumber: Int
+  author: String
 }
 
 """A connection to a list of items."""
-type TokenConnection {
+type StoryConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [TokenEdge]!
-  aggregate: AggregateToken!
+  edges: [StoryEdge]!
+  aggregate: AggregateStory!
 }
 
-input TokenCreateInput {
-  symbol: String!
-  name: String!
-  abi: String!
-  address: String!
-  totalSupply: Int
-  price: Float
-  holders: Int
-  officialSite: String
-  decimals: Int
-  marketCap: Float
-  circulatingSupply: Int
+input StoryCreateInput {
+  title: String!
+  description: String!
+  approved: Boolean
+  submissionNumber: Int
+  author: String
 }
 
 """An edge in a connection."""
-type TokenEdge {
+type StoryEdge {
   """The item at the end of the edge."""
-  node: Token!
+  node: Story!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum TokenOrderByInput {
-  symbol_ASC
-  symbol_DESC
-  name_ASC
-  name_DESC
-  abi_ASC
-  abi_DESC
-  address_ASC
-  address_DESC
-  totalSupply_ASC
-  totalSupply_DESC
-  price_ASC
-  price_DESC
-  holders_ASC
-  holders_DESC
-  officialSite_ASC
-  officialSite_DESC
-  decimals_ASC
-  decimals_DESC
-  marketCap_ASC
-  marketCap_DESC
-  circulatingSupply_ASC
-  circulatingSupply_DESC
+enum StoryOrderByInput {
   id_ASC
   id_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  approved_ASC
+  approved_DESC
+  submissionNumber_ASC
+  submissionNumber_DESC
+  author_ASC
+  author_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type TokenPreviousValues {
-  symbol: String!
-  name: String!
-  abi: String!
-  address: String!
-  totalSupply: Int
-  price: Float
-  holders: Int
-  officialSite: String
-  decimals: Int
-  marketCap: Float
-  circulatingSupply: Int
+type StoryPreviousValues {
+  id: ID!
+  title: String!
+  description: String!
+  approved: Boolean
+  submissionNumber: Int
+  author: String
 }
 
-type TokenSubscriptionPayload {
+type StorySubscriptionPayload {
   mutation: MutationType!
-  node: Token
+  node: Story
   updatedFields: [String!]
-  previousValues: TokenPreviousValues
+  previousValues: StoryPreviousValues
 }
 
-input TokenSubscriptionWhereInput {
+input StorySubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [TokenSubscriptionWhereInput!]
+  AND: [StorySubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [TokenSubscriptionWhereInput!]
+  OR: [StorySubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [TokenSubscriptionWhereInput!]
+  NOT: [StorySubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -196,367 +391,219 @@ input TokenSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: TokenWhereInput
+  node: StoryWhereInput
 }
 
-input TokenUpdateInput {
-  symbol: String
-  name: String
-  abi: String
-  address: String
-  totalSupply: Int
-  price: Float
-  holders: Int
-  officialSite: String
-  decimals: Int
-  marketCap: Float
-  circulatingSupply: Int
+input StoryUpdateInput {
+  title: String
+  description: String
+  approved: Boolean
+  submissionNumber: Int
+  author: String
 }
 
-input TokenWhereInput {
+input StoryWhereInput {
   """Logical AND on all given filters."""
-  AND: [TokenWhereInput!]
+  AND: [StoryWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [TokenWhereInput!]
+  OR: [StoryWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [TokenWhereInput!]
-  symbol: String
+  NOT: [StoryWhereInput!]
+  id: ID
 
   """All values that are not equal to given value."""
-  symbol_not: String
+  id_not: ID
 
   """All values that are contained in given list."""
-  symbol_in: [String!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  symbol_not_in: [String!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  symbol_lt: String
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  symbol_lte: String
+  id_lte: ID
 
   """All values greater than the given value."""
-  symbol_gt: String
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  symbol_gte: String
+  id_gte: ID
 
   """All values containing the given string."""
-  symbol_contains: String
+  id_contains: ID
 
   """All values not containing the given string."""
-  symbol_not_contains: String
+  id_not_contains: ID
 
   """All values starting with the given string."""
-  symbol_starts_with: String
+  id_starts_with: ID
 
   """All values not starting with the given string."""
-  symbol_not_starts_with: String
+  id_not_starts_with: ID
 
   """All values ending with the given string."""
-  symbol_ends_with: String
+  id_ends_with: ID
 
   """All values not ending with the given string."""
-  symbol_not_ends_with: String
-  name: String
+  id_not_ends_with: ID
+  title: String
 
   """All values that are not equal to given value."""
-  name_not: String
+  title_not: String
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  title_in: [String!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
+  title_not_in: [String!]
 
   """All values less than the given value."""
-  name_lt: String
+  title_lt: String
 
   """All values less than or equal the given value."""
-  name_lte: String
+  title_lte: String
 
   """All values greater than the given value."""
-  name_gt: String
+  title_gt: String
 
   """All values greater than or equal the given value."""
-  name_gte: String
+  title_gte: String
 
   """All values containing the given string."""
-  name_contains: String
+  title_contains: String
 
   """All values not containing the given string."""
-  name_not_contains: String
+  title_not_contains: String
 
   """All values starting with the given string."""
-  name_starts_with: String
+  title_starts_with: String
 
   """All values not starting with the given string."""
-  name_not_starts_with: String
+  title_not_starts_with: String
 
   """All values ending with the given string."""
-  name_ends_with: String
+  title_ends_with: String
 
   """All values not ending with the given string."""
-  name_not_ends_with: String
-  abi: String
+  title_not_ends_with: String
+  description: String
 
   """All values that are not equal to given value."""
-  abi_not: String
+  description_not: String
 
   """All values that are contained in given list."""
-  abi_in: [String!]
+  description_in: [String!]
 
   """All values that are not contained in given list."""
-  abi_not_in: [String!]
+  description_not_in: [String!]
 
   """All values less than the given value."""
-  abi_lt: String
+  description_lt: String
 
   """All values less than or equal the given value."""
-  abi_lte: String
+  description_lte: String
 
   """All values greater than the given value."""
-  abi_gt: String
+  description_gt: String
 
   """All values greater than or equal the given value."""
-  abi_gte: String
+  description_gte: String
 
   """All values containing the given string."""
-  abi_contains: String
+  description_contains: String
 
   """All values not containing the given string."""
-  abi_not_contains: String
+  description_not_contains: String
 
   """All values starting with the given string."""
-  abi_starts_with: String
+  description_starts_with: String
 
   """All values not starting with the given string."""
-  abi_not_starts_with: String
+  description_not_starts_with: String
 
   """All values ending with the given string."""
-  abi_ends_with: String
+  description_ends_with: String
 
   """All values not ending with the given string."""
-  abi_not_ends_with: String
-  address: String
+  description_not_ends_with: String
+  approved: Boolean
 
   """All values that are not equal to given value."""
-  address_not: String
+  approved_not: Boolean
+  submissionNumber: Int
+
+  """All values that are not equal to given value."""
+  submissionNumber_not: Int
 
   """All values that are contained in given list."""
-  address_in: [String!]
+  submissionNumber_in: [Int!]
 
   """All values that are not contained in given list."""
-  address_not_in: [String!]
+  submissionNumber_not_in: [Int!]
 
   """All values less than the given value."""
-  address_lt: String
+  submissionNumber_lt: Int
 
   """All values less than or equal the given value."""
-  address_lte: String
+  submissionNumber_lte: Int
 
   """All values greater than the given value."""
-  address_gt: String
+  submissionNumber_gt: Int
 
   """All values greater than or equal the given value."""
-  address_gte: String
+  submissionNumber_gte: Int
+  author: String
+
+  """All values that are not equal to given value."""
+  author_not: String
+
+  """All values that are contained in given list."""
+  author_in: [String!]
+
+  """All values that are not contained in given list."""
+  author_not_in: [String!]
+
+  """All values less than the given value."""
+  author_lt: String
+
+  """All values less than or equal the given value."""
+  author_lte: String
+
+  """All values greater than the given value."""
+  author_gt: String
+
+  """All values greater than or equal the given value."""
+  author_gte: String
 
   """All values containing the given string."""
-  address_contains: String
+  author_contains: String
 
   """All values not containing the given string."""
-  address_not_contains: String
+  author_not_contains: String
 
   """All values starting with the given string."""
-  address_starts_with: String
+  author_starts_with: String
 
   """All values not starting with the given string."""
-  address_not_starts_with: String
+  author_not_starts_with: String
 
   """All values ending with the given string."""
-  address_ends_with: String
+  author_ends_with: String
 
   """All values not ending with the given string."""
-  address_not_ends_with: String
-  totalSupply: Int
-
-  """All values that are not equal to given value."""
-  totalSupply_not: Int
-
-  """All values that are contained in given list."""
-  totalSupply_in: [Int!]
-
-  """All values that are not contained in given list."""
-  totalSupply_not_in: [Int!]
-
-  """All values less than the given value."""
-  totalSupply_lt: Int
-
-  """All values less than or equal the given value."""
-  totalSupply_lte: Int
-
-  """All values greater than the given value."""
-  totalSupply_gt: Int
-
-  """All values greater than or equal the given value."""
-  totalSupply_gte: Int
-  price: Float
-
-  """All values that are not equal to given value."""
-  price_not: Float
-
-  """All values that are contained in given list."""
-  price_in: [Float!]
-
-  """All values that are not contained in given list."""
-  price_not_in: [Float!]
-
-  """All values less than the given value."""
-  price_lt: Float
-
-  """All values less than or equal the given value."""
-  price_lte: Float
-
-  """All values greater than the given value."""
-  price_gt: Float
-
-  """All values greater than or equal the given value."""
-  price_gte: Float
-  holders: Int
-
-  """All values that are not equal to given value."""
-  holders_not: Int
-
-  """All values that are contained in given list."""
-  holders_in: [Int!]
-
-  """All values that are not contained in given list."""
-  holders_not_in: [Int!]
-
-  """All values less than the given value."""
-  holders_lt: Int
-
-  """All values less than or equal the given value."""
-  holders_lte: Int
-
-  """All values greater than the given value."""
-  holders_gt: Int
-
-  """All values greater than or equal the given value."""
-  holders_gte: Int
-  officialSite: String
-
-  """All values that are not equal to given value."""
-  officialSite_not: String
-
-  """All values that are contained in given list."""
-  officialSite_in: [String!]
-
-  """All values that are not contained in given list."""
-  officialSite_not_in: [String!]
-
-  """All values less than the given value."""
-  officialSite_lt: String
-
-  """All values less than or equal the given value."""
-  officialSite_lte: String
-
-  """All values greater than the given value."""
-  officialSite_gt: String
-
-  """All values greater than or equal the given value."""
-  officialSite_gte: String
-
-  """All values containing the given string."""
-  officialSite_contains: String
-
-  """All values not containing the given string."""
-  officialSite_not_contains: String
-
-  """All values starting with the given string."""
-  officialSite_starts_with: String
-
-  """All values not starting with the given string."""
-  officialSite_not_starts_with: String
-
-  """All values ending with the given string."""
-  officialSite_ends_with: String
-
-  """All values not ending with the given string."""
-  officialSite_not_ends_with: String
-  decimals: Int
-
-  """All values that are not equal to given value."""
-  decimals_not: Int
-
-  """All values that are contained in given list."""
-  decimals_in: [Int!]
-
-  """All values that are not contained in given list."""
-  decimals_not_in: [Int!]
-
-  """All values less than the given value."""
-  decimals_lt: Int
-
-  """All values less than or equal the given value."""
-  decimals_lte: Int
-
-  """All values greater than the given value."""
-  decimals_gt: Int
-
-  """All values greater than or equal the given value."""
-  decimals_gte: Int
-  marketCap: Float
-
-  """All values that are not equal to given value."""
-  marketCap_not: Float
-
-  """All values that are contained in given list."""
-  marketCap_in: [Float!]
-
-  """All values that are not contained in given list."""
-  marketCap_not_in: [Float!]
-
-  """All values less than the given value."""
-  marketCap_lt: Float
-
-  """All values less than or equal the given value."""
-  marketCap_lte: Float
-
-  """All values greater than the given value."""
-  marketCap_gt: Float
-
-  """All values greater than or equal the given value."""
-  marketCap_gte: Float
-  circulatingSupply: Int
-
-  """All values that are not equal to given value."""
-  circulatingSupply_not: Int
-
-  """All values that are contained in given list."""
-  circulatingSupply_in: [Int!]
-
-  """All values that are not contained in given list."""
-  circulatingSupply_not_in: [Int!]
-
-  """All values less than the given value."""
-  circulatingSupply_lt: Int
-
-  """All values less than or equal the given value."""
-  circulatingSupply_lte: Int
-
-  """All values greater than the given value."""
-  circulatingSupply_gt: Int
-
-  """All values greater than or equal the given value."""
-  circulatingSupply_gte: Int
+  author_not_ends_with: String
 }
 
-input TokenWhereUniqueInput {
-  symbol: String
-  address: String
+input StoryWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  story(where: StorySubscriptionWhereInput): StorySubscriptionPayload
+  block(where: BlockSubscriptionWhereInput): BlockSubscriptionPayload
 }
