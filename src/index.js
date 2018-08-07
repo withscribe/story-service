@@ -89,7 +89,16 @@ const server = new GraphQLServer({
     }),
   }),
 })
-server.start(() => {
+
+const options = {
+  port: 4000,
+  endpoint: '/story',
+  subscriptions: '/sub/story',
+  playground: '/story/playground'
+}
+
+
+server.start(options, ({ port }) => {
   console.log(`GraphQL server is running on http://localhost:4000`)
   var x = Validation.validate("ds98dsa90sda8dassad", text);
   console.log(x);
