@@ -1,5 +1,6 @@
 type Story {
   id: ID! @unique
+  profileId: ID! @unique
   title: String!
   description: String! 
   content: String

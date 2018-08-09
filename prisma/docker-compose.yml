@@ -1,7 +1,7 @@
 version: '3'
 services:
-  prisma:
-    image: prismagraphql/prisma:1.11
+  story-service:
+    image: prismagraphql/prisma:1.13
     restart: always
     ports:
     - "4466:4466"
@@ -13,6 +13,7 @@ services:
         databases:
           default:
             connector: postgres
+            database: storyDB
             host: postgres
             port: 5432
             user: prisma

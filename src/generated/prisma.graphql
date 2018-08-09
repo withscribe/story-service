@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Aug 04 2018 23:39:20 GMT-0400 (EDT)
+# timestamp: Tue Aug 07 2018 19:55:35 GMT-0400 (Eastern Daylight Time)
 
 type AggregateBlock {
   count: Int!
@@ -252,6 +252,7 @@ type Query {
 
 type Story implements Node {
   id: ID!
+  profileId: ID!
   title: String!
   description: String!
   content: String
@@ -270,6 +271,7 @@ type StoryConnection {
 }
 
 input StoryCreateInput {
+  profileId: ID!
   title: String!
   description: String!
   content: String
@@ -289,6 +291,8 @@ type StoryEdge {
 enum StoryOrderByInput {
   id_ASC
   id_DESC
+  profileId_ASC
+  profileId_DESC
   title_ASC
   title_DESC
   description_ASC
@@ -307,6 +311,7 @@ enum StoryOrderByInput {
 
 type StoryPreviousValues {
   id: ID!
+  profileId: ID!
   title: String!
   description: String!
   content: String
@@ -354,6 +359,7 @@ input StorySubscriptionWhereInput {
 }
 
 input StoryUpdateInput {
+  profileId: ID
   title: String
   description: String
   content: String
@@ -410,6 +416,46 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  profileId: ID
+
+  """All values that are not equal to given value."""
+  profileId_not: ID
+
+  """All values that are contained in given list."""
+  profileId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  profileId_not_in: [ID!]
+
+  """All values less than the given value."""
+  profileId_lt: ID
+
+  """All values less than or equal the given value."""
+  profileId_lte: ID
+
+  """All values greater than the given value."""
+  profileId_gt: ID
+
+  """All values greater than or equal the given value."""
+  profileId_gte: ID
+
+  """All values containing the given string."""
+  profileId_contains: ID
+
+  """All values not containing the given string."""
+  profileId_not_contains: ID
+
+  """All values starting with the given string."""
+  profileId_starts_with: ID
+
+  """All values not starting with the given string."""
+  profileId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  profileId_ends_with: ID
+
+  """All values not ending with the given string."""
+  profileId_not_ends_with: ID
   title: String
 
   """All values that are not equal to given value."""
@@ -578,6 +624,7 @@ input StoryWhereInput {
 
 input StoryWhereUniqueInput {
   id: ID
+  profileId: ID
 }
 
 type Submission implements Node {

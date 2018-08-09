@@ -17,7 +17,27 @@ const resolvers = {
         },
         info,
       )
-    },   
+    },  
+    storyById: (_, args, context, info) => {
+      return context.prisma.query.story(
+        {
+          where: {
+            id: args.storyID
+          }
+        }
+      )
+    },
+    storiesByProfileId: (_, args, context, info) => {
+      return context.prisma.query.stories(
+        {
+          where: {
+            OR: [
+              {profileId: args.profileId}
+            ]
+          }
+        }
+      )
+    }
   },
   Mutation: {
     createStory: async (_, args, context, info) => {
@@ -47,7 +67,9 @@ const resolvers = {
         {
           data: {
             title: args.title,
-            description: args.description,              
+            description: args.description, 
+            content: args.content,
+            profileId: args.profileId             
           },
         },
         info,
