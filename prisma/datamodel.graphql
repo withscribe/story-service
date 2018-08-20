@@ -1,12 +1,24 @@
 type Story {
   id: ID! @unique
-  profileId: ID! @unique
+  profileId: ID @unique
   title: String!
-  description: String! 
+  description: String 
   content: String
+  characters: [Character!]!
+  genre: Genre
   approved: Boolean @default(value: "false")
-  # submissionID: Submission
-  author: String
+  isPublished: Boolean @default(value: "false")
+  views: Int
+  likes: Int
+  clones: Int
+  # submissionID: ID
+}
+
+type Character {
+  id: ID! @unique
+  name: String!
+  age: Int
+  backStory: String
 }
 
 type Block { 
@@ -19,4 +31,19 @@ type Submission {
   id: ID! @unique
   flag: Boolean @default(value: "false")
   # blocks: [Block!]!
+}
+
+enum Genre {
+  Tragedy
+  Tragic comedy
+  Fantasy
+  Mythology
+  Adventure
+  Mystery
+  Science fiction
+  Drama
+  Romance
+  Action / Adventure
+  Satire
+  Horror
 }

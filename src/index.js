@@ -2,10 +2,12 @@ const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
 
 var Validation = require('./validation/validation');
+const { getUserId } = require('./utils');
 
 const resolvers = {
   Query: {   
     story: (_, args, context, info) => {
+      const userId = getUserId(context);
       return context.prisma.query.story(
         {
           where: {
@@ -19,6 +21,7 @@ const resolvers = {
       )
     },  
     storyById: (_, args, context, info) => {
+      const userId = getUserId(context);
       return context.prisma.query.story(
         {
           where: {
@@ -28,6 +31,7 @@ const resolvers = {
       )
     },
     storiesByProfileId: (_, args, context, info) => {
+      const userId = getUserId(context);
       return context.prisma.query.stories(
         {
           where: {
@@ -41,7 +45,7 @@ const resolvers = {
   },
   Mutation: {
     createStory: async (_, args, context, info) => {
-
+      const userId = getUserId(context);
       return context.prisma.mutation.createStory(
             {
               data: {
@@ -53,7 +57,7 @@ const resolvers = {
           )
     },
     uploadStory: async (_, args, context, info) => {
-      
+      const userId = getUserId(context);
       const submissionID = await context.prisma.mutation.createSubmission({
         data: {
           flag: true
