@@ -35,15 +35,15 @@ type Submission {
 
 enum Genre {
   Tragedy
-  Tragic comedy
+  TragicComedy
   Fantasy
   Mythology
   Adventure
   Mystery
-  Science fiction
+  ScienceFiction
   Drama
   Romance
-  Action / Adventure
+  ActionAdventure
   Satire
   Horror
 }

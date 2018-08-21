@@ -1,7 +1,11 @@
 # source: http://localhost:4466
-# timestamp: Tue Aug 07 2018 19:55:35 GMT-0400 (Eastern Daylight Time)
+# timestamp: Mon Aug 20 2018 19:57:26 GMT-0400 (Eastern Daylight Time)
 
 type AggregateBlock {
+  count: Int!
+}
+
+type AggregateCharacter {
   count: Int!
 }
 
@@ -182,6 +186,308 @@ input BlockWhereInput {
   blockContent_not_ends_with: String
 }
 
+type Character implements Node {
+  id: ID!
+  name: String!
+  age: Int
+  backStory: String
+}
+
+"""A connection to a list of items."""
+type CharacterConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CharacterEdge]!
+  aggregate: AggregateCharacter!
+}
+
+input CharacterCreateInput {
+  name: String!
+  age: Int
+  backStory: String
+}
+
+input CharacterCreateManyInput {
+  create: [CharacterCreateInput!]
+  connect: [CharacterWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type CharacterEdge {
+  """The item at the end of the edge."""
+  node: Character!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CharacterOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  age_ASC
+  age_DESC
+  backStory_ASC
+  backStory_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CharacterPreviousValues {
+  id: ID!
+  name: String!
+  age: Int
+  backStory: String
+}
+
+type CharacterSubscriptionPayload {
+  mutation: MutationType!
+  node: Character
+  updatedFields: [String!]
+  previousValues: CharacterPreviousValues
+}
+
+input CharacterSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CharacterSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CharacterSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CharacterSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CharacterWhereInput
+}
+
+input CharacterUpdateDataInput {
+  name: String
+  age: Int
+  backStory: String
+}
+
+input CharacterUpdateInput {
+  name: String
+  age: Int
+  backStory: String
+}
+
+input CharacterUpdateManyInput {
+  create: [CharacterCreateInput!]
+  connect: [CharacterWhereUniqueInput!]
+  disconnect: [CharacterWhereUniqueInput!]
+  delete: [CharacterWhereUniqueInput!]
+  update: [CharacterUpdateWithWhereUniqueNestedInput!]
+  upsert: [CharacterUpsertWithWhereUniqueNestedInput!]
+}
+
+input CharacterUpdateWithWhereUniqueNestedInput {
+  where: CharacterWhereUniqueInput!
+  data: CharacterUpdateDataInput!
+}
+
+input CharacterUpsertWithWhereUniqueNestedInput {
+  where: CharacterWhereUniqueInput!
+  update: CharacterUpdateDataInput!
+  create: CharacterCreateInput!
+}
+
+input CharacterWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CharacterWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CharacterWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CharacterWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  age: Int
+
+  """All values that are not equal to given value."""
+  age_not: Int
+
+  """All values that are contained in given list."""
+  age_in: [Int!]
+
+  """All values that are not contained in given list."""
+  age_not_in: [Int!]
+
+  """All values less than the given value."""
+  age_lt: Int
+
+  """All values less than or equal the given value."""
+  age_lte: Int
+
+  """All values greater than the given value."""
+  age_gt: Int
+
+  """All values greater than or equal the given value."""
+  age_gte: Int
+  backStory: String
+
+  """All values that are not equal to given value."""
+  backStory_not: String
+
+  """All values that are contained in given list."""
+  backStory_in: [String!]
+
+  """All values that are not contained in given list."""
+  backStory_not_in: [String!]
+
+  """All values less than the given value."""
+  backStory_lt: String
+
+  """All values less than or equal the given value."""
+  backStory_lte: String
+
+  """All values greater than the given value."""
+  backStory_gt: String
+
+  """All values greater than or equal the given value."""
+  backStory_gte: String
+
+  """All values containing the given string."""
+  backStory_contains: String
+
+  """All values not containing the given string."""
+  backStory_not_contains: String
+
+  """All values starting with the given string."""
+  backStory_starts_with: String
+
+  """All values not starting with the given string."""
+  backStory_not_starts_with: String
+
+  """All values ending with the given string."""
+  backStory_ends_with: String
+
+  """All values not ending with the given string."""
+  backStory_not_ends_with: String
+}
+
+input CharacterWhereUniqueInput {
+  id: ID
+}
+
+enum Genre {
+  Tragedy
+  Tragiccomedy
+  Fantasy
+  Mythology
+  Adventure
+  Mystery
+  Sciencefiction
+  Drama
+  Romance
+  ActionAdventure
+  Satire
+  Horror
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -192,18 +498,24 @@ type Mutation {
   createStory(data: StoryCreateInput!): Story!
   createBlock(data: BlockCreateInput!): Block!
   createSubmission(data: SubmissionCreateInput!): Submission!
+  createCharacter(data: CharacterCreateInput!): Character!
   updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
   updateSubmission(data: SubmissionUpdateInput!, where: SubmissionWhereUniqueInput!): Submission
+  updateCharacter(data: CharacterUpdateInput!, where: CharacterWhereUniqueInput!): Character
   deleteStory(where: StoryWhereUniqueInput!): Story
   deleteSubmission(where: SubmissionWhereUniqueInput!): Submission
+  deleteCharacter(where: CharacterWhereUniqueInput!): Character
   upsertStory(where: StoryWhereUniqueInput!, create: StoryCreateInput!, update: StoryUpdateInput!): Story!
   upsertSubmission(where: SubmissionWhereUniqueInput!, create: SubmissionCreateInput!, update: SubmissionUpdateInput!): Submission!
+  upsertCharacter(where: CharacterWhereUniqueInput!, create: CharacterCreateInput!, update: CharacterUpdateInput!): Character!
   updateManyStories(data: StoryUpdateInput!, where: StoryWhereInput): BatchPayload!
   updateManyBlocks(data: BlockUpdateInput!, where: BlockWhereInput): BatchPayload!
   updateManySubmissions(data: SubmissionUpdateInput!, where: SubmissionWhereInput): BatchPayload!
+  updateManyCharacters(data: CharacterUpdateInput!, where: CharacterWhereInput): BatchPayload!
   deleteManyStories(where: StoryWhereInput): BatchPayload!
   deleteManyBlocks(where: BlockWhereInput): BatchPayload!
   deleteManySubmissions(where: SubmissionWhereInput): BatchPayload!
+  deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -237,11 +549,14 @@ type Query {
   stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story]!
   blocks(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block]!
   submissions(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Submission]!
+  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
   story(where: StoryWhereUniqueInput!): Story
   submission(where: SubmissionWhereUniqueInput!): Submission
+  character(where: CharacterWhereUniqueInput!): Character
   storiesConnection(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryConnection!
   blocksConnection(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BlockConnection!
   submissionsConnection(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubmissionConnection!
+  charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -252,12 +567,17 @@ type Query {
 
 type Story implements Node {
   id: ID!
-  profileId: ID!
+  profileId: ID
   title: String!
-  description: String!
+  description: String
   content: String
+  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
+  genre: Genre
   approved: Boolean
-  author: String
+  isPublished: Boolean
+  views: Int
+  likes: Int
+  clones: Int
 }
 
 """A connection to a list of items."""
@@ -271,12 +591,17 @@ type StoryConnection {
 }
 
 input StoryCreateInput {
-  profileId: ID!
+  profileId: ID
   title: String!
-  description: String!
+  description: String
   content: String
+  genre: Genre
   approved: Boolean
-  author: String
+  isPublished: Boolean
+  views: Int
+  likes: Int
+  clones: Int
+  characters: CharacterCreateManyInput
 }
 
 """An edge in a connection."""
@@ -299,10 +624,18 @@ enum StoryOrderByInput {
   description_DESC
   content_ASC
   content_DESC
+  genre_ASC
+  genre_DESC
   approved_ASC
   approved_DESC
-  author_ASC
-  author_DESC
+  isPublished_ASC
+  isPublished_DESC
+  views_ASC
+  views_DESC
+  likes_ASC
+  likes_DESC
+  clones_ASC
+  clones_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -311,12 +644,16 @@ enum StoryOrderByInput {
 
 type StoryPreviousValues {
   id: ID!
-  profileId: ID!
+  profileId: ID
   title: String!
-  description: String!
+  description: String
   content: String
+  genre: Genre
   approved: Boolean
-  author: String
+  isPublished: Boolean
+  views: Int
+  likes: Int
+  clones: Int
 }
 
 type StorySubscriptionPayload {
@@ -363,8 +700,13 @@ input StoryUpdateInput {
   title: String
   description: String
   content: String
+  genre: Genre
   approved: Boolean
-  author: String
+  isPublished: Boolean
+  views: Int
+  likes: Int
+  clones: Int
+  characters: CharacterUpdateManyInput
 }
 
 input StoryWhereInput {
@@ -576,50 +918,93 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   content_not_ends_with: String
+  genre: Genre
+
+  """All values that are not equal to given value."""
+  genre_not: Genre
+
+  """All values that are contained in given list."""
+  genre_in: [Genre!]
+
+  """All values that are not contained in given list."""
+  genre_not_in: [Genre!]
   approved: Boolean
 
   """All values that are not equal to given value."""
   approved_not: Boolean
-  author: String
+  isPublished: Boolean
 
   """All values that are not equal to given value."""
-  author_not: String
+  isPublished_not: Boolean
+  views: Int
+
+  """All values that are not equal to given value."""
+  views_not: Int
 
   """All values that are contained in given list."""
-  author_in: [String!]
+  views_in: [Int!]
 
   """All values that are not contained in given list."""
-  author_not_in: [String!]
+  views_not_in: [Int!]
 
   """All values less than the given value."""
-  author_lt: String
+  views_lt: Int
 
   """All values less than or equal the given value."""
-  author_lte: String
+  views_lte: Int
 
   """All values greater than the given value."""
-  author_gt: String
+  views_gt: Int
 
   """All values greater than or equal the given value."""
-  author_gte: String
+  views_gte: Int
+  likes: Int
 
-  """All values containing the given string."""
-  author_contains: String
+  """All values that are not equal to given value."""
+  likes_not: Int
 
-  """All values not containing the given string."""
-  author_not_contains: String
+  """All values that are contained in given list."""
+  likes_in: [Int!]
 
-  """All values starting with the given string."""
-  author_starts_with: String
+  """All values that are not contained in given list."""
+  likes_not_in: [Int!]
 
-  """All values not starting with the given string."""
-  author_not_starts_with: String
+  """All values less than the given value."""
+  likes_lt: Int
 
-  """All values ending with the given string."""
-  author_ends_with: String
+  """All values less than or equal the given value."""
+  likes_lte: Int
 
-  """All values not ending with the given string."""
-  author_not_ends_with: String
+  """All values greater than the given value."""
+  likes_gt: Int
+
+  """All values greater than or equal the given value."""
+  likes_gte: Int
+  clones: Int
+
+  """All values that are not equal to given value."""
+  clones_not: Int
+
+  """All values that are contained in given list."""
+  clones_in: [Int!]
+
+  """All values that are not contained in given list."""
+  clones_not_in: [Int!]
+
+  """All values less than the given value."""
+  clones_lt: Int
+
+  """All values less than or equal the given value."""
+  clones_lte: Int
+
+  """All values greater than the given value."""
+  clones_gt: Int
+
+  """All values greater than or equal the given value."""
+  clones_gte: Int
+  characters_every: CharacterWhereInput
+  characters_some: CharacterWhereInput
+  characters_none: CharacterWhereInput
 }
 
 input StoryWhereUniqueInput {
@@ -777,4 +1162,5 @@ type Subscription {
   story(where: StorySubscriptionWhereInput): StorySubscriptionPayload
   block(where: BlockSubscriptionWhereInput): BlockSubscriptionPayload
   submission(where: SubmissionSubscriptionWhereInput): SubmissionSubscriptionPayload
+  character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
 }

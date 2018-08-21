@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "graphql-yoga": "^1.14.12",
     "nodemon": "^1.17.5",
     "prisma-binding": "^2.1.0",
