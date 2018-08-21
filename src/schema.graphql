@@ -7,16 +7,11 @@ type Query {
   story(searchString: String!): Story
   storyById(storyID: ID!): Story
   storiesByProfileId(profileId: ID!): [Story!]!
-  # blocks(searchString: String!): [Block!]!
-  # block(searchString: String!): Block
 }
 
 type Mutation {
-
   createSubmission(flag: Boolean): Submission
   createStory(title: String!, description: String!): Story
-  uploadStory(title: String!, description: String!, content: String, profileId: ID!): Story
-  #   createBlock(blockNumber: Int!, blockContent:String!): Block
-  #  createBlock(blockNumber: Int!, blockContent:String!): Block
+  uploadStory(title: String!, description: String!, content: String, profileId: ID): Story
 }
 

@@ -57,15 +57,17 @@ const resolvers = {
           )
     },
     uploadStory: async (_, args, context, info) => {
-      const userId = getUserId(context);
+      // const userId = getUserId(context);
       const submissionID = await context.prisma.mutation.createSubmission({
         data: {
           flag: true
         }
-      }, `{id}`)
+      }, ` { id } `)
 
       // console.log(Validation.validate(submissionID, args.content));
       // console.log(submissionID)
+
+      console.log(submissionID)
 
       return context.prisma.mutation.createStory(
         {

@@ -5,7 +5,7 @@ type Story {
   description: String 
   content: String
   characters: [Character!]!
-  genre: Genre
+  # genre: Genre
   approved: Boolean @default(value: "false")
   isPublished: Boolean @default(value: "false")
   views: Int
@@ -33,17 +33,17 @@ type Submission {
   # blocks: [Block!]!
 }
 
-enum Genre {
-  Tragedy
-  Tragic comedy
-  Fantasy
-  Mythology
-  Adventure
-  Mystery
-  Science fiction
-  Drama
-  Romance
-  Action / Adventure
-  Satire
-  Horror
-}
+# enum Genre {
+#   Tragedy
+#   Tragic comedy
+#   Fantasy
+#   Mythology
+#   Adventure
+#   Mystery
+#   Science fiction
+#   Drama
+#   Romance
+#   Action / Adventure
+#   Satire
+#   Horror
+# }
