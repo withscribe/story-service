@@ -5,7 +5,7 @@ type Story {
   description: String 
   content: String
   characters: [Character!]!
-  # genre: Genre
+  genre: Genre
   approved: Boolean @default(value: "false")
   isPublished: Boolean @default(value: "false")
   views: Int
