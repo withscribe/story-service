@@ -26,17 +26,17 @@ type Submission {
   flag: Boolean @default(value: "false")
 }
 
-enum Genre {
-  Tragedy
-  TragicComedy
-  Fantasy
-  Mythology
-  Adventure
-  Mystery
-  ScienceFiction
-  Drama
-  Romance
-  ActionAdventure
-  Satire
-  Horror
-}
+# enum Genre {
+#   Tragedy
+#   TragicComedy
+#   Fantasy
+#   Mythology
+#   Adventure
+#   Mystery
+#   ScienceFiction
+#   Drama
+#   Romance
+#   ActionAdventure
+#   Satire
+#   Horror
+# }

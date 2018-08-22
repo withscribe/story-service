@@ -1,8 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
-
-var Validation = require('./validation/validation');
 const { getUserId } = require('./utils');
+const Validation = require('./validation/validation');
 
 const resolvers = {
   Query: {   
@@ -63,29 +62,27 @@ const resolvers = {
           flag: true
         }
       }, ` { id } `)
-      console.log(submissionID)
 
-      // console.log(Validation.validate(submissionID, args.content));
-      // console.log(submissionID)
-
-      console.log(submissionID)
-
-      return context.prisma.mutation.createStory(
-        {
-          data: {
-            title: args.title,
-            description: args.description, 
-            content: args.content,
-            profileId: args.profileId,
-            submission: submissionID             
+      var validationResult = Validation.validate(submissionID['id'], text);
+      if(validationResult.approved) {
+        return context.prisma.mutation.createStory(
+          {
+            data: {
+              title: args.title,
+              description: args.description, 
+              content: args.content,
+              profileId: args.profileId,
+              submission: submissionID['id']             
+            },
           },
-        },
-        info,
-      )
+          info,
+        )
+      } else {
+        //return flagged story
+        console.log("got flagged");
+      }
     },
-
   },
-
 }
 
 
@@ -130,6 +127,4 @@ const options = {
 
 server.start(options, ({ port }) => {
   console.log(`GraphQL server is running on http://localhost:4000`)
-  // var x = Validation.validate("ds98dsa90sda8dassad", text);
-  // console.log(x);
 })
