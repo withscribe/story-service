@@ -11,7 +11,7 @@ type Story {
   views: Int
   likes: Int
   clones: Int
-  # submissionID: ID
+  submission: ID
 }
 
 type Character {
@@ -21,29 +21,22 @@ type Character {
   backStory: String
 }
 
-type Block { 
-  blockNumber: Int!
-  blockContent: String!
-  # submissionID: Submission
-}
-
 type Submission {
   id: ID! @unique
   flag: Boolean @default(value: "false")
-  # blocks: [Block!]!
 }
 
-# enum Genre {
-#   Tragedy
-#   Tragic comedy
-#   Fantasy
-#   Mythology
-#   Adventure
-#   Mystery
-#   Science fiction
-#   Drama
-#   Romance
-#   Action / Adventure
-#   Satire
-#   Horror
-# }
+enum Genre {
+  Tragedy
+  TragicComedy
+  Fantasy
+  Mythology
+  Adventure
+  Mystery
+  ScienceFiction
+  Drama
+  Romance
+  ActionAdventure
+  Satire
+  Horror
+}

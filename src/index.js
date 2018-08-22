@@ -57,12 +57,13 @@ const resolvers = {
           )
     },
     uploadStory: async (_, args, context, info) => {
-      // const userId = getUserId(context);
+      //const userId = getUserId(context);
       const submissionID = await context.prisma.mutation.createSubmission({
         data: {
           flag: true
         }
       }, ` { id } `)
+      console.log(submissionID)
 
       // console.log(Validation.validate(submissionID, args.content));
       // console.log(submissionID)
@@ -75,7 +76,8 @@ const resolvers = {
             title: args.title,
             description: args.description, 
             content: args.content,
-            profileId: args.profileId             
+            profileId: args.profileId,
+            submission: submissionID             
           },
         },
         info,
@@ -128,6 +130,6 @@ const options = {
 
 server.start(options, ({ port }) => {
   console.log(`GraphQL server is running on http://localhost:4000`)
-  var x = Validation.validate("ds98dsa90sda8dassad", text);
-  console.log(x);
+  // var x = Validation.validate("ds98dsa90sda8dassad", text);
+  // console.log(x);
 })

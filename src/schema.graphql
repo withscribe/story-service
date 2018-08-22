@@ -1,10 +1,9 @@
 # import Story from './generated/prisma.graphql'
-# import Block from './generated/prisma.graphql'
 # import Submission from './generated/prisma.graphql'
 
 type Query {
   stories(searchString: String!): [Story!]!
-  story(searchString: String!): Story
+  story(searchString: String!): Storyloc
   storyById(storyID: ID!): Story
   storiesByProfileId(profileId: ID!): [Story!]!
 }
@@ -12,6 +11,6 @@ type Query {
 type Mutation {
   createSubmission(flag: Boolean): Submission
   createStory(title: String!, description: String!): Story
-  uploadStory(title: String!, description: String!, content: String, profileId: ID): Story
+  uploadStory(title: String!, description: String!, content: String, profileId: ID, submission: ID): Story
 }
 
