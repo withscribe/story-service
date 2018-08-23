@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed Aug 22 2018 19:27:59 GMT-0400 (EDT)
+# timestamp: Wed Aug 22 2018 19:56:18 GMT-0400 (EDT)
 
 type AggregateCharacter {
   count: Int!

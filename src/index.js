@@ -40,6 +40,17 @@ const resolvers = {
           }
         }
       )
+    },
+    submissions: (_, args, context, info) => {     
+      return context.prisma.query.submissions(
+        {
+          where: {
+            OR: [
+              {searchString: args.searchString}
+            ]
+          }
+        }
+      )
     }
   },
   Mutation: {
@@ -64,6 +75,7 @@ const resolvers = {
       }, ` { id } `)
 
       var validationResult = Validation.validate(submissionID['id'], text);
+
       if(validationResult.approved) {
         return context.prisma.mutation.createStory(
           {
@@ -73,12 +85,20 @@ const resolvers = {
               content: args.content,
               profileId: args.profileId,
               submission: submissionID['id']             
-            },
+            }, 
           },
           info,
         )
       } else {
-        //return flagged story
+        //set the submission to false -> story flagged
+        return context.prisma.mutation.updateSubmission({
+          where: {
+            submissionID: submissionID['id']  
+          },
+          data: {
+            flag: false
+          }
+        })
         console.log("got flagged");
       }
     },

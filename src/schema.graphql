@@ -6,12 +6,13 @@ type Query {
   story(searchString: String!): Story
   storyById(storyID: ID!): Story
   storiesByProfileId(profileId: ID!): [Story!]!
+  submissions(searchString: String!): [Submission!]!
 }
 
 type Mutation {
   createSubmission(flag: Boolean): Submission
   createStory(title: String!, description: String!): Story
   uploadStory(title: String!, description: String!, content: String, profileId: ID, submission: ID): Story
-  # uploadStory(title: String!, description: String!, content: String, profileId: ID): Story
+  flagSubmission(submissionID: ID): Submission
 }
 
