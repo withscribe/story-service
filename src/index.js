@@ -45,13 +45,11 @@ const resolvers = {
         }
       )
     },
-    submissions: (_, args, context, info) => {     
+    getSubmissionsByFlag: (_, args, context, info) => {     
       return context.prisma.query.submissions(
         {
-          where: {
-            OR: [
-              {searchString: args.searchString}
-            ]
+          where: {            
+            flag: args.flag            
           }
         }
       )
