@@ -12,6 +12,5 @@ type Mutation {
   createSubmission(flag: Boolean): Submission
   createStory(title: String!, description: String!): Story
   uploadStory(title: String!, description: String!, content: String, profileId: ID, submission: ID): Story
-  # uploadStory(title: String!, description: String!, content: String, profileId: ID): Story
 }
 
