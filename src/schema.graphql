@@ -7,8 +7,9 @@ type Query {
   storiesByProfileId(profileId: ID!): [Story!]!
   searchByKeyword(searchString: String!): [Story!]!
   searchByAuthor(username: String!): [Story!]!
-  searchByTitle(title: String!): [Story!]!
+  searchByTitle(title: String!): [Story]
   getSubmissionsByFlag(flag: Boolean!): [Submission!]!
+  allStories: [Story!]!
 }
 
 type Mutation {
