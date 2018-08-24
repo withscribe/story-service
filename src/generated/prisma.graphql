@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed Aug 22 2018 19:56:18 GMT-0400 (EDT)
+# timestamp: Thu Aug 23 2018 21:47:37 GMT-0400 (EDT)
 
 type AggregateCharacter {
   count: Int!
@@ -308,6 +308,21 @@ input CharacterWhereUniqueInput {
   id: ID
 }
 
+enum Genre {
+  Tragedy
+  TragicComedy
+  Fantasy
+  Mythology
+  Adventure
+  Mystery
+  ScienceFiction
+  Drama
+  Romance
+  ActionAdventure
+  Satire
+  Horror
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -387,6 +402,7 @@ type Story implements Node {
   description: String
   content: String
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
+  genre: Genre
   approved: Boolean
   isPublished: Boolean
   views: Int
@@ -410,6 +426,7 @@ input StoryCreateInput {
   title: String!
   description: String
   content: String
+  genre: Genre
   approved: Boolean
   isPublished: Boolean
   views: Int
@@ -439,6 +456,8 @@ enum StoryOrderByInput {
   description_DESC
   content_ASC
   content_DESC
+  genre_ASC
+  genre_DESC
   approved_ASC
   approved_DESC
   isPublished_ASC
@@ -463,6 +482,7 @@ type StoryPreviousValues {
   title: String!
   description: String
   content: String
+  genre: Genre
   approved: Boolean
   isPublished: Boolean
   views: Int
@@ -515,6 +535,7 @@ input StoryUpdateInput {
   title: String
   description: String
   content: String
+  genre: Genre
   approved: Boolean
   isPublished: Boolean
   views: Int
@@ -733,6 +754,16 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   content_not_ends_with: String
+  genre: Genre
+
+  """All values that are not equal to given value."""
+  genre_not: Genre
+
+  """All values that are contained in given list."""
+  genre_in: [Genre!]
+
+  """All values that are not contained in given list."""
+  genre_not_in: [Genre!]
   approved: Boolean
 
   """All values that are not equal to given value."""
@@ -860,6 +891,8 @@ input StoryWhereUniqueInput {
 type Submission implements Node {
   id: ID!
   flag: Boolean
+  validationApproval: Boolean
+  platformApproval: Boolean
 }
 
 """A connection to a list of items."""
@@ -874,6 +907,8 @@ type SubmissionConnection {
 
 input SubmissionCreateInput {
   flag: Boolean
+  validationApproval: Boolean
+  platformApproval: Boolean
 }
 
 """An edge in a connection."""
@@ -890,6 +925,10 @@ enum SubmissionOrderByInput {
   id_DESC
   flag_ASC
   flag_DESC
+  validationApproval_ASC
+  validationApproval_DESC
+  platformApproval_ASC
+  platformApproval_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -899,6 +938,8 @@ enum SubmissionOrderByInput {
 type SubmissionPreviousValues {
   id: ID!
   flag: Boolean
+  validationApproval: Boolean
+  platformApproval: Boolean
 }
 
 type SubmissionSubscriptionPayload {
@@ -942,6 +983,8 @@ input SubmissionSubscriptionWhereInput {
 
 input SubmissionUpdateInput {
   flag: Boolean
+  validationApproval: Boolean
+  platformApproval: Boolean
 }
 
 input SubmissionWhereInput {
@@ -997,6 +1040,14 @@ input SubmissionWhereInput {
 
   """All values that are not equal to given value."""
   flag_not: Boolean
+  validationApproval: Boolean
+
+  """All values that are not equal to given value."""
+  validationApproval_not: Boolean
+  platformApproval: Boolean
+
+  """All values that are not equal to given value."""
+  platformApproval_not: Boolean
 }
 
 input SubmissionWhereUniqueInput {

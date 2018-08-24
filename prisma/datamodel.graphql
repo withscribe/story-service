@@ -1,11 +1,13 @@
 type Story {
+  # createdAt: DateTime!
+  # updatedAt: DateTime!
   id: ID! @unique
   profileId: ID @unique
   title: String!
   description: String 
   content: String
   characters: [Character!]!
-  # genre: Genre
+  genre: Genre
   approved: Boolean @default(value: "false")
   isPublished: Boolean @default(value: "false")
   views: Int
@@ -23,20 +25,24 @@ type Character {
 
 type Submission {
   id: ID! @unique
-  flag: Boolean @default(value: "false")
+  flag: Boolean @default(value: "true") #assume the story is good
+  validationApproval: Boolean #this is whether the code approved the content
+  platformApproval: Boolean @default(value: "false") #whether we approve the story
+  # createdAt: DateTime!
+  # updatedAt: DateTime!
 }
 
-# enum Genre {
-#   Tragedy
-#   TragicComedy
-#   Fantasy
-#   Mythology
-#   Adventure
-#   Mystery
-#   ScienceFiction
-#   Drama
-#   Romance
-#   ActionAdventure
-#   Satire
-#   Horror
-# }
+enum Genre {
+  Tragedy
+  TragicComedy
+  Fantasy
+  Mythology
+  Adventure
+  Mystery
+  ScienceFiction
+  Drama
+  Romance
+  ActionAdventure
+  Satire
+  Horror
+}

@@ -3,24 +3,30 @@ const { Prisma } = require('prisma-binding')
 const { getUserId } = require('./utils');
 const Validation = require('./validation/validation');
 
+
+/**
+ * Story by ID - pass
+ * Story by title - descript - tag
+ * 
+ */
 const resolvers = {
   Query: {   
-    story: (_, args, context, info) => {
-      const userId = getUserId(context);
-      return context.prisma.query.story(
+    stories: (_, args, context, info) => {
+      // const userId = getUserId(context);
+      return context.prisma.query.stories(
         {
           where: {
-              OR:[
-                  {title: args.searchString},
-                  {description: args.searchString},                               
+              OR:[               
+                {title: args.searchString},
+                {description: args.searchString},               
               ]
           },
         },
         info,
       )
-    },  
+    },   
     storyById: (_, args, context, info) => {
-      const userId = getUserId(context);
+      // const userId = getUserId(context);
       return context.prisma.query.story(
         {
           where: {
@@ -30,13 +36,11 @@ const resolvers = {
       )
     },
     storiesByProfileId: (_, args, context, info) => {
-      const userId = getUserId(context);
+      // const userId = getUserId(context);
       return context.prisma.query.stories(
         {
           where: {
-            OR: [
-              {profileId: args.profileId}
-            ]
+              profileId: args.profileId
           }
         }
       )
@@ -54,53 +58,37 @@ const resolvers = {
     }
   },
   Mutation: {
-    createStory: async (_, args, context, info) => {
-      const userId = getUserId(context);
-      return context.prisma.mutation.createStory(
-            {
-              data: {
-                title: args.title,
-                description: args.description,              
-              },
-            },
-            info,
-          )
-    },
-    uploadStory: async (_, args, context, info) => {
+    submitStory: async (_, args, context, info) => {
       //const userId = getUserId(context);
+
       const submissionID = await context.prisma.mutation.createSubmission({
         data: {
           flag: true
         }
       }, ` { id } `)
 
-      var validationResult = Validation.validate(submissionID['id'], text);
+      var validationResult = Validation.validate(submissionID['id'], args.content);
 
-      if(validationResult.approved) {
-        return context.prisma.mutation.createStory(
-          {
-            data: {
-              title: args.title,
-              description: args.description, 
-              content: args.content,
-              profileId: args.profileId,
-              submission: submissionID['id']             
-            }, 
-          },
-          info,
-        )
-      } else {
-        //set the submission to false -> story flagged
-        return context.prisma.mutation.updateSubmission({
-          where: {
-            submissionID: submissionID['id']  
-          },
-          data: {
-            flag: false
-          }
-        })
-        console.log("got flagged");
-      }
+      const submissionObject = await context.prisma.mutation.updateSubmission({
+        where: {
+          id: submissionID['id']  
+        },
+        data: {
+          flag: validationResult.approved          
+        }
+      })
+
+      return storyDraft = await context.prisma.mutation.createStory({
+        data: {
+            title: args.title,
+            description: args.description, 
+            content: args.content,
+            profileId: args.profileId,
+            submission: submissionID['id'],           
+          }, 
+        },
+        info,
+      )
     },
   },
 }
