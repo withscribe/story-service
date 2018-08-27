@@ -21,7 +21,7 @@ function storyById (_, args, context, info) {
     return context.prisma.query.story(
         {
             where: {
-            id: args.storyID
+                id: args.storyID
             }
         }
     )
@@ -30,13 +30,45 @@ function storyById (_, args, context, info) {
 function storiesByProfileId (_, args, context, info) {
     // const userId = getUserId(context);
     return context.prisma.query.stories(
-    {
-        where: {
-            profileId: args.profileId
+        {
+            where: {
+                profileId: args.profileId
+            }
         }
-    }
     )
 }
+
+
+function searchByKeyword (_, args, context, info) {
+    // const userId = getUserId(context);
+    return context.prisma.query.stories(
+        {
+            where: {
+                OR:[               
+                    {title_contains: args.searchString},
+                    {description_contains: args.searchString},   
+                    {content_contains: args.searchString},              
+                ]
+            }
+        }
+    )
+}
+
+// function searchByAuthor - need to query the gateway for the profile service
+
+function searchByTitle (_, args, context, info) {
+    // const userId = getUserId(context);
+    return context.prisma.query.stories(
+        {
+            where: {
+                OR: [
+                    {title_contains: args.title}
+                ]
+            }
+        }
+    )
+}
+
 
 function getSubmissionsByFlag (_, args, context, info) {     
     return context.prisma.query.submissions(
@@ -52,5 +84,7 @@ module.exports = {
     stories,
     storyById,
     storiesByProfileId,
-    getSubmissionsByFlag
+    getSubmissionsByFlag,
+    searchByKeyword,
+    searchByTitle
 }
