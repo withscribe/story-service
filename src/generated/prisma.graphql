@@ -1,7 +1,241 @@
 # source: http://localhost:4466
-# timestamp: Thu Aug 23 2018 21:47:37 GMT-0400 (EDT)
+# timestamp: Sun Aug 26 2018 21:25:32 GMT-0400 (EDT)
+
+type AgeRange implements Node {
+  id: ID!
+  minAge: Int
+  maxAge: Int
+}
+
+"""A connection to a list of items."""
+type AgeRangeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AgeRangeEdge]!
+  aggregate: AggregateAgeRange!
+}
+
+input AgeRangeCreateInput {
+  minAge: Int
+  maxAge: Int
+}
+
+input AgeRangeCreateOneInput {
+  create: AgeRangeCreateInput
+  connect: AgeRangeWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type AgeRangeEdge {
+  """The item at the end of the edge."""
+  node: AgeRange!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AgeRangeOrderByInput {
+  id_ASC
+  id_DESC
+  minAge_ASC
+  minAge_DESC
+  maxAge_ASC
+  maxAge_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AgeRangePreviousValues {
+  id: ID!
+  minAge: Int
+  maxAge: Int
+}
+
+type AgeRangeSubscriptionPayload {
+  mutation: MutationType!
+  node: AgeRange
+  updatedFields: [String!]
+  previousValues: AgeRangePreviousValues
+}
+
+input AgeRangeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AgeRangeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AgeRangeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AgeRangeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AgeRangeWhereInput
+}
+
+input AgeRangeUpdateDataInput {
+  minAge: Int
+  maxAge: Int
+}
+
+input AgeRangeUpdateInput {
+  minAge: Int
+  maxAge: Int
+}
+
+input AgeRangeUpdateOneInput {
+  create: AgeRangeCreateInput
+  connect: AgeRangeWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: AgeRangeUpdateDataInput
+  upsert: AgeRangeUpsertNestedInput
+}
+
+input AgeRangeUpsertNestedInput {
+  update: AgeRangeUpdateDataInput!
+  create: AgeRangeCreateInput!
+}
+
+input AgeRangeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AgeRangeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AgeRangeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AgeRangeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  minAge: Int
+
+  """All values that are not equal to given value."""
+  minAge_not: Int
+
+  """All values that are contained in given list."""
+  minAge_in: [Int!]
+
+  """All values that are not contained in given list."""
+  minAge_not_in: [Int!]
+
+  """All values less than the given value."""
+  minAge_lt: Int
+
+  """All values less than or equal the given value."""
+  minAge_lte: Int
+
+  """All values greater than the given value."""
+  minAge_gt: Int
+
+  """All values greater than or equal the given value."""
+  minAge_gte: Int
+  maxAge: Int
+
+  """All values that are not equal to given value."""
+  maxAge_not: Int
+
+  """All values that are contained in given list."""
+  maxAge_in: [Int!]
+
+  """All values that are not contained in given list."""
+  maxAge_not_in: [Int!]
+
+  """All values less than the given value."""
+  maxAge_lt: Int
+
+  """All values less than or equal the given value."""
+  maxAge_lte: Int
+
+  """All values greater than the given value."""
+  maxAge_gt: Int
+
+  """All values greater than or equal the given value."""
+  maxAge_gte: Int
+  _MagicalBackRelation_AgeRangeToStory_every: StoryWhereInput
+  _MagicalBackRelation_AgeRangeToStory_some: StoryWhereInput
+  _MagicalBackRelation_AgeRangeToStory_none: StoryWhereInput
+  _MagicalBackRelation_AgeRangeToCharacter_every: CharacterWhereInput
+  _MagicalBackRelation_AgeRangeToCharacter_some: CharacterWhereInput
+  _MagicalBackRelation_AgeRangeToCharacter_none: CharacterWhereInput
+}
+
+input AgeRangeWhereUniqueInput {
+  id: ID
+}
+
+type AggregateAgeRange {
+  count: Int!
+}
 
 type AggregateCharacter {
+  count: Int!
+}
+
+type AggregateGenreRequest {
+  count: Int!
+}
+
+type AggregatePlot {
   count: Int!
 }
 
@@ -9,7 +243,15 @@ type AggregateStory {
   count: Int!
 }
 
+type AggregateStoryLocations {
+  count: Int!
+}
+
 type AggregateSubmission {
+  count: Int!
+}
+
+type AggregateTheme {
   count: Int!
 }
 
@@ -20,9 +262,23 @@ type BatchPayload {
 
 type Character implements Node {
   id: ID!
+  approved: Boolean
   name: String!
   age: Int
   backStory: String
+  storyId: [ID!]!
+  ageRange(where: AgeRangeWhereInput): AgeRange
+  storyLocations(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryLocations!]
+  themes(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Theme!]
+  verbalBehaviour: String
+  physicalAppearance: String
+  personality: String
+  goals: [String!]!
+  motivations: [String!]!
+  internalConflicts: [String!]!
+  flaws: [String!]!
+  weaknesses: [String!]!
+  strengths: [String!]!
 }
 
 """A connection to a list of items."""
@@ -35,15 +291,57 @@ type CharacterConnection {
   aggregate: AggregateCharacter!
 }
 
+input CharacterCreateflawsInput {
+  set: [String!]
+}
+
+input CharacterCreategoalsInput {
+  set: [String!]
+}
+
 input CharacterCreateInput {
+  approved: Boolean
   name: String!
   age: Int
   backStory: String
+  verbalBehaviour: String
+  physicalAppearance: String
+  personality: String
+  storyId: CharacterCreatestoryIdInput
+  goals: CharacterCreategoalsInput
+  motivations: CharacterCreatemotivationsInput
+  internalConflicts: CharacterCreateinternalConflictsInput
+  flaws: CharacterCreateflawsInput
+  weaknesses: CharacterCreateweaknessesInput
+  strengths: CharacterCreatestrengthsInput
+  ageRange: AgeRangeCreateOneInput
+  storyLocations: StoryLocationsCreateManyInput
+  themes: ThemeCreateManyInput
+}
+
+input CharacterCreateinternalConflictsInput {
+  set: [String!]
 }
 
 input CharacterCreateManyInput {
   create: [CharacterCreateInput!]
   connect: [CharacterWhereUniqueInput!]
+}
+
+input CharacterCreatemotivationsInput {
+  set: [String!]
+}
+
+input CharacterCreatestoryIdInput {
+  set: [ID!]
+}
+
+input CharacterCreatestrengthsInput {
+  set: [String!]
+}
+
+input CharacterCreateweaknessesInput {
+  set: [String!]
 }
 
 """An edge in a connection."""
@@ -58,12 +356,20 @@ type CharacterEdge {
 enum CharacterOrderByInput {
   id_ASC
   id_DESC
+  approved_ASC
+  approved_DESC
   name_ASC
   name_DESC
   age_ASC
   age_DESC
   backStory_ASC
   backStory_DESC
+  verbalBehaviour_ASC
+  verbalBehaviour_DESC
+  physicalAppearance_ASC
+  physicalAppearance_DESC
+  personality_ASC
+  personality_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -72,9 +378,20 @@ enum CharacterOrderByInput {
 
 type CharacterPreviousValues {
   id: ID!
+  approved: Boolean
   name: String!
   age: Int
   backStory: String
+  storyId: [ID!]!
+  verbalBehaviour: String
+  physicalAppearance: String
+  personality: String
+  goals: [String!]!
+  motivations: [String!]!
+  internalConflicts: [String!]!
+  flaws: [String!]!
+  weaknesses: [String!]!
+  strengths: [String!]!
 }
 
 type CharacterSubscriptionPayload {
@@ -117,15 +434,55 @@ input CharacterSubscriptionWhereInput {
 }
 
 input CharacterUpdateDataInput {
+  approved: Boolean
   name: String
   age: Int
   backStory: String
+  verbalBehaviour: String
+  physicalAppearance: String
+  personality: String
+  storyId: CharacterUpdatestoryIdInput
+  goals: CharacterUpdategoalsInput
+  motivations: CharacterUpdatemotivationsInput
+  internalConflicts: CharacterUpdateinternalConflictsInput
+  flaws: CharacterUpdateflawsInput
+  weaknesses: CharacterUpdateweaknessesInput
+  strengths: CharacterUpdatestrengthsInput
+  ageRange: AgeRangeUpdateOneInput
+  storyLocations: StoryLocationsUpdateManyInput
+  themes: ThemeUpdateManyInput
+}
+
+input CharacterUpdateflawsInput {
+  set: [String!]
+}
+
+input CharacterUpdategoalsInput {
+  set: [String!]
 }
 
 input CharacterUpdateInput {
+  approved: Boolean
   name: String
   age: Int
   backStory: String
+  verbalBehaviour: String
+  physicalAppearance: String
+  personality: String
+  storyId: CharacterUpdatestoryIdInput
+  goals: CharacterUpdategoalsInput
+  motivations: CharacterUpdatemotivationsInput
+  internalConflicts: CharacterUpdateinternalConflictsInput
+  flaws: CharacterUpdateflawsInput
+  weaknesses: CharacterUpdateweaknessesInput
+  strengths: CharacterUpdatestrengthsInput
+  ageRange: AgeRangeUpdateOneInput
+  storyLocations: StoryLocationsUpdateManyInput
+  themes: ThemeUpdateManyInput
+}
+
+input CharacterUpdateinternalConflictsInput {
+  set: [String!]
 }
 
 input CharacterUpdateManyInput {
@@ -135,6 +492,22 @@ input CharacterUpdateManyInput {
   delete: [CharacterWhereUniqueInput!]
   update: [CharacterUpdateWithWhereUniqueNestedInput!]
   upsert: [CharacterUpsertWithWhereUniqueNestedInput!]
+}
+
+input CharacterUpdatemotivationsInput {
+  set: [String!]
+}
+
+input CharacterUpdatestoryIdInput {
+  set: [ID!]
+}
+
+input CharacterUpdatestrengthsInput {
+  set: [String!]
+}
+
+input CharacterUpdateweaknessesInput {
+  set: [String!]
 }
 
 input CharacterUpdateWithWhereUniqueNestedInput {
@@ -197,6 +570,10 @@ input CharacterWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  approved: Boolean
+
+  """All values that are not equal to given value."""
+  approved_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -299,6 +676,136 @@ input CharacterWhereInput {
 
   """All values not ending with the given string."""
   backStory_not_ends_with: String
+  verbalBehaviour: String
+
+  """All values that are not equal to given value."""
+  verbalBehaviour_not: String
+
+  """All values that are contained in given list."""
+  verbalBehaviour_in: [String!]
+
+  """All values that are not contained in given list."""
+  verbalBehaviour_not_in: [String!]
+
+  """All values less than the given value."""
+  verbalBehaviour_lt: String
+
+  """All values less than or equal the given value."""
+  verbalBehaviour_lte: String
+
+  """All values greater than the given value."""
+  verbalBehaviour_gt: String
+
+  """All values greater than or equal the given value."""
+  verbalBehaviour_gte: String
+
+  """All values containing the given string."""
+  verbalBehaviour_contains: String
+
+  """All values not containing the given string."""
+  verbalBehaviour_not_contains: String
+
+  """All values starting with the given string."""
+  verbalBehaviour_starts_with: String
+
+  """All values not starting with the given string."""
+  verbalBehaviour_not_starts_with: String
+
+  """All values ending with the given string."""
+  verbalBehaviour_ends_with: String
+
+  """All values not ending with the given string."""
+  verbalBehaviour_not_ends_with: String
+  physicalAppearance: String
+
+  """All values that are not equal to given value."""
+  physicalAppearance_not: String
+
+  """All values that are contained in given list."""
+  physicalAppearance_in: [String!]
+
+  """All values that are not contained in given list."""
+  physicalAppearance_not_in: [String!]
+
+  """All values less than the given value."""
+  physicalAppearance_lt: String
+
+  """All values less than or equal the given value."""
+  physicalAppearance_lte: String
+
+  """All values greater than the given value."""
+  physicalAppearance_gt: String
+
+  """All values greater than or equal the given value."""
+  physicalAppearance_gte: String
+
+  """All values containing the given string."""
+  physicalAppearance_contains: String
+
+  """All values not containing the given string."""
+  physicalAppearance_not_contains: String
+
+  """All values starting with the given string."""
+  physicalAppearance_starts_with: String
+
+  """All values not starting with the given string."""
+  physicalAppearance_not_starts_with: String
+
+  """All values ending with the given string."""
+  physicalAppearance_ends_with: String
+
+  """All values not ending with the given string."""
+  physicalAppearance_not_ends_with: String
+  personality: String
+
+  """All values that are not equal to given value."""
+  personality_not: String
+
+  """All values that are contained in given list."""
+  personality_in: [String!]
+
+  """All values that are not contained in given list."""
+  personality_not_in: [String!]
+
+  """All values less than the given value."""
+  personality_lt: String
+
+  """All values less than or equal the given value."""
+  personality_lte: String
+
+  """All values greater than the given value."""
+  personality_gt: String
+
+  """All values greater than or equal the given value."""
+  personality_gte: String
+
+  """All values containing the given string."""
+  personality_contains: String
+
+  """All values not containing the given string."""
+  personality_not_contains: String
+
+  """All values starting with the given string."""
+  personality_starts_with: String
+
+  """All values not starting with the given string."""
+  personality_not_starts_with: String
+
+  """All values ending with the given string."""
+  personality_ends_with: String
+
+  """All values not ending with the given string."""
+  personality_not_ends_with: String
+  ageRange: AgeRangeWhereInput
+  storyLocations_every: StoryLocationsWhereInput
+  storyLocations_some: StoryLocationsWhereInput
+  storyLocations_none: StoryLocationsWhereInput
+  themes_every: ThemeWhereInput
+  themes_some: ThemeWhereInput
+  themes_none: ThemeWhereInput
+  _MagicalBackRelation_CharacterToPlot_every: PlotWhereInput
+  _MagicalBackRelation_CharacterToPlot_some: PlotWhereInput
+  _MagicalBackRelation_CharacterToPlot_none: PlotWhereInput
   _MagicalBackRelation_CharacterToStory_every: StoryWhereInput
   _MagicalBackRelation_CharacterToStory_some: StoryWhereInput
   _MagicalBackRelation_CharacterToStory_none: StoryWhereInput
@@ -323,6 +830,244 @@ enum Genre {
   Horror
 }
 
+type GenreRequest implements Node {
+  id: ID!
+  approved: Boolean
+  genreTitle: String
+  description: String
+}
+
+"""A connection to a list of items."""
+type GenreRequestConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [GenreRequestEdge]!
+  aggregate: AggregateGenreRequest!
+}
+
+input GenreRequestCreateInput {
+  approved: Boolean
+  genreTitle: String
+  description: String
+}
+
+"""An edge in a connection."""
+type GenreRequestEdge {
+  """The item at the end of the edge."""
+  node: GenreRequest!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum GenreRequestOrderByInput {
+  id_ASC
+  id_DESC
+  approved_ASC
+  approved_DESC
+  genreTitle_ASC
+  genreTitle_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type GenreRequestPreviousValues {
+  id: ID!
+  approved: Boolean
+  genreTitle: String
+  description: String
+}
+
+type GenreRequestSubscriptionPayload {
+  mutation: MutationType!
+  node: GenreRequest
+  updatedFields: [String!]
+  previousValues: GenreRequestPreviousValues
+}
+
+input GenreRequestSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GenreRequestSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GenreRequestSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GenreRequestSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: GenreRequestWhereInput
+}
+
+input GenreRequestUpdateInput {
+  approved: Boolean
+  genreTitle: String
+  description: String
+}
+
+input GenreRequestWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GenreRequestWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GenreRequestWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GenreRequestWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  approved: Boolean
+
+  """All values that are not equal to given value."""
+  approved_not: Boolean
+  genreTitle: String
+
+  """All values that are not equal to given value."""
+  genreTitle_not: String
+
+  """All values that are contained in given list."""
+  genreTitle_in: [String!]
+
+  """All values that are not contained in given list."""
+  genreTitle_not_in: [String!]
+
+  """All values less than the given value."""
+  genreTitle_lt: String
+
+  """All values less than or equal the given value."""
+  genreTitle_lte: String
+
+  """All values greater than the given value."""
+  genreTitle_gt: String
+
+  """All values greater than or equal the given value."""
+  genreTitle_gte: String
+
+  """All values containing the given string."""
+  genreTitle_contains: String
+
+  """All values not containing the given string."""
+  genreTitle_not_contains: String
+
+  """All values starting with the given string."""
+  genreTitle_starts_with: String
+
+  """All values not starting with the given string."""
+  genreTitle_not_starts_with: String
+
+  """All values ending with the given string."""
+  genreTitle_ends_with: String
+
+  """All values not ending with the given string."""
+  genreTitle_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+input GenreRequestWhereUniqueInput {
+  id: ID
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -332,22 +1077,52 @@ scalar Long
 type Mutation {
   createStory(data: StoryCreateInput!): Story!
   createSubmission(data: SubmissionCreateInput!): Submission!
+  createPlot(data: PlotCreateInput!): Plot!
+  createGenreRequest(data: GenreRequestCreateInput!): GenreRequest!
+  createTheme(data: ThemeCreateInput!): Theme!
   createCharacter(data: CharacterCreateInput!): Character!
+  createAgeRange(data: AgeRangeCreateInput!): AgeRange!
+  createStoryLocations(data: StoryLocationsCreateInput!): StoryLocations!
   updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
   updateSubmission(data: SubmissionUpdateInput!, where: SubmissionWhereUniqueInput!): Submission
+  updatePlot(data: PlotUpdateInput!, where: PlotWhereUniqueInput!): Plot
+  updateGenreRequest(data: GenreRequestUpdateInput!, where: GenreRequestWhereUniqueInput!): GenreRequest
+  updateTheme(data: ThemeUpdateInput!, where: ThemeWhereUniqueInput!): Theme
   updateCharacter(data: CharacterUpdateInput!, where: CharacterWhereUniqueInput!): Character
+  updateAgeRange(data: AgeRangeUpdateInput!, where: AgeRangeWhereUniqueInput!): AgeRange
+  updateStoryLocations(data: StoryLocationsUpdateInput!, where: StoryLocationsWhereUniqueInput!): StoryLocations
   deleteStory(where: StoryWhereUniqueInput!): Story
   deleteSubmission(where: SubmissionWhereUniqueInput!): Submission
+  deletePlot(where: PlotWhereUniqueInput!): Plot
+  deleteGenreRequest(where: GenreRequestWhereUniqueInput!): GenreRequest
+  deleteTheme(where: ThemeWhereUniqueInput!): Theme
   deleteCharacter(where: CharacterWhereUniqueInput!): Character
+  deleteAgeRange(where: AgeRangeWhereUniqueInput!): AgeRange
+  deleteStoryLocations(where: StoryLocationsWhereUniqueInput!): StoryLocations
   upsertStory(where: StoryWhereUniqueInput!, create: StoryCreateInput!, update: StoryUpdateInput!): Story!
   upsertSubmission(where: SubmissionWhereUniqueInput!, create: SubmissionCreateInput!, update: SubmissionUpdateInput!): Submission!
+  upsertPlot(where: PlotWhereUniqueInput!, create: PlotCreateInput!, update: PlotUpdateInput!): Plot!
+  upsertGenreRequest(where: GenreRequestWhereUniqueInput!, create: GenreRequestCreateInput!, update: GenreRequestUpdateInput!): GenreRequest!
+  upsertTheme(where: ThemeWhereUniqueInput!, create: ThemeCreateInput!, update: ThemeUpdateInput!): Theme!
   upsertCharacter(where: CharacterWhereUniqueInput!, create: CharacterCreateInput!, update: CharacterUpdateInput!): Character!
+  upsertAgeRange(where: AgeRangeWhereUniqueInput!, create: AgeRangeCreateInput!, update: AgeRangeUpdateInput!): AgeRange!
+  upsertStoryLocations(where: StoryLocationsWhereUniqueInput!, create: StoryLocationsCreateInput!, update: StoryLocationsUpdateInput!): StoryLocations!
   updateManyStories(data: StoryUpdateInput!, where: StoryWhereInput): BatchPayload!
   updateManySubmissions(data: SubmissionUpdateInput!, where: SubmissionWhereInput): BatchPayload!
+  updateManyPlots(data: PlotUpdateInput!, where: PlotWhereInput): BatchPayload!
+  updateManyGenreRequests(data: GenreRequestUpdateInput!, where: GenreRequestWhereInput): BatchPayload!
+  updateManyThemes(data: ThemeUpdateInput!, where: ThemeWhereInput): BatchPayload!
   updateManyCharacters(data: CharacterUpdateInput!, where: CharacterWhereInput): BatchPayload!
+  updateManyAgeRanges(data: AgeRangeUpdateInput!, where: AgeRangeWhereInput): BatchPayload!
+  updateManyStoryLocationses(data: StoryLocationsUpdateInput!, where: StoryLocationsWhereInput): BatchPayload!
   deleteManyStories(where: StoryWhereInput): BatchPayload!
   deleteManySubmissions(where: SubmissionWhereInput): BatchPayload!
+  deleteManyPlots(where: PlotWhereInput): BatchPayload!
+  deleteManyGenreRequests(where: GenreRequestWhereInput): BatchPayload!
+  deleteManyThemes(where: ThemeWhereInput): BatchPayload!
   deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
+  deleteManyAgeRanges(where: AgeRangeWhereInput): BatchPayload!
+  deleteManyStoryLocationses(where: StoryLocationsWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -377,16 +1152,407 @@ type PageInfo {
   endCursor: String
 }
 
+type Plot implements Node {
+  id: ID!
+  approved: Boolean
+  openingScene: String
+  endingScene: String
+  conflicts: [String!]!
+  struggles: [String!]!
+  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
+  climax: [String!]!
+  victories: [String!]!
+  defeats: [String!]!
+  surprises: [String!]!
+  controvery: [String!]!
+  mysteries: [String!]!
+  suspenses: [String!]!
+  plotTwists: [String!]!
+  subPlots: [String!]!
+}
+
+"""A connection to a list of items."""
+type PlotConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PlotEdge]!
+  aggregate: AggregatePlot!
+}
+
+input PlotCreateclimaxInput {
+  set: [String!]
+}
+
+input PlotCreateconflictsInput {
+  set: [String!]
+}
+
+input PlotCreatecontroveryInput {
+  set: [String!]
+}
+
+input PlotCreatedefeatsInput {
+  set: [String!]
+}
+
+input PlotCreateInput {
+  approved: Boolean
+  openingScene: String
+  endingScene: String
+  conflicts: PlotCreateconflictsInput
+  struggles: PlotCreatestrugglesInput
+  climax: PlotCreateclimaxInput
+  victories: PlotCreatevictoriesInput
+  defeats: PlotCreatedefeatsInput
+  surprises: PlotCreatesurprisesInput
+  controvery: PlotCreatecontroveryInput
+  mysteries: PlotCreatemysteriesInput
+  suspenses: PlotCreatesuspensesInput
+  plotTwists: PlotCreateplotTwistsInput
+  subPlots: PlotCreatesubPlotsInput
+  characters: CharacterCreateManyInput
+}
+
+input PlotCreatemysteriesInput {
+  set: [String!]
+}
+
+input PlotCreateplotTwistsInput {
+  set: [String!]
+}
+
+input PlotCreatestrugglesInput {
+  set: [String!]
+}
+
+input PlotCreatesubPlotsInput {
+  set: [String!]
+}
+
+input PlotCreatesurprisesInput {
+  set: [String!]
+}
+
+input PlotCreatesuspensesInput {
+  set: [String!]
+}
+
+input PlotCreatevictoriesInput {
+  set: [String!]
+}
+
+"""An edge in a connection."""
+type PlotEdge {
+  """The item at the end of the edge."""
+  node: Plot!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PlotOrderByInput {
+  id_ASC
+  id_DESC
+  approved_ASC
+  approved_DESC
+  openingScene_ASC
+  openingScene_DESC
+  endingScene_ASC
+  endingScene_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PlotPreviousValues {
+  id: ID!
+  approved: Boolean
+  openingScene: String
+  endingScene: String
+  conflicts: [String!]!
+  struggles: [String!]!
+  climax: [String!]!
+  victories: [String!]!
+  defeats: [String!]!
+  surprises: [String!]!
+  controvery: [String!]!
+  mysteries: [String!]!
+  suspenses: [String!]!
+  plotTwists: [String!]!
+  subPlots: [String!]!
+}
+
+type PlotSubscriptionPayload {
+  mutation: MutationType!
+  node: Plot
+  updatedFields: [String!]
+  previousValues: PlotPreviousValues
+}
+
+input PlotSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlotSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlotSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlotSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PlotWhereInput
+}
+
+input PlotUpdateclimaxInput {
+  set: [String!]
+}
+
+input PlotUpdateconflictsInput {
+  set: [String!]
+}
+
+input PlotUpdatecontroveryInput {
+  set: [String!]
+}
+
+input PlotUpdatedefeatsInput {
+  set: [String!]
+}
+
+input PlotUpdateInput {
+  approved: Boolean
+  openingScene: String
+  endingScene: String
+  conflicts: PlotUpdateconflictsInput
+  struggles: PlotUpdatestrugglesInput
+  climax: PlotUpdateclimaxInput
+  victories: PlotUpdatevictoriesInput
+  defeats: PlotUpdatedefeatsInput
+  surprises: PlotUpdatesurprisesInput
+  controvery: PlotUpdatecontroveryInput
+  mysteries: PlotUpdatemysteriesInput
+  suspenses: PlotUpdatesuspensesInput
+  plotTwists: PlotUpdateplotTwistsInput
+  subPlots: PlotUpdatesubPlotsInput
+  characters: CharacterUpdateManyInput
+}
+
+input PlotUpdatemysteriesInput {
+  set: [String!]
+}
+
+input PlotUpdateplotTwistsInput {
+  set: [String!]
+}
+
+input PlotUpdatestrugglesInput {
+  set: [String!]
+}
+
+input PlotUpdatesubPlotsInput {
+  set: [String!]
+}
+
+input PlotUpdatesurprisesInput {
+  set: [String!]
+}
+
+input PlotUpdatesuspensesInput {
+  set: [String!]
+}
+
+input PlotUpdatevictoriesInput {
+  set: [String!]
+}
+
+input PlotWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlotWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlotWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlotWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  approved: Boolean
+
+  """All values that are not equal to given value."""
+  approved_not: Boolean
+  openingScene: String
+
+  """All values that are not equal to given value."""
+  openingScene_not: String
+
+  """All values that are contained in given list."""
+  openingScene_in: [String!]
+
+  """All values that are not contained in given list."""
+  openingScene_not_in: [String!]
+
+  """All values less than the given value."""
+  openingScene_lt: String
+
+  """All values less than or equal the given value."""
+  openingScene_lte: String
+
+  """All values greater than the given value."""
+  openingScene_gt: String
+
+  """All values greater than or equal the given value."""
+  openingScene_gte: String
+
+  """All values containing the given string."""
+  openingScene_contains: String
+
+  """All values not containing the given string."""
+  openingScene_not_contains: String
+
+  """All values starting with the given string."""
+  openingScene_starts_with: String
+
+  """All values not starting with the given string."""
+  openingScene_not_starts_with: String
+
+  """All values ending with the given string."""
+  openingScene_ends_with: String
+
+  """All values not ending with the given string."""
+  openingScene_not_ends_with: String
+  endingScene: String
+
+  """All values that are not equal to given value."""
+  endingScene_not: String
+
+  """All values that are contained in given list."""
+  endingScene_in: [String!]
+
+  """All values that are not contained in given list."""
+  endingScene_not_in: [String!]
+
+  """All values less than the given value."""
+  endingScene_lt: String
+
+  """All values less than or equal the given value."""
+  endingScene_lte: String
+
+  """All values greater than the given value."""
+  endingScene_gt: String
+
+  """All values greater than or equal the given value."""
+  endingScene_gte: String
+
+  """All values containing the given string."""
+  endingScene_contains: String
+
+  """All values not containing the given string."""
+  endingScene_not_contains: String
+
+  """All values starting with the given string."""
+  endingScene_starts_with: String
+
+  """All values not starting with the given string."""
+  endingScene_not_starts_with: String
+
+  """All values ending with the given string."""
+  endingScene_ends_with: String
+
+  """All values not ending with the given string."""
+  endingScene_not_ends_with: String
+  characters_every: CharacterWhereInput
+  characters_some: CharacterWhereInput
+  characters_none: CharacterWhereInput
+}
+
+input PlotWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story]!
   submissions(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Submission]!
+  plots(where: PlotWhereInput, orderBy: PlotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Plot]!
+  genreRequests(where: GenreRequestWhereInput, orderBy: GenreRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GenreRequest]!
+  themes(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Theme]!
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
+  ageRanges(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AgeRange]!
+  storyLocationses(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryLocations]!
   story(where: StoryWhereUniqueInput!): Story
   submission(where: SubmissionWhereUniqueInput!): Submission
+  plot(where: PlotWhereUniqueInput!): Plot
+  genreRequest(where: GenreRequestWhereUniqueInput!): GenreRequest
+  theme(where: ThemeWhereUniqueInput!): Theme
   character(where: CharacterWhereUniqueInput!): Character
+  ageRange(where: AgeRangeWhereUniqueInput!): AgeRange
+  storyLocations(where: StoryLocationsWhereUniqueInput!): StoryLocations
   storiesConnection(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryConnection!
   submissionsConnection(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubmissionConnection!
+  plotsConnection(where: PlotWhereInput, orderBy: PlotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlotConnection!
+  genreRequestsConnection(where: GenreRequestWhereInput, orderBy: GenreRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GenreRequestConnection!
+  themesConnection(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThemeConnection!
   charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
+  ageRangesConnection(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AgeRangeConnection!
+  storyLocationsesConnection(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryLocationsConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -409,6 +1575,7 @@ type Story implements Node {
   likes: Int
   clones: Int
   submission: ID
+  ageRange(where: AgeRangeWhereInput): AgeRange
 }
 
 """A connection to a list of items."""
@@ -434,6 +1601,7 @@ input StoryCreateInput {
   clones: Int
   submission: ID
   characters: CharacterCreateManyInput
+  ageRange: AgeRangeCreateOneInput
 }
 
 """An edge in a connection."""
@@ -443,6 +1611,338 @@ type StoryEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+type StoryLocations implements Node {
+  id: ID!
+  approved: Boolean
+  location: String
+  timeOfStory: String
+  description: String
+  landmarks: [String!]!
+}
+
+"""A connection to a list of items."""
+type StoryLocationsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [StoryLocationsEdge]!
+  aggregate: AggregateStoryLocations!
+}
+
+input StoryLocationsCreateInput {
+  approved: Boolean
+  location: String
+  timeOfStory: String
+  description: String
+  landmarks: StoryLocationsCreatelandmarksInput
+}
+
+input StoryLocationsCreatelandmarksInput {
+  set: [String!]
+}
+
+input StoryLocationsCreateManyInput {
+  create: [StoryLocationsCreateInput!]
+  connect: [StoryLocationsWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type StoryLocationsEdge {
+  """The item at the end of the edge."""
+  node: StoryLocations!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum StoryLocationsOrderByInput {
+  id_ASC
+  id_DESC
+  approved_ASC
+  approved_DESC
+  location_ASC
+  location_DESC
+  timeOfStory_ASC
+  timeOfStory_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type StoryLocationsPreviousValues {
+  id: ID!
+  approved: Boolean
+  location: String
+  timeOfStory: String
+  description: String
+  landmarks: [String!]!
+}
+
+type StoryLocationsSubscriptionPayload {
+  mutation: MutationType!
+  node: StoryLocations
+  updatedFields: [String!]
+  previousValues: StoryLocationsPreviousValues
+}
+
+input StoryLocationsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StoryLocationsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StoryLocationsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StoryLocationsSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: StoryLocationsWhereInput
+}
+
+input StoryLocationsUpdateDataInput {
+  approved: Boolean
+  location: String
+  timeOfStory: String
+  description: String
+  landmarks: StoryLocationsUpdatelandmarksInput
+}
+
+input StoryLocationsUpdateInput {
+  approved: Boolean
+  location: String
+  timeOfStory: String
+  description: String
+  landmarks: StoryLocationsUpdatelandmarksInput
+}
+
+input StoryLocationsUpdatelandmarksInput {
+  set: [String!]
+}
+
+input StoryLocationsUpdateManyInput {
+  create: [StoryLocationsCreateInput!]
+  connect: [StoryLocationsWhereUniqueInput!]
+  disconnect: [StoryLocationsWhereUniqueInput!]
+  delete: [StoryLocationsWhereUniqueInput!]
+  update: [StoryLocationsUpdateWithWhereUniqueNestedInput!]
+  upsert: [StoryLocationsUpsertWithWhereUniqueNestedInput!]
+}
+
+input StoryLocationsUpdateWithWhereUniqueNestedInput {
+  where: StoryLocationsWhereUniqueInput!
+  data: StoryLocationsUpdateDataInput!
+}
+
+input StoryLocationsUpsertWithWhereUniqueNestedInput {
+  where: StoryLocationsWhereUniqueInput!
+  update: StoryLocationsUpdateDataInput!
+  create: StoryLocationsCreateInput!
+}
+
+input StoryLocationsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StoryLocationsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StoryLocationsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StoryLocationsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  approved: Boolean
+
+  """All values that are not equal to given value."""
+  approved_not: Boolean
+  location: String
+
+  """All values that are not equal to given value."""
+  location_not: String
+
+  """All values that are contained in given list."""
+  location_in: [String!]
+
+  """All values that are not contained in given list."""
+  location_not_in: [String!]
+
+  """All values less than the given value."""
+  location_lt: String
+
+  """All values less than or equal the given value."""
+  location_lte: String
+
+  """All values greater than the given value."""
+  location_gt: String
+
+  """All values greater than or equal the given value."""
+  location_gte: String
+
+  """All values containing the given string."""
+  location_contains: String
+
+  """All values not containing the given string."""
+  location_not_contains: String
+
+  """All values starting with the given string."""
+  location_starts_with: String
+
+  """All values not starting with the given string."""
+  location_not_starts_with: String
+
+  """All values ending with the given string."""
+  location_ends_with: String
+
+  """All values not ending with the given string."""
+  location_not_ends_with: String
+  timeOfStory: String
+
+  """All values that are not equal to given value."""
+  timeOfStory_not: String
+
+  """All values that are contained in given list."""
+  timeOfStory_in: [String!]
+
+  """All values that are not contained in given list."""
+  timeOfStory_not_in: [String!]
+
+  """All values less than the given value."""
+  timeOfStory_lt: String
+
+  """All values less than or equal the given value."""
+  timeOfStory_lte: String
+
+  """All values greater than the given value."""
+  timeOfStory_gt: String
+
+  """All values greater than or equal the given value."""
+  timeOfStory_gte: String
+
+  """All values containing the given string."""
+  timeOfStory_contains: String
+
+  """All values not containing the given string."""
+  timeOfStory_not_contains: String
+
+  """All values starting with the given string."""
+  timeOfStory_starts_with: String
+
+  """All values not starting with the given string."""
+  timeOfStory_not_starts_with: String
+
+  """All values ending with the given string."""
+  timeOfStory_ends_with: String
+
+  """All values not ending with the given string."""
+  timeOfStory_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  _MagicalBackRelation_CharacterToStoryLocations_every: CharacterWhereInput
+  _MagicalBackRelation_CharacterToStoryLocations_some: CharacterWhereInput
+  _MagicalBackRelation_CharacterToStoryLocations_none: CharacterWhereInput
+}
+
+input StoryLocationsWhereUniqueInput {
+  id: ID
 }
 
 enum StoryOrderByInput {
@@ -543,6 +2043,7 @@ input StoryUpdateInput {
   clones: Int
   submission: ID
   characters: CharacterUpdateManyInput
+  ageRange: AgeRangeUpdateOneInput
 }
 
 input StoryWhereInput {
@@ -881,6 +2382,7 @@ input StoryWhereInput {
   characters_every: CharacterWhereInput
   characters_some: CharacterWhereInput
   characters_none: CharacterWhereInput
+  ageRange: AgeRangeWhereInput
 }
 
 input StoryWhereUniqueInput {
@@ -1057,5 +2559,282 @@ input SubmissionWhereUniqueInput {
 type Subscription {
   story(where: StorySubscriptionWhereInput): StorySubscriptionPayload
   submission(where: SubmissionSubscriptionWhereInput): SubmissionSubscriptionPayload
+  plot(where: PlotSubscriptionWhereInput): PlotSubscriptionPayload
+  genreRequest(where: GenreRequestSubscriptionWhereInput): GenreRequestSubscriptionPayload
+  theme(where: ThemeSubscriptionWhereInput): ThemeSubscriptionPayload
   character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
+  ageRange(where: AgeRangeSubscriptionWhereInput): AgeRangeSubscriptionPayload
+  storyLocations(where: StoryLocationsSubscriptionWhereInput): StoryLocationsSubscriptionPayload
+}
+
+type Theme implements Node {
+  id: ID!
+  approved: Boolean
+  themeType: String
+  description: String
+}
+
+"""A connection to a list of items."""
+type ThemeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ThemeEdge]!
+  aggregate: AggregateTheme!
+}
+
+input ThemeCreateInput {
+  approved: Boolean
+  themeType: String
+  description: String
+}
+
+input ThemeCreateManyInput {
+  create: [ThemeCreateInput!]
+  connect: [ThemeWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type ThemeEdge {
+  """The item at the end of the edge."""
+  node: Theme!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ThemeOrderByInput {
+  id_ASC
+  id_DESC
+  approved_ASC
+  approved_DESC
+  themeType_ASC
+  themeType_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ThemePreviousValues {
+  id: ID!
+  approved: Boolean
+  themeType: String
+  description: String
+}
+
+type ThemeSubscriptionPayload {
+  mutation: MutationType!
+  node: Theme
+  updatedFields: [String!]
+  previousValues: ThemePreviousValues
+}
+
+input ThemeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThemeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThemeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThemeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ThemeWhereInput
+}
+
+input ThemeUpdateDataInput {
+  approved: Boolean
+  themeType: String
+  description: String
+}
+
+input ThemeUpdateInput {
+  approved: Boolean
+  themeType: String
+  description: String
+}
+
+input ThemeUpdateManyInput {
+  create: [ThemeCreateInput!]
+  connect: [ThemeWhereUniqueInput!]
+  disconnect: [ThemeWhereUniqueInput!]
+  delete: [ThemeWhereUniqueInput!]
+  update: [ThemeUpdateWithWhereUniqueNestedInput!]
+  upsert: [ThemeUpsertWithWhereUniqueNestedInput!]
+}
+
+input ThemeUpdateWithWhereUniqueNestedInput {
+  where: ThemeWhereUniqueInput!
+  data: ThemeUpdateDataInput!
+}
+
+input ThemeUpsertWithWhereUniqueNestedInput {
+  where: ThemeWhereUniqueInput!
+  update: ThemeUpdateDataInput!
+  create: ThemeCreateInput!
+}
+
+input ThemeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThemeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThemeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThemeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  approved: Boolean
+
+  """All values that are not equal to given value."""
+  approved_not: Boolean
+  themeType: String
+
+  """All values that are not equal to given value."""
+  themeType_not: String
+
+  """All values that are contained in given list."""
+  themeType_in: [String!]
+
+  """All values that are not contained in given list."""
+  themeType_not_in: [String!]
+
+  """All values less than the given value."""
+  themeType_lt: String
+
+  """All values less than or equal the given value."""
+  themeType_lte: String
+
+  """All values greater than the given value."""
+  themeType_gt: String
+
+  """All values greater than or equal the given value."""
+  themeType_gte: String
+
+  """All values containing the given string."""
+  themeType_contains: String
+
+  """All values not containing the given string."""
+  themeType_not_contains: String
+
+  """All values starting with the given string."""
+  themeType_starts_with: String
+
+  """All values not starting with the given string."""
+  themeType_not_starts_with: String
+
+  """All values ending with the given string."""
+  themeType_ends_with: String
+
+  """All values not ending with the given string."""
+  themeType_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  _MagicalBackRelation_CharacterToTheme_every: CharacterWhereInput
+  _MagicalBackRelation_CharacterToTheme_some: CharacterWhereInput
+  _MagicalBackRelation_CharacterToTheme_none: CharacterWhereInput
+}
+
+input ThemeWhereUniqueInput {
+  id: ID
 }
