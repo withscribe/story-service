@@ -2,6 +2,8 @@ type Story {
   # createdAt: DateTime!
   # updatedAt: DateTime!
   id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
   profileId: ID @unique
   title: String!
   description: String 
@@ -29,6 +31,8 @@ type Submission {
 type Character {
   id: ID! @unique
   approved: Boolean @default(value: "false")
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
   name: String!
   age: Int
   backStory: String
@@ -57,6 +61,8 @@ type AgeRange {
 #on what the theme is and why they think the user wrote what they did.
 type Theme {
   id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
   approved: Boolean @default(value: "false")
   themeType: String
   description: String
@@ -64,6 +70,8 @@ type Theme {
 
 type StoryLocations {
   id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
   approved: Boolean @default(value: "false")
   location: String
   timeOfStory: String
@@ -76,6 +84,8 @@ type StoryLocations {
 # think of it like madlibs, but essential story components, using the app as inspiration
 type Plot {
   id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
   approved: Boolean @default(value: "false")
   openingScene: String
   endingScene: String
