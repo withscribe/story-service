@@ -2,6 +2,8 @@ type Story {
   # createdAt: DateTime!
   # updatedAt: DateTime!
   id: ID! @unique
+  parentStoryId: ID
+  isCloned: Boolean @default(value: "false")
   profileId: ID @unique
   title: String!
   description: String 
@@ -14,13 +16,7 @@ type Story {
   likes: Int
   clones: Int
   submission: ID
-}
-
-type Character {
-  id: ID! @unique
-  name: String!
-  age: Int
-  backStory: String
+  ageRange: AgeRange
 }
 
 type Submission {
@@ -30,6 +26,107 @@ type Submission {
   platformApproval: Boolean @default(value: "false") #whether we approve the story
   # createdAt: DateTime!
   # updatedAt: DateTime!
+}
+
+type Character {
+  id: ID! @unique
+  approved: Boolean @default(value: "false")
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
+  name: String!
+  age: Int
+  backStory: String
+  storyId: [ID!] #character could be in many stories
+  ageRange: AgeRange #character could be better suited for certain ages
+  storyLocations: [StoryLocations!]! #characters could be better suited for certain types of stories - fantasy etc
+  themes: [Theme!]!
+  verbalBehaviour: String
+  physicalAppearance: String
+  personality: String
+  goals: [String!]
+  motivations: [String!]
+  internalConflicts: [String!]
+  flaws: [String!]
+  weaknesses: [String!]
+  strengths: [String!]
+}
+
+type AgeRange { 
+  id: ID! @unique
+  minAge: Int
+  maxAge: Int
+}
+
+#users uploading a story can add their own intended themese -> premium users can also critique a story and add their own intepretation 
+#on what the theme is and why they think the user wrote what they did.
+type Theme {
+  id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
+  approved: Boolean @default(value: "false")
+  themeType: String
+  description: String
+}
+
+type StoryLocations {
+  id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
+  approved: Boolean @default(value: "false")
+  location: String
+  timeOfStory: String
+  description: String
+  landmarks: [String!]
+}
+
+# users can make up new plots with characters they didn't even create. The idea is mixing and matching original platform content
+# users can create conflicts, struggles
+# think of it like madlibs, but essential story components, using the app as inspiration
+type Plot {
+  id: ID! @unique
+  parentAuthorId: ID
+  isCloned: Boolean @default(value: "false")
+  approved: Boolean @default(value: "false")
+  openingScene: String
+  endingScene: String
+  conflicts: [String!]
+  struggles: [String!]
+  characters: [Character!]!
+  climax: [String!]
+  victories: [String!]
+  defeats: [String!]
+  surprises: [String!]
+  controvery: [String!]
+  mysteries: [String!]
+  suspenses: [String!]
+  plotTwists: [String!]
+  subPlots: [String!]
+}
+
+
+#if a user wants a genre that is not yet on the app, they can request for it to be added
+type GenreRequest { 
+  id: ID! @unique
+  approved: Boolean @default(value: "false")
+  genreTitle: String
+  description: String
+}
+
+#saved object could be a user saving a story to their private library -> a favourite or bookmark
+#users might wish to save individual items on the app, like characters, or plots, or whatever
+#for this reason we will just the user ID, the object ID (story or character or plot etc..) and type of content
+type SavedObject {
+  userId: ID
+  objectId: ID
+  type: SavedObjectType 
+}
+
+enum SavedObjectType {
+  Character
+  Plot
+  StoryLocation
+  Theme
+  Story
 }
 
 enum Genre {

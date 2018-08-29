@@ -1,20 +1,54 @@
 # import Story from './generated/prisma.graphql'
 # import Submission from './generated/prisma.graphql'
+# import SavedObject from './generated/prisma.graphql'
 
 type Query {
+  #story queries
+  allStories: [Story]
   stories(searchString: String!): [Story!]!
   storyById(storyID: ID!): Story
   storiesByProfileId(profileId: ID!): [Story!]!
   searchByKeyword(searchString: String!): [Story!]!
   searchByAuthor(username: String!): [Story!]!
   searchByTitle(title: String!): [Story]
+  searchByDescription(description: String!): [Story]
+  #submission queries
+  allSubmissions: [Submission]
   getSubmissionsByFlag(flag: Boolean!): [Submission!]!
-  allStories: [Story!]!
+  #character queries
 }
 
 type Mutation {
-  createSubmission(flag: Boolean): Submission  
-  submitStory(title: String!, description: String!, content: String, profileId: ID, submission: ID): Story
-  flagSubmission(submissionID: ID): Submission
+  #submission mutations
+  createSubmission(flag: Boolean): Submission 
+  flagSubmission(submissionID: ID): Submission 
+  
+  #story mutations
+  submitStory(
+    title: String!, 
+    description: String!, 
+    content: String, 
+    profileId: ID, 
+    submission: ID
+  ): Story
+  
+  #will need the gateway for this - creating bookmarks or saved items in the db with a user and any object
+  bookmarkContent(
+    userId: ID,
+    objectId: ID,
+    type: SavedObjectType
+  ): SavedObject
+
+  cloneStory(
+    parentStoryId: ID, 
+    isCloned: Boolean,
+    profileId: ID,
+    title: String, 
+    description: String, 
+    content: String
+  ): Story 
+
+  #character mutations
+  #createIndependentCharacter()
 }
 
