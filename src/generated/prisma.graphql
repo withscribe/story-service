@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Aug 26 2018 21:25:32 GMT-0400 (EDT)
+# timestamp: Wed Aug 29 2018 19:43:01 GMT-0400 (EDT)
 
 type AgeRange implements Node {
   id: ID!
@@ -211,12 +211,6 @@ input AgeRangeWhereInput {
 
   """All values greater than or equal the given value."""
   maxAge_gte: Int
-  _MagicalBackRelation_AgeRangeToStory_every: StoryWhereInput
-  _MagicalBackRelation_AgeRangeToStory_some: StoryWhereInput
-  _MagicalBackRelation_AgeRangeToStory_none: StoryWhereInput
-  _MagicalBackRelation_AgeRangeToCharacter_every: CharacterWhereInput
-  _MagicalBackRelation_AgeRangeToCharacter_some: CharacterWhereInput
-  _MagicalBackRelation_AgeRangeToCharacter_none: CharacterWhereInput
 }
 
 input AgeRangeWhereUniqueInput {
@@ -236,6 +230,10 @@ type AggregateGenreRequest {
 }
 
 type AggregatePlot {
+  count: Int!
+}
+
+type AggregateSavedObject {
   count: Int!
 }
 
@@ -263,6 +261,8 @@ type BatchPayload {
 type Character implements Node {
   id: ID!
   approved: Boolean
+  parentAuthorId: ID
+  isCloned: Boolean
   name: String!
   age: Int
   backStory: String
@@ -301,6 +301,8 @@ input CharacterCreategoalsInput {
 
 input CharacterCreateInput {
   approved: Boolean
+  parentAuthorId: ID
+  isCloned: Boolean
   name: String!
   age: Int
   backStory: String
@@ -358,6 +360,10 @@ enum CharacterOrderByInput {
   id_DESC
   approved_ASC
   approved_DESC
+  parentAuthorId_ASC
+  parentAuthorId_DESC
+  isCloned_ASC
+  isCloned_DESC
   name_ASC
   name_DESC
   age_ASC
@@ -379,6 +385,8 @@ enum CharacterOrderByInput {
 type CharacterPreviousValues {
   id: ID!
   approved: Boolean
+  parentAuthorId: ID
+  isCloned: Boolean
   name: String!
   age: Int
   backStory: String
@@ -435,6 +443,8 @@ input CharacterSubscriptionWhereInput {
 
 input CharacterUpdateDataInput {
   approved: Boolean
+  parentAuthorId: ID
+  isCloned: Boolean
   name: String
   age: Int
   backStory: String
@@ -463,6 +473,8 @@ input CharacterUpdategoalsInput {
 
 input CharacterUpdateInput {
   approved: Boolean
+  parentAuthorId: ID
+  isCloned: Boolean
   name: String
   age: Int
   backStory: String
@@ -574,6 +586,50 @@ input CharacterWhereInput {
 
   """All values that are not equal to given value."""
   approved_not: Boolean
+  parentAuthorId: ID
+
+  """All values that are not equal to given value."""
+  parentAuthorId_not: ID
+
+  """All values that are contained in given list."""
+  parentAuthorId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  parentAuthorId_not_in: [ID!]
+
+  """All values less than the given value."""
+  parentAuthorId_lt: ID
+
+  """All values less than or equal the given value."""
+  parentAuthorId_lte: ID
+
+  """All values greater than the given value."""
+  parentAuthorId_gt: ID
+
+  """All values greater than or equal the given value."""
+  parentAuthorId_gte: ID
+
+  """All values containing the given string."""
+  parentAuthorId_contains: ID
+
+  """All values not containing the given string."""
+  parentAuthorId_not_contains: ID
+
+  """All values starting with the given string."""
+  parentAuthorId_starts_with: ID
+
+  """All values not starting with the given string."""
+  parentAuthorId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  parentAuthorId_ends_with: ID
+
+  """All values not ending with the given string."""
+  parentAuthorId_not_ends_with: ID
+  isCloned: Boolean
+
+  """All values that are not equal to given value."""
+  isCloned_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -803,12 +859,6 @@ input CharacterWhereInput {
   themes_every: ThemeWhereInput
   themes_some: ThemeWhereInput
   themes_none: ThemeWhereInput
-  _MagicalBackRelation_CharacterToPlot_every: PlotWhereInput
-  _MagicalBackRelation_CharacterToPlot_some: PlotWhereInput
-  _MagicalBackRelation_CharacterToPlot_none: PlotWhereInput
-  _MagicalBackRelation_CharacterToStory_every: StoryWhereInput
-  _MagicalBackRelation_CharacterToStory_some: StoryWhereInput
-  _MagicalBackRelation_CharacterToStory_none: StoryWhereInput
 }
 
 input CharacterWhereUniqueInput {
@@ -1079,6 +1129,7 @@ type Mutation {
   createSubmission(data: SubmissionCreateInput!): Submission!
   createPlot(data: PlotCreateInput!): Plot!
   createGenreRequest(data: GenreRequestCreateInput!): GenreRequest!
+  createSavedObject(data: SavedObjectCreateInput!): SavedObject!
   createTheme(data: ThemeCreateInput!): Theme!
   createCharacter(data: CharacterCreateInput!): Character!
   createAgeRange(data: AgeRangeCreateInput!): AgeRange!
@@ -1111,6 +1162,7 @@ type Mutation {
   updateManySubmissions(data: SubmissionUpdateInput!, where: SubmissionWhereInput): BatchPayload!
   updateManyPlots(data: PlotUpdateInput!, where: PlotWhereInput): BatchPayload!
   updateManyGenreRequests(data: GenreRequestUpdateInput!, where: GenreRequestWhereInput): BatchPayload!
+  updateManySavedObjects(data: SavedObjectUpdateInput!, where: SavedObjectWhereInput): BatchPayload!
   updateManyThemes(data: ThemeUpdateInput!, where: ThemeWhereInput): BatchPayload!
   updateManyCharacters(data: CharacterUpdateInput!, where: CharacterWhereInput): BatchPayload!
   updateManyAgeRanges(data: AgeRangeUpdateInput!, where: AgeRangeWhereInput): BatchPayload!
@@ -1119,6 +1171,7 @@ type Mutation {
   deleteManySubmissions(where: SubmissionWhereInput): BatchPayload!
   deleteManyPlots(where: PlotWhereInput): BatchPayload!
   deleteManyGenreRequests(where: GenreRequestWhereInput): BatchPayload!
+  deleteManySavedObjects(where: SavedObjectWhereInput): BatchPayload!
   deleteManyThemes(where: ThemeWhereInput): BatchPayload!
   deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
   deleteManyAgeRanges(where: AgeRangeWhereInput): BatchPayload!
@@ -1154,6 +1207,8 @@ type PageInfo {
 
 type Plot implements Node {
   id: ID!
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   openingScene: String
   endingScene: String
@@ -1198,6 +1253,8 @@ input PlotCreatedefeatsInput {
 }
 
 input PlotCreateInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   openingScene: String
   endingScene: String
@@ -1255,6 +1312,10 @@ type PlotEdge {
 enum PlotOrderByInput {
   id_ASC
   id_DESC
+  parentAuthorId_ASC
+  parentAuthorId_DESC
+  isCloned_ASC
+  isCloned_DESC
   approved_ASC
   approved_DESC
   openingScene_ASC
@@ -1269,6 +1330,8 @@ enum PlotOrderByInput {
 
 type PlotPreviousValues {
   id: ID!
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   openingScene: String
   endingScene: String
@@ -1341,6 +1404,8 @@ input PlotUpdatedefeatsInput {
 }
 
 input PlotUpdateInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   openingScene: String
   endingScene: String
@@ -1435,6 +1500,50 @@ input PlotWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  parentAuthorId: ID
+
+  """All values that are not equal to given value."""
+  parentAuthorId_not: ID
+
+  """All values that are contained in given list."""
+  parentAuthorId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  parentAuthorId_not_in: [ID!]
+
+  """All values less than the given value."""
+  parentAuthorId_lt: ID
+
+  """All values less than or equal the given value."""
+  parentAuthorId_lte: ID
+
+  """All values greater than the given value."""
+  parentAuthorId_gt: ID
+
+  """All values greater than or equal the given value."""
+  parentAuthorId_gte: ID
+
+  """All values containing the given string."""
+  parentAuthorId_contains: ID
+
+  """All values not containing the given string."""
+  parentAuthorId_not_contains: ID
+
+  """All values starting with the given string."""
+  parentAuthorId_starts_with: ID
+
+  """All values not starting with the given string."""
+  parentAuthorId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  parentAuthorId_ends_with: ID
+
+  """All values not ending with the given string."""
+  parentAuthorId_not_ends_with: ID
+  isCloned: Boolean
+
+  """All values that are not equal to given value."""
+  isCloned_not: Boolean
   approved: Boolean
 
   """All values that are not equal to given value."""
@@ -1533,6 +1642,7 @@ type Query {
   submissions(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Submission]!
   plots(where: PlotWhereInput, orderBy: PlotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Plot]!
   genreRequests(where: GenreRequestWhereInput, orderBy: GenreRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GenreRequest]!
+  savedObjects(where: SavedObjectWhereInput, orderBy: SavedObjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SavedObject]!
   themes(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Theme]!
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
   ageRanges(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AgeRange]!
@@ -1549,6 +1659,7 @@ type Query {
   submissionsConnection(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubmissionConnection!
   plotsConnection(where: PlotWhereInput, orderBy: PlotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlotConnection!
   genreRequestsConnection(where: GenreRequestWhereInput, orderBy: GenreRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GenreRequestConnection!
+  savedObjectsConnection(where: SavedObjectWhereInput, orderBy: SavedObjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SavedObjectConnection!
   themesConnection(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThemeConnection!
   charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
   ageRangesConnection(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AgeRangeConnection!
@@ -1561,8 +1672,216 @@ type Query {
   ): Node
 }
 
+type SavedObject {
+  userId: ID
+  objectId: ID
+  type: SavedObjectType
+}
+
+"""A connection to a list of items."""
+type SavedObjectConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SavedObjectEdge]!
+  aggregate: AggregateSavedObject!
+}
+
+input SavedObjectCreateInput {
+  userId: ID
+  objectId: ID
+  type: SavedObjectType
+}
+
+"""An edge in a connection."""
+type SavedObjectEdge {
+  """The item at the end of the edge."""
+  node: SavedObject!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SavedObjectOrderByInput {
+  userId_ASC
+  userId_DESC
+  objectId_ASC
+  objectId_DESC
+  type_ASC
+  type_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SavedObjectPreviousValues {
+  userId: ID
+  objectId: ID
+  type: SavedObjectType
+}
+
+type SavedObjectSubscriptionPayload {
+  mutation: MutationType!
+  node: SavedObject
+  updatedFields: [String!]
+  previousValues: SavedObjectPreviousValues
+}
+
+input SavedObjectSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SavedObjectSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SavedObjectSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SavedObjectSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SavedObjectWhereInput
+}
+
+enum SavedObjectType {
+  Character
+  Plot
+  StoryLocation
+  Theme
+  Story
+}
+
+input SavedObjectUpdateInput {
+  userId: ID
+  objectId: ID
+  type: SavedObjectType
+}
+
+input SavedObjectWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SavedObjectWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SavedObjectWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SavedObjectWhereInput!]
+  userId: ID
+
+  """All values that are not equal to given value."""
+  userId_not: ID
+
+  """All values that are contained in given list."""
+  userId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  userId_not_in: [ID!]
+
+  """All values less than the given value."""
+  userId_lt: ID
+
+  """All values less than or equal the given value."""
+  userId_lte: ID
+
+  """All values greater than the given value."""
+  userId_gt: ID
+
+  """All values greater than or equal the given value."""
+  userId_gte: ID
+
+  """All values containing the given string."""
+  userId_contains: ID
+
+  """All values not containing the given string."""
+  userId_not_contains: ID
+
+  """All values starting with the given string."""
+  userId_starts_with: ID
+
+  """All values not starting with the given string."""
+  userId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  userId_ends_with: ID
+
+  """All values not ending with the given string."""
+  userId_not_ends_with: ID
+  objectId: ID
+
+  """All values that are not equal to given value."""
+  objectId_not: ID
+
+  """All values that are contained in given list."""
+  objectId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  objectId_not_in: [ID!]
+
+  """All values less than the given value."""
+  objectId_lt: ID
+
+  """All values less than or equal the given value."""
+  objectId_lte: ID
+
+  """All values greater than the given value."""
+  objectId_gt: ID
+
+  """All values greater than or equal the given value."""
+  objectId_gte: ID
+
+  """All values containing the given string."""
+  objectId_contains: ID
+
+  """All values not containing the given string."""
+  objectId_not_contains: ID
+
+  """All values starting with the given string."""
+  objectId_starts_with: ID
+
+  """All values not starting with the given string."""
+  objectId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  objectId_ends_with: ID
+
+  """All values not ending with the given string."""
+  objectId_not_ends_with: ID
+  type: SavedObjectType
+
+  """All values that are not equal to given value."""
+  type_not: SavedObjectType
+
+  """All values that are contained in given list."""
+  type_in: [SavedObjectType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [SavedObjectType!]
+}
+
 type Story implements Node {
   id: ID!
+  parentStoryId: ID
+  isCloned: Boolean
   profileId: ID
   title: String!
   description: String
@@ -1589,6 +1908,8 @@ type StoryConnection {
 }
 
 input StoryCreateInput {
+  parentStoryId: ID
+  isCloned: Boolean
   profileId: ID
   title: String!
   description: String
@@ -1615,6 +1936,8 @@ type StoryEdge {
 
 type StoryLocations implements Node {
   id: ID!
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   location: String
   timeOfStory: String
@@ -1633,6 +1956,8 @@ type StoryLocationsConnection {
 }
 
 input StoryLocationsCreateInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   location: String
   timeOfStory: String
@@ -1661,6 +1986,10 @@ type StoryLocationsEdge {
 enum StoryLocationsOrderByInput {
   id_ASC
   id_DESC
+  parentAuthorId_ASC
+  parentAuthorId_DESC
+  isCloned_ASC
+  isCloned_DESC
   approved_ASC
   approved_DESC
   location_ASC
@@ -1677,6 +2006,8 @@ enum StoryLocationsOrderByInput {
 
 type StoryLocationsPreviousValues {
   id: ID!
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   location: String
   timeOfStory: String
@@ -1724,6 +2055,8 @@ input StoryLocationsSubscriptionWhereInput {
 }
 
 input StoryLocationsUpdateDataInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   location: String
   timeOfStory: String
@@ -1732,6 +2065,8 @@ input StoryLocationsUpdateDataInput {
 }
 
 input StoryLocationsUpdateInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   location: String
   timeOfStory: String
@@ -1812,6 +2147,50 @@ input StoryLocationsWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  parentAuthorId: ID
+
+  """All values that are not equal to given value."""
+  parentAuthorId_not: ID
+
+  """All values that are contained in given list."""
+  parentAuthorId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  parentAuthorId_not_in: [ID!]
+
+  """All values less than the given value."""
+  parentAuthorId_lt: ID
+
+  """All values less than or equal the given value."""
+  parentAuthorId_lte: ID
+
+  """All values greater than the given value."""
+  parentAuthorId_gt: ID
+
+  """All values greater than or equal the given value."""
+  parentAuthorId_gte: ID
+
+  """All values containing the given string."""
+  parentAuthorId_contains: ID
+
+  """All values not containing the given string."""
+  parentAuthorId_not_contains: ID
+
+  """All values starting with the given string."""
+  parentAuthorId_starts_with: ID
+
+  """All values not starting with the given string."""
+  parentAuthorId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  parentAuthorId_ends_with: ID
+
+  """All values not ending with the given string."""
+  parentAuthorId_not_ends_with: ID
+  isCloned: Boolean
+
+  """All values that are not equal to given value."""
+  isCloned_not: Boolean
   approved: Boolean
 
   """All values that are not equal to given value."""
@@ -1936,9 +2315,6 @@ input StoryLocationsWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  _MagicalBackRelation_CharacterToStoryLocations_every: CharacterWhereInput
-  _MagicalBackRelation_CharacterToStoryLocations_some: CharacterWhereInput
-  _MagicalBackRelation_CharacterToStoryLocations_none: CharacterWhereInput
 }
 
 input StoryLocationsWhereUniqueInput {
@@ -1948,6 +2324,10 @@ input StoryLocationsWhereUniqueInput {
 enum StoryOrderByInput {
   id_ASC
   id_DESC
+  parentStoryId_ASC
+  parentStoryId_DESC
+  isCloned_ASC
+  isCloned_DESC
   profileId_ASC
   profileId_DESC
   title_ASC
@@ -1978,6 +2358,8 @@ enum StoryOrderByInput {
 
 type StoryPreviousValues {
   id: ID!
+  parentStoryId: ID
+  isCloned: Boolean
   profileId: ID
   title: String!
   description: String
@@ -2031,6 +2413,8 @@ input StorySubscriptionWhereInput {
 }
 
 input StoryUpdateInput {
+  parentStoryId: ID
+  isCloned: Boolean
   profileId: ID
   title: String
   description: String
@@ -2095,6 +2479,50 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  parentStoryId: ID
+
+  """All values that are not equal to given value."""
+  parentStoryId_not: ID
+
+  """All values that are contained in given list."""
+  parentStoryId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  parentStoryId_not_in: [ID!]
+
+  """All values less than the given value."""
+  parentStoryId_lt: ID
+
+  """All values less than or equal the given value."""
+  parentStoryId_lte: ID
+
+  """All values greater than the given value."""
+  parentStoryId_gt: ID
+
+  """All values greater than or equal the given value."""
+  parentStoryId_gte: ID
+
+  """All values containing the given string."""
+  parentStoryId_contains: ID
+
+  """All values not containing the given string."""
+  parentStoryId_not_contains: ID
+
+  """All values starting with the given string."""
+  parentStoryId_starts_with: ID
+
+  """All values not starting with the given string."""
+  parentStoryId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  parentStoryId_ends_with: ID
+
+  """All values not ending with the given string."""
+  parentStoryId_not_ends_with: ID
+  isCloned: Boolean
+
+  """All values that are not equal to given value."""
+  isCloned_not: Boolean
   profileId: ID
 
   """All values that are not equal to given value."""
@@ -2561,6 +2989,7 @@ type Subscription {
   submission(where: SubmissionSubscriptionWhereInput): SubmissionSubscriptionPayload
   plot(where: PlotSubscriptionWhereInput): PlotSubscriptionPayload
   genreRequest(where: GenreRequestSubscriptionWhereInput): GenreRequestSubscriptionPayload
+  savedObject(where: SavedObjectSubscriptionWhereInput): SavedObjectSubscriptionPayload
   theme(where: ThemeSubscriptionWhereInput): ThemeSubscriptionPayload
   character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
   ageRange(where: AgeRangeSubscriptionWhereInput): AgeRangeSubscriptionPayload
@@ -2569,6 +2998,8 @@ type Subscription {
 
 type Theme implements Node {
   id: ID!
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   themeType: String
   description: String
@@ -2585,6 +3016,8 @@ type ThemeConnection {
 }
 
 input ThemeCreateInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   themeType: String
   description: String
@@ -2607,6 +3040,10 @@ type ThemeEdge {
 enum ThemeOrderByInput {
   id_ASC
   id_DESC
+  parentAuthorId_ASC
+  parentAuthorId_DESC
+  isCloned_ASC
+  isCloned_DESC
   approved_ASC
   approved_DESC
   themeType_ASC
@@ -2621,6 +3058,8 @@ enum ThemeOrderByInput {
 
 type ThemePreviousValues {
   id: ID!
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   themeType: String
   description: String
@@ -2666,12 +3105,16 @@ input ThemeSubscriptionWhereInput {
 }
 
 input ThemeUpdateDataInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   themeType: String
   description: String
 }
 
 input ThemeUpdateInput {
+  parentAuthorId: ID
+  isCloned: Boolean
   approved: Boolean
   themeType: String
   description: String
@@ -2746,6 +3189,50 @@ input ThemeWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  parentAuthorId: ID
+
+  """All values that are not equal to given value."""
+  parentAuthorId_not: ID
+
+  """All values that are contained in given list."""
+  parentAuthorId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  parentAuthorId_not_in: [ID!]
+
+  """All values less than the given value."""
+  parentAuthorId_lt: ID
+
+  """All values less than or equal the given value."""
+  parentAuthorId_lte: ID
+
+  """All values greater than the given value."""
+  parentAuthorId_gt: ID
+
+  """All values greater than or equal the given value."""
+  parentAuthorId_gte: ID
+
+  """All values containing the given string."""
+  parentAuthorId_contains: ID
+
+  """All values not containing the given string."""
+  parentAuthorId_not_contains: ID
+
+  """All values starting with the given string."""
+  parentAuthorId_starts_with: ID
+
+  """All values not starting with the given string."""
+  parentAuthorId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  parentAuthorId_ends_with: ID
+
+  """All values not ending with the given string."""
+  parentAuthorId_not_ends_with: ID
+  isCloned: Boolean
+
+  """All values that are not equal to given value."""
+  isCloned_not: Boolean
   approved: Boolean
 
   """All values that are not equal to given value."""
@@ -2830,9 +3317,6 @@ input ThemeWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  _MagicalBackRelation_CharacterToTheme_every: CharacterWhereInput
-  _MagicalBackRelation_CharacterToTheme_some: CharacterWhereInput
-  _MagicalBackRelation_CharacterToTheme_none: CharacterWhereInput
 }
 
 input ThemeWhereUniqueInput {

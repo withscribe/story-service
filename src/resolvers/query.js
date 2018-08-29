@@ -86,22 +86,7 @@ function searchByDescription (_, args, context, info) {
     )
 }
 
-
-
 // function searchByAuthor - need to query the gateway for the profile service
-
-function searchByTitle (_, args, context, info) {
-    // const userId = getUserId(context);
-    return context.prisma.query.stories(
-        {
-            where: {
-                OR: [
-                    {title_contains: args.title}
-                ]
-            }
-        }
-    )
-}
 
 function allSubmissions (_, args, context, info) {
     // const userId = getUserId(context);
