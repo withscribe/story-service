@@ -1,6 +1,5 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
-const { getUserId } = require('./utils');
 const Query = require('./resolvers/query');
 const Mutation = require('./resolvers/mutation');
 

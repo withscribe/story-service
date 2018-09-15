@@ -1,4 +1,4 @@
-const { getUserId } = require('../utils')
+const { getAccountId } = require('../utils')
 const Validation = require('../validation/validation');
 
 async function submitStory (_, args, context, info) {
