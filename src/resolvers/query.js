@@ -1,4 +1,4 @@
-const { getUserId } = require('../utils')
+const { getAccountId } = require('../utils')
 
 function allStories (_, args, context, info) {
     const payload = getAccountId(context)
