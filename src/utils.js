@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-function getAccountId(context) {
+function verifyToken(context) {
   const Authorization = context.request.get('Authorization')
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
-    const accountId = jwt.verify(token, process.env.TOKEN_SECRET);
-    return accountId
+    const payload = jwt.verify(token, process.env.TOKEN_SECRET);
+    return payload
   }
 
   throw new AuthError()
@@ -19,5 +19,5 @@ class AuthError extends Error {
 }
 
 module.exports = {
-  getAccountId,
+  verifyToken,
 }
