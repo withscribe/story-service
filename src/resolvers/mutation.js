@@ -1,8 +1,8 @@
-const { verifyToken } = require('../utils')
+const { getAccountId } = require('../utils')
 const Validation = require('../validation/validation');
 
 async function submitStory (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     const submissionID = await context.prisma.mutation.createSubmission({
         data: {
             flag: true

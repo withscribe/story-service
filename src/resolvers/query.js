@@ -1,7 +1,7 @@
-const { verifyToken } = require('../utils')
+const { getAccountId } = require('../utils')
 
 function allStories (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.stories(  
         _, 
         info,
@@ -9,7 +9,7 @@ function allStories (_, args, context, info) {
 }  
 
 function stories (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.stories(
     {
         where: {
@@ -24,7 +24,7 @@ function stories (_, args, context, info) {
 }  
 
 function storyById (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.story(
         {
             where: {
@@ -35,7 +35,7 @@ function storyById (_, args, context, info) {
 }
 
 function storiesByProfileId (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.stories(
         {
             where: {
@@ -46,7 +46,7 @@ function storiesByProfileId (_, args, context, info) {
 }
 
 function searchByKeyword (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.stories(
         {
             where: {
@@ -61,7 +61,7 @@ function searchByKeyword (_, args, context, info) {
 }
 
 function searchByTitle (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.stories(
         {
             where: {
@@ -74,7 +74,7 @@ function searchByTitle (_, args, context, info) {
 }
 
 function searchByDescription (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.stories(
         {
             where: {
@@ -89,7 +89,7 @@ function searchByDescription (_, args, context, info) {
 // function searchByAuthor - need to query the gateway for the profile service
 
 function allSubmissions (_, args, context, info) {
-    const payload = verifyToken(context)
+    const payload = getAccountId(context)
     return context.prisma.query.submissions(  
         _, 
         info,
