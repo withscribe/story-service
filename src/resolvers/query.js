@@ -1,7 +1,7 @@
 const { verifyToken } = require('../utils')
 
 function allStories (_, args, context, info) {
-    const payload = verifyToken(context)
+    // const payload = verifyToken(context)
     return context.prisma.query.stories(  
         _, 
         info,

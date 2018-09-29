@@ -33,6 +33,61 @@ async function submitStory (_, args, context, info) {
     )
 }
 
+async function cloneStory (_, args, context, info) {
+    const payload = verifyToken(context)
+
+    const profile = await context.prisma.query.profile(
+        {
+            where: {
+                accountId: payload.accountId
+            },
+            context,
+            info
+        }
+    )
+
+    const parentStory = await context.prisma.query.story(
+        {
+            where: {
+                id: args.parentStoryId
+            }
+        }
+    );
+
+    return storyClone = await context.prisma.mutation.createStory({
+            data: {
+                parentStoryId: parentStory.id,
+                isCloned: true,
+                profileId: args.profileId,
+                title: parentStory.title,
+                description: parentStory.description,
+                content: parentStory.content,
+            },
+        },
+        info,
+    )
+}
+
+async function updateStory(_, args, context, info) {
+    // const payload = verifyToken(context);
+
+    const result = await context.prisma.mutation.updateStory(
+        {
+            where: {
+                id: args.id
+            },
+            data: {
+                title: args.title,
+                description: args.description,
+                content: args.content
+            }
+        }
+    )
+    return result
+}
+
 module.exports = {
     submitStory,
+    cloneStory,
+    updateStory
 }
