@@ -2,7 +2,18 @@ const { verifyToken } = require('../utils')
 const Validation = require('../validation/validation');
 
 async function submitStory (_, args, context, info) {
+
     const payload = verifyToken(context)
+    const profile = await context.prisma.query.profile(
+        {
+            where: {
+                accountId: payload.accountId
+            },
+            context,
+            info
+        }
+    )
+
     const submissionID = await context.prisma.mutation.createSubmission({
         data: {
             flag: true
@@ -10,7 +21,6 @@ async function submitStory (_, args, context, info) {
     }, ` { id } `)
 
     var validationResult = Validation.validate(submissionID['id'], args.content);
-
     const submissionObject = await context.prisma.mutation.updateSubmission({
         where: {
             id: submissionID['id']  
@@ -25,7 +35,7 @@ async function submitStory (_, args, context, info) {
             title: args.title,
             description: args.description, 
             content: args.content,
-            profileId: args.profileId,
+            profileId: profile.id,
             submission: submissionID['id'],           
             }, 
         },
@@ -58,7 +68,7 @@ async function cloneStory (_, args, context, info) {
             data: {
                 parentStoryId: parentStory.id,
                 isCloned: true,
-                profileId: args.profileId,
+                profileId: profile.id,
                 title: parentStory.title,
                 description: parentStory.description,
                 content: parentStory.content,
@@ -69,7 +79,7 @@ async function cloneStory (_, args, context, info) {
 }
 
 async function updateStory(_, args, context, info) {
-    // const payload = verifyToken(context);
+    const payload = verifyToken(context);
 
     const result = await context.prisma.mutation.updateStory(
         {
