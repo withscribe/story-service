@@ -38,6 +38,15 @@ type Mutation {
     description: String,
     content: String
   ): Story
+
+  deleteStory(
+    id: ID!
+  ): Story
+
+  cloneStory(
+    parentStoryId: ID,
+    profileId: ID
+  ): Story
   
   #will need the gateway for this - creating bookmarks or saved items in the db with a user and any object
   bookmarkContent(
@@ -45,11 +54,6 @@ type Mutation {
     objectId: ID,
     type: SavedObjectType
   ): SavedObject
-
-  cloneStory(
-    parentStoryId: ID,
-    profileId: ID
-  ): Story 
 
   #character mutations
   #createIndependentCharacter()

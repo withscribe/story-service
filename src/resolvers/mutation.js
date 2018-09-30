@@ -43,6 +43,37 @@ async function submitStory (_, args, context, info) {
     )
 }
 
+async function updateStory(_, args, context, info) {
+    const payload = verifyToken(context);
+
+    const result = await context.prisma.mutation.updateStory(
+        {
+            where: {
+                id: args.id
+            },
+            data: {
+                title: args.title,
+                description: args.description,
+                content: args.content
+            }
+        }
+    )
+    return result
+}
+
+async function deleteStory(_, args, context, info) {
+    const payload = verifyToken(context);
+
+    const result = await context.prisma.mutation.deleteStory(
+        {
+            where: {
+                id: args.id
+            }
+        }
+    )
+    return result
+}
+
 async function cloneStory (_, args, context, info) {
     const payload = verifyToken(context)
 
@@ -78,26 +109,9 @@ async function cloneStory (_, args, context, info) {
     )
 }
 
-async function updateStory(_, args, context, info) {
-    const payload = verifyToken(context);
-
-    const result = await context.prisma.mutation.updateStory(
-        {
-            where: {
-                id: args.id
-            },
-            data: {
-                title: args.title,
-                description: args.description,
-                content: args.content
-            }
-        }
-    )
-    return result
-}
-
 module.exports = {
     submitStory,
-    cloneStory,
-    updateStory
+    updateStory,
+    deleteStory,
+    cloneStory
 }
