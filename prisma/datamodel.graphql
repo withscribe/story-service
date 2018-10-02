@@ -4,7 +4,7 @@ type Story {
   id: ID! @unique
   parentStoryId: ID
   isCloned: Boolean @default(value: "false")
-  profileId: ID @unique
+  profileId: ID
   title: String!
   description: String 
   content: String
