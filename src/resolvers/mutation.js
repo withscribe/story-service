@@ -24,6 +24,7 @@ async function submitStory (_, args, context, info) {
     return storyDraft = await context.prisma.mutation.createStory({
         data: {
             title: args.title,
+            author: args.author,
             description: args.description, 
             content: args.content,
             profileId: args.id,

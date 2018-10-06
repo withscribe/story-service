@@ -3,4 +3,4 @@ datamodel: datamodel.graphql
 
 hooks:
   post-deploy:
-    - graphql get-schema -p prisma
+    - graphql get-schema -p

@@ -2,7 +2,8 @@ type Story {
   # createdAt: DateTime!
   # updatedAt: DateTime!
   id: ID! @unique
-  parentStoryId: ID
+  parentStoryId: ID,
+  author: String
   isCloned: Boolean @default(value: "false")
   profileId: ID
   title: String!
