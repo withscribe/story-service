@@ -92,9 +92,36 @@ async function cloneStory (_, args, context, info) {
     )
 }
 
+async function likeStory(_, args, context, info) {
+    const payload = verifyToken(context)
+
+    const story = await context.prisma.query.story(
+        {
+            where: {
+                id: args.storyId
+            }
+        }
+    )
+
+
+    const storyToBeUpdated = await context.prisma.mutation.updateStory(
+        {
+            where: {
+                id: story.id
+            },
+            data: {
+                likes: story.likes + 1
+            }
+        }
+    )
+
+    return storyToBeUpdated
+}
+
 module.exports = {
     submitStory,
     updateStory,
     deleteStory,
-    cloneStory
+    cloneStory,
+    likeStory
 }

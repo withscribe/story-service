@@ -1,7 +1,7 @@
 version: '3'
 services:
   story-service:
-    image: prismagraphql/prisma:1.13
+    image: prismagraphql/prisma:1.14
     restart: always
     ports:
     - "4466:4466"
@@ -20,6 +20,8 @@ services:
             password: prisma
             migrations: true
   postgres:
+    ports:
+      - "3001:5432"
     image: postgres
     restart: always
     environment:
