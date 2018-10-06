@@ -26,7 +26,8 @@ type Mutation {
   #story mutations
   submitStory(
     title: String!, 
-    description: String!, 
+    description: String!,
+    author: String!
     content: String, 
     profileId: ID, 
     submission: ID

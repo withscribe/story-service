@@ -23,12 +23,12 @@ async function submitStory (_, args, context, info) {
 
     return storyDraft = await context.prisma.mutation.createStory({
         data: {
-            title: args.title,
-            author: args.author,
-            description: args.description, 
-            content: args.content,
-            profileId: args.id,
-            submission: submissionID['id'],           
+                title: args.title,
+                author: args.author,
+                description: args.description, 
+                content: args.content,
+                profileId: args.id,
+                submission: submissionID['id'],           
             }, 
         },
         info,
@@ -81,6 +81,7 @@ async function cloneStory (_, args, context, info) {
             data: {
                 parentStoryId: parentStory.id,
                 isCloned: true,
+                author: parentStory.author,
                 profileId: args.id,
                 title: parentStory.title,
                 description: parentStory.description,
