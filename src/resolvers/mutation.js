@@ -3,7 +3,7 @@ const Validation = require('../validation/validation');
 
 async function submitStory (_, args, context, info) {
 
-    //const payload = verifyToken(context)
+    const payload = verifyToken(context)
 
     const submissionID = await context.prisma.mutation.createSubmission({
         data: {
@@ -93,7 +93,7 @@ async function cloneStory (_, args, context, info) {
 }
 
 async function likeStory(_, args, context, info) {
-    //const payload = verifyToken(context)
+    const payload = verifyToken(context)
 
     const story = await context.prisma.query.story(
         {
