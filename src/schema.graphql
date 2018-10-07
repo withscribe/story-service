@@ -58,6 +58,7 @@ type Mutation {
 
   likeStory(
     storyId: ID,
+    profileId: ID,
   ) : Story
   #character mutations
   #createIndependentCharacter()

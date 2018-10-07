@@ -18,6 +18,11 @@ type Story {
   clones: Int
   submission: ID
   ageRange: AgeRange
+  usersWhoLiked: [Likes!]!
+}
+
+type Likes {
+  profileId: ID,
 }
 
 type Submission {
