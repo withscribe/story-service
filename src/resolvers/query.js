@@ -1,16 +1,19 @@
 const { verifyToken } = require('../utils')
 
-function allStories (_, args, context, info) {
+async function allStories (_, args, context, info) {
     const payload = verifyToken(context)
-    return context.prisma.query.stories(  
+    const stories = await context.prisma.query.stories(  
         _, 
         info,
     )
+
+    console.log(stories)
+    return stories
 }  
 
 function stories (_, args, context, info) {
     const payload = verifyToken(context)
-    return context.prisma.query.stories(
+    const stories =  context.prisma.query.stories(
     {
         where: {
             OR:[               
@@ -21,16 +24,19 @@ function stories (_, args, context, info) {
     },
     info,
     )
+    console.log(stories)
+    return stories
 }  
 
-function storyById (_, args, context, info) {
+async function storyById (_, args, context, info) {
     const payload = verifyToken(context)
-    return context.prisma.query.story(
+    return await context.prisma.query.story(
         {
             where: {
-                id: args.storyID
-            }
-        }
+                id: args.storyID,
+            }, 
+        },
+        ` { id, parentStoryId, profileId, author, title, content, description, likes, usersWhoLiked { profileId } } `
     )
 }
 
