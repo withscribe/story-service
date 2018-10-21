@@ -27,7 +27,7 @@ async function submitStory (_, args, context, info) {
                 author: args.author,
                 description: args.description, 
                 content: args.content,
-                profileId: args.id,
+                profileId: args.profileId,
                 submission: submissionID['id'],           
             }, 
         },
