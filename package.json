@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec node src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +15,9 @@
     "nodemon": "^1.17.5",
     "prisma-binding": "^2.1.0",
     "swearjar": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }

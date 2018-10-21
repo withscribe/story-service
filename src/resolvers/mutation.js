@@ -82,7 +82,7 @@ async function cloneStory (_, args, context, info) {
                 parentStoryId: parentStory.id,
                 isCloned: true,
                 author: parentStory.author,
-                profileId: args.id,
+                profileId: args.profileId,
                 title: parentStory.title,
                 description: parentStory.description,
                 content: parentStory.content,
