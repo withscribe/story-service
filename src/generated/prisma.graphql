@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Oct 07 2018 15:10:16 GMT-0400 (Eastern Daylight Time)
+# timestamp: Thu Oct 11 2018 21:14:03 GMT-0400 (Eastern Daylight Time)
 
 type AgeRange implements Node {
   id: ID!
@@ -226,10 +226,6 @@ type AggregateCharacter {
 }
 
 type AggregateGenreRequest {
-  count: Int!
-}
-
-type AggregateLikes {
   count: Int!
 }
 
@@ -1122,150 +1118,6 @@ input GenreRequestWhereUniqueInput {
   id: ID
 }
 
-type Likes {
-  profileId: ID
-}
-
-"""A connection to a list of items."""
-type LikesConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [LikesEdge]!
-  aggregate: AggregateLikes!
-}
-
-input LikesCreateInput {
-  profileId: ID
-}
-
-input LikesCreateManyInput {
-  create: [LikesCreateInput!]
-}
-
-"""An edge in a connection."""
-type LikesEdge {
-  """The item at the end of the edge."""
-  node: Likes!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum LikesOrderByInput {
-  profileId_ASC
-  profileId_DESC
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type LikesPreviousValues {
-  profileId: ID
-}
-
-type LikesSubscriptionPayload {
-  mutation: MutationType!
-  node: Likes
-  updatedFields: [String!]
-  previousValues: LikesPreviousValues
-}
-
-input LikesSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LikesSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LikesSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LikesSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: LikesWhereInput
-}
-
-input LikesUpdateInput {
-  profileId: ID
-}
-
-input LikesUpdateManyInput {
-  create: [LikesCreateInput!]
-}
-
-input LikesWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LikesWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LikesWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LikesWhereInput!]
-  profileId: ID
-
-  """All values that are not equal to given value."""
-  profileId_not: ID
-
-  """All values that are contained in given list."""
-  profileId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  profileId_not_in: [ID!]
-
-  """All values less than the given value."""
-  profileId_lt: ID
-
-  """All values less than or equal the given value."""
-  profileId_lte: ID
-
-  """All values greater than the given value."""
-  profileId_gt: ID
-
-  """All values greater than or equal the given value."""
-  profileId_gte: ID
-
-  """All values containing the given string."""
-  profileId_contains: ID
-
-  """All values not containing the given string."""
-  profileId_not_contains: ID
-
-  """All values starting with the given string."""
-  profileId_starts_with: ID
-
-  """All values not starting with the given string."""
-  profileId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  profileId_ends_with: ID
-
-  """All values not ending with the given string."""
-  profileId_not_ends_with: ID
-}
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1280,7 +1132,6 @@ type Mutation {
   createSavedObject(data: SavedObjectCreateInput!): SavedObject!
   createTheme(data: ThemeCreateInput!): Theme!
   createCharacter(data: CharacterCreateInput!): Character!
-  createLikes(data: LikesCreateInput!): Likes!
   createAgeRange(data: AgeRangeCreateInput!): AgeRange!
   createStoryLocations(data: StoryLocationsCreateInput!): StoryLocations!
   updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
@@ -1314,7 +1165,6 @@ type Mutation {
   updateManySavedObjects(data: SavedObjectUpdateInput!, where: SavedObjectWhereInput): BatchPayload!
   updateManyThemes(data: ThemeUpdateInput!, where: ThemeWhereInput): BatchPayload!
   updateManyCharacters(data: CharacterUpdateInput!, where: CharacterWhereInput): BatchPayload!
-  updateManyLikeses(data: LikesUpdateInput!, where: LikesWhereInput): BatchPayload!
   updateManyAgeRanges(data: AgeRangeUpdateInput!, where: AgeRangeWhereInput): BatchPayload!
   updateManyStoryLocationses(data: StoryLocationsUpdateInput!, where: StoryLocationsWhereInput): BatchPayload!
   deleteManyStories(where: StoryWhereInput): BatchPayload!
@@ -1324,7 +1174,6 @@ type Mutation {
   deleteManySavedObjects(where: SavedObjectWhereInput): BatchPayload!
   deleteManyThemes(where: ThemeWhereInput): BatchPayload!
   deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
-  deleteManyLikeses(where: LikesWhereInput): BatchPayload!
   deleteManyAgeRanges(where: AgeRangeWhereInput): BatchPayload!
   deleteManyStoryLocationses(where: StoryLocationsWhereInput): BatchPayload!
 }
@@ -1796,7 +1645,6 @@ type Query {
   savedObjects(where: SavedObjectWhereInput, orderBy: SavedObjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SavedObject]!
   themes(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Theme]!
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
-  likeses(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Likes]!
   ageRanges(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AgeRange]!
   storyLocationses(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryLocations]!
   story(where: StoryWhereUniqueInput!): Story
@@ -1814,7 +1662,6 @@ type Query {
   savedObjectsConnection(where: SavedObjectWhereInput, orderBy: SavedObjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SavedObjectConnection!
   themesConnection(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThemeConnection!
   charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
-  likesesConnection(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LikesConnection!
   ageRangesConnection(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AgeRangeConnection!
   storyLocationsesConnection(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryLocationsConnection!
 
@@ -2049,7 +1896,6 @@ type Story implements Node {
   clones: Int
   submission: ID
   ageRange(where: AgeRangeWhereInput): AgeRange
-  usersWhoLiked(where: LikesWhereInput, orderBy: LikesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Likes!]
 }
 
 """A connection to a list of items."""
@@ -2079,7 +1925,6 @@ input StoryCreateInput {
   submission: ID
   characters: CharacterCreateManyInput
   ageRange: AgeRangeCreateOneInput
-  usersWhoLiked: LikesCreateManyInput
 }
 
 """An edge in a connection."""
@@ -2589,7 +2434,6 @@ input StoryUpdateInput {
   submission: ID
   characters: CharacterUpdateManyInput
   ageRange: AgeRangeUpdateOneInput
-  usersWhoLiked: LikesUpdateManyInput
 }
 
 input StoryWhereInput {
@@ -3013,9 +2857,6 @@ input StoryWhereInput {
   characters_some: CharacterWhereInput
   characters_none: CharacterWhereInput
   ageRange: AgeRangeWhereInput
-  usersWhoLiked_every: LikesWhereInput
-  usersWhoLiked_some: LikesWhereInput
-  usersWhoLiked_none: LikesWhereInput
 }
 
 input StoryWhereUniqueInput {
@@ -3196,7 +3037,6 @@ type Subscription {
   savedObject(where: SavedObjectSubscriptionWhereInput): SavedObjectSubscriptionPayload
   theme(where: ThemeSubscriptionWhereInput): ThemeSubscriptionPayload
   character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
-  likes(where: LikesSubscriptionWhereInput): LikesSubscriptionPayload
   ageRange(where: AgeRangeSubscriptionWhereInput): AgeRangeSubscriptionPayload
   storyLocations(where: StoryLocationsSubscriptionWhereInput): StoryLocationsSubscriptionPayload
 }

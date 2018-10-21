@@ -92,7 +92,7 @@ async function cloneStory (_, args, context, info) {
     )
 }
 
-async function likeStory(_, args, context, info) {
+async function addLikeToStory(_, args, context, info) {
     const payload = verifyToken(context)
 
     const story = await context.prisma.query.story(
@@ -111,7 +111,6 @@ async function likeStory(_, args, context, info) {
             },
             data: {
                 likes: story.likes + 1,
-                usersWhoLiked: { create: { profileId: args.profileId } }
             }
         }
     )
@@ -119,10 +118,42 @@ async function likeStory(_, args, context, info) {
     return storyToBeUpdated
 }
 
+
+async function removeLikeFromStory(_, args, context, info) {
+    const payload = verifyToken(context)
+
+    const story = await context.prisma.query.story(
+        {
+            where: {
+                id: args.storyId
+            }
+        }
+    )
+
+    if(story.likes > 0) {
+        const storyToBeUpdated = await context.prisma.mutation.updateStory(
+            {
+                where: {
+                    id: story.id
+                },
+                data: {
+                    likes: story.likes - 1,
+                }
+            }
+        )
+
+        return storyToBeUpdated
+    }
+
+
+    return story
+}
+
 module.exports = {
     submitStory,
     updateStory,
     deleteStory,
     cloneStory,
-    likeStory
+    addLikeToStory,
+    removeLikeFromStory
 }

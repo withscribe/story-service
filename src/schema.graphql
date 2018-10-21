@@ -56,9 +56,12 @@ type Mutation {
     type: SavedObjectType
   ): SavedObject
 
-  likeStory(
+  addLikeToStory(
     storyId: ID,
-    profileId: ID,
+  ) : Story
+
+  removeLikeFromStory(
+    storyId: ID,
   ) : Story
   #character mutations
   #createIndependentCharacter()

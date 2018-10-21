@@ -2,30 +2,25 @@ const { verifyToken } = require('../utils')
 
 async function allStories (_, args, context, info) {
     const payload = verifyToken(context)
-    const stories = await context.prisma.query.stories(  
+    return await context.prisma.query.stories(  
         _, 
         info,
     )
-
-    console.log(stories)
-    return stories
 }  
 
 function stories (_, args, context, info) {
     const payload = verifyToken(context)
-    const stories =  context.prisma.query.stories(
-    {
-        where: {
-            OR:[               
-            {title: args.searchString},
-            {description: args.searchString},               
-            ]
+    return context.prisma.query.stories(
+        {
+            where: {
+                OR: [               
+                    {title: args.searchString},
+                    {description: args.searchString},               
+                ]
+            },
         },
-    },
-    info,
+        info,
     )
-    console.log(stories)
-    return stories
 }  
 
 async function storyById (_, args, context, info) {
