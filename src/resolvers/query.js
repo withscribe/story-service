@@ -31,7 +31,7 @@ async function storyById (_, args, context, info) {
                 id: args.storyID,
             }, 
         },
-        ` { id, parentStoryId, profileId, author, title, content, description, likes } `
+        ` { id, parentStoryId, profileId, author, title, content, description, likes, isCloned } `
     )
 }
 
