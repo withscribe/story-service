@@ -7,7 +7,8 @@ type Query {
   allStories: [Story]
   stories(searchString: String!): [Story!]!
   storyById(storyID: ID!): Story
-  storiesByProfileId(profileId: ID!): [Story!]!
+  storiesByAuthorId(authorId: ID!): [Story!]!
+  storiesByNonAuthorId(nonAuthorId: ID!): [Story!]!
   searchByKeyword(searchString: String!): [Story!]!
   searchByAuthor(username: String!): [Story!]!
   searchByTitle(title: String!): [Story]
