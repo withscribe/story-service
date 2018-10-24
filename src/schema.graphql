@@ -12,25 +12,18 @@ type Query {
   searchByAuthor(username: String!): [Story!]!
   searchByTitle(title: String!): [Story]
   searchByDescription(description: String!): [Story]
-  #submission queries
-  allSubmissions: [Submission]
-  getSubmissionsByFlag(flag: Boolean!): [Submission!]!
+  getContributionsById(authorProfileId: ID): [Contribution!]!
   #character queries
 }
 
-type Mutation {
-  #submission mutations
-  createSubmission(flag: Boolean): Submission 
-  flagSubmission(submissionID: ID): Submission 
-  
+type Mutation { 
   #story mutations
   submitStory(
     title: String!, 
     description: String!,
     author: String!
     content: String, 
-    profileId: ID, 
-    submission: ID
+    authorId: ID, 
   ): Story
 
   updateStory(
@@ -46,15 +39,8 @@ type Mutation {
 
   cloneStory(
     parentStoryId: ID,
-    profileId: ID
+    nonAuthorId: ID
   ): Story
-  
-  #will need the gateway for this - creating bookmarks or saved items in the db with a user and any object
-  bookmarkContent(
-    userId: ID,
-    objectId: ID,
-    type: SavedObjectType
-  ): SavedObject
 
   addLikeToStory(
     storyId: ID,
@@ -63,7 +49,22 @@ type Mutation {
   removeLikeFromStory(
     storyId: ID,
   ) : Story
-  #character mutations
-  #createIndependentCharacter()
+
+  forkStory(
+    parentStoryId: ID,
+    nonAuthorId: ID
+  ): Story
+
+  contributeRequest(
+    storyId: ID,
+  ): Contribution
+
+  approveChanges (
+    contributionId: ID,
+  ): Story
+
+  rejectChanges (
+    contributionId: ID,
+  ): Story
 }
 

@@ -87,22 +87,11 @@ function searchByDescription (_, args, context, info) {
     )
 }
 
-// function searchByAuthor - need to query the gateway for the profile service
-
-function allSubmissions (_, args, context, info) {
-    const payload = verifyToken(context)
-    return context.prisma.query.submissions(  
-        _, 
-        info,
-    )
-}  
-
-
-function getSubmissionsByFlag (_, args, context, info) {     
-    return context.prisma.query.submissions(
+function getContributionsById(_, args, context, info) {
+    return context.prisma.query.contributions(
         {
-            where: {            
-                flag: args.flag            
+            where: {
+                authorProfile: args.authorProfileId
             }
         }
     )
@@ -113,9 +102,8 @@ module.exports = {
     stories,
     storyById,
     storiesByProfileId,
-    getSubmissionsByFlag,
-    allSubmissions,
     searchByKeyword,
     searchByTitle,
-    searchByDescription
+    searchByDescription,
+    getContributionsById
 }

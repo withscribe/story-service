@@ -1,255 +1,11 @@
 # source: http://localhost:4466
-# timestamp: Thu Oct 11 2018 21:14:03 GMT-0400 (Eastern Daylight Time)
+# timestamp: Wed Oct 24 2018 11:26:30 GMT-0400 (Eastern Daylight Time)
 
-type AgeRange implements Node {
-  id: ID!
-  minAge: Int
-  maxAge: Int
-}
-
-"""A connection to a list of items."""
-type AgeRangeConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [AgeRangeEdge]!
-  aggregate: AggregateAgeRange!
-}
-
-input AgeRangeCreateInput {
-  minAge: Int
-  maxAge: Int
-}
-
-input AgeRangeCreateOneInput {
-  create: AgeRangeCreateInput
-  connect: AgeRangeWhereUniqueInput
-}
-
-"""An edge in a connection."""
-type AgeRangeEdge {
-  """The item at the end of the edge."""
-  node: AgeRange!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum AgeRangeOrderByInput {
-  id_ASC
-  id_DESC
-  minAge_ASC
-  minAge_DESC
-  maxAge_ASC
-  maxAge_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type AgeRangePreviousValues {
-  id: ID!
-  minAge: Int
-  maxAge: Int
-}
-
-type AgeRangeSubscriptionPayload {
-  mutation: MutationType!
-  node: AgeRange
-  updatedFields: [String!]
-  previousValues: AgeRangePreviousValues
-}
-
-input AgeRangeSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [AgeRangeSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [AgeRangeSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [AgeRangeSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: AgeRangeWhereInput
-}
-
-input AgeRangeUpdateDataInput {
-  minAge: Int
-  maxAge: Int
-}
-
-input AgeRangeUpdateInput {
-  minAge: Int
-  maxAge: Int
-}
-
-input AgeRangeUpdateOneInput {
-  create: AgeRangeCreateInput
-  connect: AgeRangeWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: AgeRangeUpdateDataInput
-  upsert: AgeRangeUpsertNestedInput
-}
-
-input AgeRangeUpsertNestedInput {
-  update: AgeRangeUpdateDataInput!
-  create: AgeRangeCreateInput!
-}
-
-input AgeRangeWhereInput {
-  """Logical AND on all given filters."""
-  AND: [AgeRangeWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [AgeRangeWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [AgeRangeWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  minAge: Int
-
-  """All values that are not equal to given value."""
-  minAge_not: Int
-
-  """All values that are contained in given list."""
-  minAge_in: [Int!]
-
-  """All values that are not contained in given list."""
-  minAge_not_in: [Int!]
-
-  """All values less than the given value."""
-  minAge_lt: Int
-
-  """All values less than or equal the given value."""
-  minAge_lte: Int
-
-  """All values greater than the given value."""
-  minAge_gt: Int
-
-  """All values greater than or equal the given value."""
-  minAge_gte: Int
-  maxAge: Int
-
-  """All values that are not equal to given value."""
-  maxAge_not: Int
-
-  """All values that are contained in given list."""
-  maxAge_in: [Int!]
-
-  """All values that are not contained in given list."""
-  maxAge_not_in: [Int!]
-
-  """All values less than the given value."""
-  maxAge_lt: Int
-
-  """All values less than or equal the given value."""
-  maxAge_lte: Int
-
-  """All values greater than the given value."""
-  maxAge_gt: Int
-
-  """All values greater than or equal the given value."""
-  maxAge_gte: Int
-}
-
-input AgeRangeWhereUniqueInput {
-  id: ID
-}
-
-type AggregateAgeRange {
-  count: Int!
-}
-
-type AggregateCharacter {
-  count: Int!
-}
-
-type AggregateGenreRequest {
-  count: Int!
-}
-
-type AggregatePlot {
-  count: Int!
-}
-
-type AggregateSavedObject {
+type AggregateContribution {
   count: Int!
 }
 
 type AggregateStory {
-  count: Int!
-}
-
-type AggregateStoryLocations {
-  count: Int!
-}
-
-type AggregateSubmission {
-  count: Int!
-}
-
-type AggregateTheme {
   count: Int!
 }
 
@@ -258,166 +14,86 @@ type BatchPayload {
   count: Long!
 }
 
-type Character implements Node {
+type Contribution implements Node {
   id: ID!
-  approved: Boolean
-  parentAuthorId: ID
-  isCloned: Boolean
-  name: String!
-  age: Int
-  backStory: String
-  storyId: [ID!]!
-  ageRange(where: AgeRangeWhereInput): AgeRange
-  storyLocations(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryLocations!]
-  themes(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Theme!]
-  verbalBehaviour: String
-  physicalAppearance: String
-  personality: String
-  goals: [String!]!
-  motivations: [String!]!
-  internalConflicts: [String!]!
-  flaws: [String!]!
-  weaknesses: [String!]!
-  strengths: [String!]!
+  forkId: ID
+  contributorProfileId: ID
+  authorProfileId: ID
+  content: String
+  comment: String
 }
 
 """A connection to a list of items."""
-type CharacterConnection {
+type ContributionConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [CharacterEdge]!
-  aggregate: AggregateCharacter!
+  edges: [ContributionEdge]!
+  aggregate: AggregateContribution!
 }
 
-input CharacterCreateflawsInput {
-  set: [String!]
-}
-
-input CharacterCreategoalsInput {
-  set: [String!]
-}
-
-input CharacterCreateInput {
-  approved: Boolean
-  parentAuthorId: ID
-  isCloned: Boolean
-  name: String!
-  age: Int
-  backStory: String
-  verbalBehaviour: String
-  physicalAppearance: String
-  personality: String
-  storyId: CharacterCreatestoryIdInput
-  goals: CharacterCreategoalsInput
-  motivations: CharacterCreatemotivationsInput
-  internalConflicts: CharacterCreateinternalConflictsInput
-  flaws: CharacterCreateflawsInput
-  weaknesses: CharacterCreateweaknessesInput
-  strengths: CharacterCreatestrengthsInput
-  ageRange: AgeRangeCreateOneInput
-  storyLocations: StoryLocationsCreateManyInput
-  themes: ThemeCreateManyInput
-}
-
-input CharacterCreateinternalConflictsInput {
-  set: [String!]
-}
-
-input CharacterCreateManyInput {
-  create: [CharacterCreateInput!]
-  connect: [CharacterWhereUniqueInput!]
-}
-
-input CharacterCreatemotivationsInput {
-  set: [String!]
-}
-
-input CharacterCreatestoryIdInput {
-  set: [ID!]
-}
-
-input CharacterCreatestrengthsInput {
-  set: [String!]
-}
-
-input CharacterCreateweaknessesInput {
-  set: [String!]
+input ContributionCreateInput {
+  forkId: ID
+  contributorProfileId: ID
+  authorProfileId: ID
+  content: String
+  comment: String
 }
 
 """An edge in a connection."""
-type CharacterEdge {
+type ContributionEdge {
   """The item at the end of the edge."""
-  node: Character!
+  node: Contribution!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum CharacterOrderByInput {
+enum ContributionOrderByInput {
   id_ASC
   id_DESC
-  approved_ASC
-  approved_DESC
-  parentAuthorId_ASC
-  parentAuthorId_DESC
-  isCloned_ASC
-  isCloned_DESC
-  name_ASC
-  name_DESC
-  age_ASC
-  age_DESC
-  backStory_ASC
-  backStory_DESC
-  verbalBehaviour_ASC
-  verbalBehaviour_DESC
-  physicalAppearance_ASC
-  physicalAppearance_DESC
-  personality_ASC
-  personality_DESC
+  forkId_ASC
+  forkId_DESC
+  contributorProfileId_ASC
+  contributorProfileId_DESC
+  authorProfileId_ASC
+  authorProfileId_DESC
+  content_ASC
+  content_DESC
+  comment_ASC
+  comment_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type CharacterPreviousValues {
+type ContributionPreviousValues {
   id: ID!
-  approved: Boolean
-  parentAuthorId: ID
-  isCloned: Boolean
-  name: String!
-  age: Int
-  backStory: String
-  storyId: [ID!]!
-  verbalBehaviour: String
-  physicalAppearance: String
-  personality: String
-  goals: [String!]!
-  motivations: [String!]!
-  internalConflicts: [String!]!
-  flaws: [String!]!
-  weaknesses: [String!]!
-  strengths: [String!]!
+  forkId: ID
+  contributorProfileId: ID
+  authorProfileId: ID
+  content: String
+  comment: String
 }
 
-type CharacterSubscriptionPayload {
+type ContributionSubscriptionPayload {
   mutation: MutationType!
-  node: Character
+  node: Contribution
   updatedFields: [String!]
-  previousValues: CharacterPreviousValues
+  previousValues: ContributionPreviousValues
 }
 
-input CharacterSubscriptionWhereInput {
+input ContributionSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [CharacterSubscriptionWhereInput!]
+  AND: [ContributionSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CharacterSubscriptionWhereInput!]
+  OR: [ContributionSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CharacterSubscriptionWhereInput!]
+  NOT: [ContributionSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -438,110 +114,26 @@ input CharacterSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: CharacterWhereInput
+  node: ContributionWhereInput
 }
 
-input CharacterUpdateDataInput {
-  approved: Boolean
-  parentAuthorId: ID
-  isCloned: Boolean
-  name: String
-  age: Int
-  backStory: String
-  verbalBehaviour: String
-  physicalAppearance: String
-  personality: String
-  storyId: CharacterUpdatestoryIdInput
-  goals: CharacterUpdategoalsInput
-  motivations: CharacterUpdatemotivationsInput
-  internalConflicts: CharacterUpdateinternalConflictsInput
-  flaws: CharacterUpdateflawsInput
-  weaknesses: CharacterUpdateweaknessesInput
-  strengths: CharacterUpdatestrengthsInput
-  ageRange: AgeRangeUpdateOneInput
-  storyLocations: StoryLocationsUpdateManyInput
-  themes: ThemeUpdateManyInput
+input ContributionUpdateInput {
+  forkId: ID
+  contributorProfileId: ID
+  authorProfileId: ID
+  content: String
+  comment: String
 }
 
-input CharacterUpdateflawsInput {
-  set: [String!]
-}
-
-input CharacterUpdategoalsInput {
-  set: [String!]
-}
-
-input CharacterUpdateInput {
-  approved: Boolean
-  parentAuthorId: ID
-  isCloned: Boolean
-  name: String
-  age: Int
-  backStory: String
-  verbalBehaviour: String
-  physicalAppearance: String
-  personality: String
-  storyId: CharacterUpdatestoryIdInput
-  goals: CharacterUpdategoalsInput
-  motivations: CharacterUpdatemotivationsInput
-  internalConflicts: CharacterUpdateinternalConflictsInput
-  flaws: CharacterUpdateflawsInput
-  weaknesses: CharacterUpdateweaknessesInput
-  strengths: CharacterUpdatestrengthsInput
-  ageRange: AgeRangeUpdateOneInput
-  storyLocations: StoryLocationsUpdateManyInput
-  themes: ThemeUpdateManyInput
-}
-
-input CharacterUpdateinternalConflictsInput {
-  set: [String!]
-}
-
-input CharacterUpdateManyInput {
-  create: [CharacterCreateInput!]
-  connect: [CharacterWhereUniqueInput!]
-  disconnect: [CharacterWhereUniqueInput!]
-  delete: [CharacterWhereUniqueInput!]
-  update: [CharacterUpdateWithWhereUniqueNestedInput!]
-  upsert: [CharacterUpsertWithWhereUniqueNestedInput!]
-}
-
-input CharacterUpdatemotivationsInput {
-  set: [String!]
-}
-
-input CharacterUpdatestoryIdInput {
-  set: [ID!]
-}
-
-input CharacterUpdatestrengthsInput {
-  set: [String!]
-}
-
-input CharacterUpdateweaknessesInput {
-  set: [String!]
-}
-
-input CharacterUpdateWithWhereUniqueNestedInput {
-  where: CharacterWhereUniqueInput!
-  data: CharacterUpdateDataInput!
-}
-
-input CharacterUpsertWithWhereUniqueNestedInput {
-  where: CharacterWhereUniqueInput!
-  update: CharacterUpdateDataInput!
-  create: CharacterCreateInput!
-}
-
-input CharacterWhereInput {
+input ContributionWhereInput {
   """Logical AND on all given filters."""
-  AND: [CharacterWhereInput!]
+  AND: [ContributionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CharacterWhereInput!]
+  OR: [ContributionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CharacterWhereInput!]
+  NOT: [ContributionWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -582,539 +174,209 @@ input CharacterWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  approved: Boolean
+  forkId: ID
 
   """All values that are not equal to given value."""
-  approved_not: Boolean
-  parentAuthorId: ID
-
-  """All values that are not equal to given value."""
-  parentAuthorId_not: ID
+  forkId_not: ID
 
   """All values that are contained in given list."""
-  parentAuthorId_in: [ID!]
+  forkId_in: [ID!]
 
   """All values that are not contained in given list."""
-  parentAuthorId_not_in: [ID!]
+  forkId_not_in: [ID!]
 
   """All values less than the given value."""
-  parentAuthorId_lt: ID
+  forkId_lt: ID
 
   """All values less than or equal the given value."""
-  parentAuthorId_lte: ID
+  forkId_lte: ID
 
   """All values greater than the given value."""
-  parentAuthorId_gt: ID
+  forkId_gt: ID
 
   """All values greater than or equal the given value."""
-  parentAuthorId_gte: ID
+  forkId_gte: ID
 
   """All values containing the given string."""
-  parentAuthorId_contains: ID
+  forkId_contains: ID
 
   """All values not containing the given string."""
-  parentAuthorId_not_contains: ID
+  forkId_not_contains: ID
 
   """All values starting with the given string."""
-  parentAuthorId_starts_with: ID
+  forkId_starts_with: ID
 
   """All values not starting with the given string."""
-  parentAuthorId_not_starts_with: ID
+  forkId_not_starts_with: ID
 
   """All values ending with the given string."""
-  parentAuthorId_ends_with: ID
+  forkId_ends_with: ID
 
   """All values not ending with the given string."""
-  parentAuthorId_not_ends_with: ID
-  isCloned: Boolean
+  forkId_not_ends_with: ID
+  contributorProfileId: ID
 
   """All values that are not equal to given value."""
-  isCloned_not: Boolean
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
+  contributorProfileId_not: ID
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  contributorProfileId_in: [ID!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
+  contributorProfileId_not_in: [ID!]
 
   """All values less than the given value."""
-  name_lt: String
+  contributorProfileId_lt: ID
 
   """All values less than or equal the given value."""
-  name_lte: String
+  contributorProfileId_lte: ID
 
   """All values greater than the given value."""
-  name_gt: String
+  contributorProfileId_gt: ID
 
   """All values greater than or equal the given value."""
-  name_gte: String
+  contributorProfileId_gte: ID
 
   """All values containing the given string."""
-  name_contains: String
+  contributorProfileId_contains: ID
 
   """All values not containing the given string."""
-  name_not_contains: String
+  contributorProfileId_not_contains: ID
 
   """All values starting with the given string."""
-  name_starts_with: String
+  contributorProfileId_starts_with: ID
 
   """All values not starting with the given string."""
-  name_not_starts_with: String
+  contributorProfileId_not_starts_with: ID
 
   """All values ending with the given string."""
-  name_ends_with: String
+  contributorProfileId_ends_with: ID
 
   """All values not ending with the given string."""
-  name_not_ends_with: String
-  age: Int
+  contributorProfileId_not_ends_with: ID
+  authorProfileId: ID
 
   """All values that are not equal to given value."""
-  age_not: Int
+  authorProfileId_not: ID
 
   """All values that are contained in given list."""
-  age_in: [Int!]
+  authorProfileId_in: [ID!]
 
   """All values that are not contained in given list."""
-  age_not_in: [Int!]
+  authorProfileId_not_in: [ID!]
 
   """All values less than the given value."""
-  age_lt: Int
+  authorProfileId_lt: ID
 
   """All values less than or equal the given value."""
-  age_lte: Int
+  authorProfileId_lte: ID
 
   """All values greater than the given value."""
-  age_gt: Int
+  authorProfileId_gt: ID
 
   """All values greater than or equal the given value."""
-  age_gte: Int
-  backStory: String
-
-  """All values that are not equal to given value."""
-  backStory_not: String
-
-  """All values that are contained in given list."""
-  backStory_in: [String!]
-
-  """All values that are not contained in given list."""
-  backStory_not_in: [String!]
-
-  """All values less than the given value."""
-  backStory_lt: String
-
-  """All values less than or equal the given value."""
-  backStory_lte: String
-
-  """All values greater than the given value."""
-  backStory_gt: String
-
-  """All values greater than or equal the given value."""
-  backStory_gte: String
+  authorProfileId_gte: ID
 
   """All values containing the given string."""
-  backStory_contains: String
+  authorProfileId_contains: ID
 
   """All values not containing the given string."""
-  backStory_not_contains: String
+  authorProfileId_not_contains: ID
 
   """All values starting with the given string."""
-  backStory_starts_with: String
+  authorProfileId_starts_with: ID
 
   """All values not starting with the given string."""
-  backStory_not_starts_with: String
+  authorProfileId_not_starts_with: ID
 
   """All values ending with the given string."""
-  backStory_ends_with: String
+  authorProfileId_ends_with: ID
 
   """All values not ending with the given string."""
-  backStory_not_ends_with: String
-  verbalBehaviour: String
+  authorProfileId_not_ends_with: ID
+  content: String
 
   """All values that are not equal to given value."""
-  verbalBehaviour_not: String
+  content_not: String
 
   """All values that are contained in given list."""
-  verbalBehaviour_in: [String!]
+  content_in: [String!]
 
   """All values that are not contained in given list."""
-  verbalBehaviour_not_in: [String!]
+  content_not_in: [String!]
 
   """All values less than the given value."""
-  verbalBehaviour_lt: String
+  content_lt: String
 
   """All values less than or equal the given value."""
-  verbalBehaviour_lte: String
+  content_lte: String
 
   """All values greater than the given value."""
-  verbalBehaviour_gt: String
+  content_gt: String
 
   """All values greater than or equal the given value."""
-  verbalBehaviour_gte: String
+  content_gte: String
 
   """All values containing the given string."""
-  verbalBehaviour_contains: String
+  content_contains: String
 
   """All values not containing the given string."""
-  verbalBehaviour_not_contains: String
+  content_not_contains: String
 
   """All values starting with the given string."""
-  verbalBehaviour_starts_with: String
+  content_starts_with: String
 
   """All values not starting with the given string."""
-  verbalBehaviour_not_starts_with: String
+  content_not_starts_with: String
 
   """All values ending with the given string."""
-  verbalBehaviour_ends_with: String
+  content_ends_with: String
 
   """All values not ending with the given string."""
-  verbalBehaviour_not_ends_with: String
-  physicalAppearance: String
+  content_not_ends_with: String
+  comment: String
 
   """All values that are not equal to given value."""
-  physicalAppearance_not: String
+  comment_not: String
 
   """All values that are contained in given list."""
-  physicalAppearance_in: [String!]
+  comment_in: [String!]
 
   """All values that are not contained in given list."""
-  physicalAppearance_not_in: [String!]
+  comment_not_in: [String!]
 
   """All values less than the given value."""
-  physicalAppearance_lt: String
+  comment_lt: String
 
   """All values less than or equal the given value."""
-  physicalAppearance_lte: String
+  comment_lte: String
 
   """All values greater than the given value."""
-  physicalAppearance_gt: String
+  comment_gt: String
 
   """All values greater than or equal the given value."""
-  physicalAppearance_gte: String
+  comment_gte: String
 
   """All values containing the given string."""
-  physicalAppearance_contains: String
+  comment_contains: String
 
   """All values not containing the given string."""
-  physicalAppearance_not_contains: String
+  comment_not_contains: String
 
   """All values starting with the given string."""
-  physicalAppearance_starts_with: String
+  comment_starts_with: String
 
   """All values not starting with the given string."""
-  physicalAppearance_not_starts_with: String
+  comment_not_starts_with: String
 
   """All values ending with the given string."""
-  physicalAppearance_ends_with: String
+  comment_ends_with: String
 
   """All values not ending with the given string."""
-  physicalAppearance_not_ends_with: String
-  personality: String
-
-  """All values that are not equal to given value."""
-  personality_not: String
-
-  """All values that are contained in given list."""
-  personality_in: [String!]
-
-  """All values that are not contained in given list."""
-  personality_not_in: [String!]
-
-  """All values less than the given value."""
-  personality_lt: String
-
-  """All values less than or equal the given value."""
-  personality_lte: String
-
-  """All values greater than the given value."""
-  personality_gt: String
-
-  """All values greater than or equal the given value."""
-  personality_gte: String
-
-  """All values containing the given string."""
-  personality_contains: String
-
-  """All values not containing the given string."""
-  personality_not_contains: String
-
-  """All values starting with the given string."""
-  personality_starts_with: String
-
-  """All values not starting with the given string."""
-  personality_not_starts_with: String
-
-  """All values ending with the given string."""
-  personality_ends_with: String
-
-  """All values not ending with the given string."""
-  personality_not_ends_with: String
-  ageRange: AgeRangeWhereInput
-  storyLocations_every: StoryLocationsWhereInput
-  storyLocations_some: StoryLocationsWhereInput
-  storyLocations_none: StoryLocationsWhereInput
-  themes_every: ThemeWhereInput
-  themes_some: ThemeWhereInput
-  themes_none: ThemeWhereInput
+  comment_not_ends_with: String
 }
 
-input CharacterWhereUniqueInput {
-  id: ID
-}
-
-enum Genre {
-  Tragedy
-  TragicComedy
-  Fantasy
-  Mythology
-  Adventure
-  Mystery
-  ScienceFiction
-  Drama
-  Romance
-  ActionAdventure
-  Satire
-  Horror
-}
-
-type GenreRequest implements Node {
-  id: ID!
-  approved: Boolean
-  genreTitle: String
-  description: String
-}
-
-"""A connection to a list of items."""
-type GenreRequestConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [GenreRequestEdge]!
-  aggregate: AggregateGenreRequest!
-}
-
-input GenreRequestCreateInput {
-  approved: Boolean
-  genreTitle: String
-  description: String
-}
-
-"""An edge in a connection."""
-type GenreRequestEdge {
-  """The item at the end of the edge."""
-  node: GenreRequest!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum GenreRequestOrderByInput {
-  id_ASC
-  id_DESC
-  approved_ASC
-  approved_DESC
-  genreTitle_ASC
-  genreTitle_DESC
-  description_ASC
-  description_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type GenreRequestPreviousValues {
-  id: ID!
-  approved: Boolean
-  genreTitle: String
-  description: String
-}
-
-type GenreRequestSubscriptionPayload {
-  mutation: MutationType!
-  node: GenreRequest
-  updatedFields: [String!]
-  previousValues: GenreRequestPreviousValues
-}
-
-input GenreRequestSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [GenreRequestSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [GenreRequestSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [GenreRequestSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: GenreRequestWhereInput
-}
-
-input GenreRequestUpdateInput {
-  approved: Boolean
-  genreTitle: String
-  description: String
-}
-
-input GenreRequestWhereInput {
-  """Logical AND on all given filters."""
-  AND: [GenreRequestWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [GenreRequestWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [GenreRequestWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  approved: Boolean
-
-  """All values that are not equal to given value."""
-  approved_not: Boolean
-  genreTitle: String
-
-  """All values that are not equal to given value."""
-  genreTitle_not: String
-
-  """All values that are contained in given list."""
-  genreTitle_in: [String!]
-
-  """All values that are not contained in given list."""
-  genreTitle_not_in: [String!]
-
-  """All values less than the given value."""
-  genreTitle_lt: String
-
-  """All values less than or equal the given value."""
-  genreTitle_lte: String
-
-  """All values greater than the given value."""
-  genreTitle_gt: String
-
-  """All values greater than or equal the given value."""
-  genreTitle_gte: String
-
-  """All values containing the given string."""
-  genreTitle_contains: String
-
-  """All values not containing the given string."""
-  genreTitle_not_contains: String
-
-  """All values starting with the given string."""
-  genreTitle_starts_with: String
-
-  """All values not starting with the given string."""
-  genreTitle_not_starts_with: String
-
-  """All values ending with the given string."""
-  genreTitle_ends_with: String
-
-  """All values not ending with the given string."""
-  genreTitle_not_ends_with: String
-  description: String
-
-  """All values that are not equal to given value."""
-  description_not: String
-
-  """All values that are contained in given list."""
-  description_in: [String!]
-
-  """All values that are not contained in given list."""
-  description_not_in: [String!]
-
-  """All values less than the given value."""
-  description_lt: String
-
-  """All values less than or equal the given value."""
-  description_lte: String
-
-  """All values greater than the given value."""
-  description_gt: String
-
-  """All values greater than or equal the given value."""
-  description_gte: String
-
-  """All values containing the given string."""
-  description_contains: String
-
-  """All values not containing the given string."""
-  description_not_contains: String
-
-  """All values starting with the given string."""
-  description_starts_with: String
-
-  """All values not starting with the given string."""
-  description_not_starts_with: String
-
-  """All values ending with the given string."""
-  description_ends_with: String
-
-  """All values not ending with the given string."""
-  description_not_ends_with: String
-}
-
-input GenreRequestWhereUniqueInput {
+input ContributionWhereUniqueInput {
   id: ID
 }
 
@@ -1126,56 +388,17 @@ scalar Long
 
 type Mutation {
   createStory(data: StoryCreateInput!): Story!
-  createSubmission(data: SubmissionCreateInput!): Submission!
-  createPlot(data: PlotCreateInput!): Plot!
-  createGenreRequest(data: GenreRequestCreateInput!): GenreRequest!
-  createSavedObject(data: SavedObjectCreateInput!): SavedObject!
-  createTheme(data: ThemeCreateInput!): Theme!
-  createCharacter(data: CharacterCreateInput!): Character!
-  createAgeRange(data: AgeRangeCreateInput!): AgeRange!
-  createStoryLocations(data: StoryLocationsCreateInput!): StoryLocations!
+  createContribution(data: ContributionCreateInput!): Contribution!
   updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
-  updateSubmission(data: SubmissionUpdateInput!, where: SubmissionWhereUniqueInput!): Submission
-  updatePlot(data: PlotUpdateInput!, where: PlotWhereUniqueInput!): Plot
-  updateGenreRequest(data: GenreRequestUpdateInput!, where: GenreRequestWhereUniqueInput!): GenreRequest
-  updateTheme(data: ThemeUpdateInput!, where: ThemeWhereUniqueInput!): Theme
-  updateCharacter(data: CharacterUpdateInput!, where: CharacterWhereUniqueInput!): Character
-  updateAgeRange(data: AgeRangeUpdateInput!, where: AgeRangeWhereUniqueInput!): AgeRange
-  updateStoryLocations(data: StoryLocationsUpdateInput!, where: StoryLocationsWhereUniqueInput!): StoryLocations
+  updateContribution(data: ContributionUpdateInput!, where: ContributionWhereUniqueInput!): Contribution
   deleteStory(where: StoryWhereUniqueInput!): Story
-  deleteSubmission(where: SubmissionWhereUniqueInput!): Submission
-  deletePlot(where: PlotWhereUniqueInput!): Plot
-  deleteGenreRequest(where: GenreRequestWhereUniqueInput!): GenreRequest
-  deleteTheme(where: ThemeWhereUniqueInput!): Theme
-  deleteCharacter(where: CharacterWhereUniqueInput!): Character
-  deleteAgeRange(where: AgeRangeWhereUniqueInput!): AgeRange
-  deleteStoryLocations(where: StoryLocationsWhereUniqueInput!): StoryLocations
+  deleteContribution(where: ContributionWhereUniqueInput!): Contribution
   upsertStory(where: StoryWhereUniqueInput!, create: StoryCreateInput!, update: StoryUpdateInput!): Story!
-  upsertSubmission(where: SubmissionWhereUniqueInput!, create: SubmissionCreateInput!, update: SubmissionUpdateInput!): Submission!
-  upsertPlot(where: PlotWhereUniqueInput!, create: PlotCreateInput!, update: PlotUpdateInput!): Plot!
-  upsertGenreRequest(where: GenreRequestWhereUniqueInput!, create: GenreRequestCreateInput!, update: GenreRequestUpdateInput!): GenreRequest!
-  upsertTheme(where: ThemeWhereUniqueInput!, create: ThemeCreateInput!, update: ThemeUpdateInput!): Theme!
-  upsertCharacter(where: CharacterWhereUniqueInput!, create: CharacterCreateInput!, update: CharacterUpdateInput!): Character!
-  upsertAgeRange(where: AgeRangeWhereUniqueInput!, create: AgeRangeCreateInput!, update: AgeRangeUpdateInput!): AgeRange!
-  upsertStoryLocations(where: StoryLocationsWhereUniqueInput!, create: StoryLocationsCreateInput!, update: StoryLocationsUpdateInput!): StoryLocations!
+  upsertContribution(where: ContributionWhereUniqueInput!, create: ContributionCreateInput!, update: ContributionUpdateInput!): Contribution!
   updateManyStories(data: StoryUpdateInput!, where: StoryWhereInput): BatchPayload!
-  updateManySubmissions(data: SubmissionUpdateInput!, where: SubmissionWhereInput): BatchPayload!
-  updateManyPlots(data: PlotUpdateInput!, where: PlotWhereInput): BatchPayload!
-  updateManyGenreRequests(data: GenreRequestUpdateInput!, where: GenreRequestWhereInput): BatchPayload!
-  updateManySavedObjects(data: SavedObjectUpdateInput!, where: SavedObjectWhereInput): BatchPayload!
-  updateManyThemes(data: ThemeUpdateInput!, where: ThemeWhereInput): BatchPayload!
-  updateManyCharacters(data: CharacterUpdateInput!, where: CharacterWhereInput): BatchPayload!
-  updateManyAgeRanges(data: AgeRangeUpdateInput!, where: AgeRangeWhereInput): BatchPayload!
-  updateManyStoryLocationses(data: StoryLocationsUpdateInput!, where: StoryLocationsWhereInput): BatchPayload!
+  updateManyContributions(data: ContributionUpdateInput!, where: ContributionWhereInput): BatchPayload!
   deleteManyStories(where: StoryWhereInput): BatchPayload!
-  deleteManySubmissions(where: SubmissionWhereInput): BatchPayload!
-  deleteManyPlots(where: PlotWhereInput): BatchPayload!
-  deleteManyGenreRequests(where: GenreRequestWhereInput): BatchPayload!
-  deleteManySavedObjects(where: SavedObjectWhereInput): BatchPayload!
-  deleteManyThemes(where: ThemeWhereInput): BatchPayload!
-  deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
-  deleteManyAgeRanges(where: AgeRangeWhereInput): BatchPayload!
-  deleteManyStoryLocationses(where: StoryLocationsWhereInput): BatchPayload!
+  deleteManyContributions(where: ContributionWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1205,465 +428,13 @@ type PageInfo {
   endCursor: String
 }
 
-type Plot implements Node {
-  id: ID!
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  openingScene: String
-  endingScene: String
-  conflicts: [String!]!
-  struggles: [String!]!
-  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
-  climax: [String!]!
-  victories: [String!]!
-  defeats: [String!]!
-  surprises: [String!]!
-  controvery: [String!]!
-  mysteries: [String!]!
-  suspenses: [String!]!
-  plotTwists: [String!]!
-  subPlots: [String!]!
-}
-
-"""A connection to a list of items."""
-type PlotConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [PlotEdge]!
-  aggregate: AggregatePlot!
-}
-
-input PlotCreateclimaxInput {
-  set: [String!]
-}
-
-input PlotCreateconflictsInput {
-  set: [String!]
-}
-
-input PlotCreatecontroveryInput {
-  set: [String!]
-}
-
-input PlotCreatedefeatsInput {
-  set: [String!]
-}
-
-input PlotCreateInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  openingScene: String
-  endingScene: String
-  conflicts: PlotCreateconflictsInput
-  struggles: PlotCreatestrugglesInput
-  climax: PlotCreateclimaxInput
-  victories: PlotCreatevictoriesInput
-  defeats: PlotCreatedefeatsInput
-  surprises: PlotCreatesurprisesInput
-  controvery: PlotCreatecontroveryInput
-  mysteries: PlotCreatemysteriesInput
-  suspenses: PlotCreatesuspensesInput
-  plotTwists: PlotCreateplotTwistsInput
-  subPlots: PlotCreatesubPlotsInput
-  characters: CharacterCreateManyInput
-}
-
-input PlotCreatemysteriesInput {
-  set: [String!]
-}
-
-input PlotCreateplotTwistsInput {
-  set: [String!]
-}
-
-input PlotCreatestrugglesInput {
-  set: [String!]
-}
-
-input PlotCreatesubPlotsInput {
-  set: [String!]
-}
-
-input PlotCreatesurprisesInput {
-  set: [String!]
-}
-
-input PlotCreatesuspensesInput {
-  set: [String!]
-}
-
-input PlotCreatevictoriesInput {
-  set: [String!]
-}
-
-"""An edge in a connection."""
-type PlotEdge {
-  """The item at the end of the edge."""
-  node: Plot!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum PlotOrderByInput {
-  id_ASC
-  id_DESC
-  parentAuthorId_ASC
-  parentAuthorId_DESC
-  isCloned_ASC
-  isCloned_DESC
-  approved_ASC
-  approved_DESC
-  openingScene_ASC
-  openingScene_DESC
-  endingScene_ASC
-  endingScene_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type PlotPreviousValues {
-  id: ID!
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  openingScene: String
-  endingScene: String
-  conflicts: [String!]!
-  struggles: [String!]!
-  climax: [String!]!
-  victories: [String!]!
-  defeats: [String!]!
-  surprises: [String!]!
-  controvery: [String!]!
-  mysteries: [String!]!
-  suspenses: [String!]!
-  plotTwists: [String!]!
-  subPlots: [String!]!
-}
-
-type PlotSubscriptionPayload {
-  mutation: MutationType!
-  node: Plot
-  updatedFields: [String!]
-  previousValues: PlotPreviousValues
-}
-
-input PlotSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PlotSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PlotSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PlotSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: PlotWhereInput
-}
-
-input PlotUpdateclimaxInput {
-  set: [String!]
-}
-
-input PlotUpdateconflictsInput {
-  set: [String!]
-}
-
-input PlotUpdatecontroveryInput {
-  set: [String!]
-}
-
-input PlotUpdatedefeatsInput {
-  set: [String!]
-}
-
-input PlotUpdateInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  openingScene: String
-  endingScene: String
-  conflicts: PlotUpdateconflictsInput
-  struggles: PlotUpdatestrugglesInput
-  climax: PlotUpdateclimaxInput
-  victories: PlotUpdatevictoriesInput
-  defeats: PlotUpdatedefeatsInput
-  surprises: PlotUpdatesurprisesInput
-  controvery: PlotUpdatecontroveryInput
-  mysteries: PlotUpdatemysteriesInput
-  suspenses: PlotUpdatesuspensesInput
-  plotTwists: PlotUpdateplotTwistsInput
-  subPlots: PlotUpdatesubPlotsInput
-  characters: CharacterUpdateManyInput
-}
-
-input PlotUpdatemysteriesInput {
-  set: [String!]
-}
-
-input PlotUpdateplotTwistsInput {
-  set: [String!]
-}
-
-input PlotUpdatestrugglesInput {
-  set: [String!]
-}
-
-input PlotUpdatesubPlotsInput {
-  set: [String!]
-}
-
-input PlotUpdatesurprisesInput {
-  set: [String!]
-}
-
-input PlotUpdatesuspensesInput {
-  set: [String!]
-}
-
-input PlotUpdatevictoriesInput {
-  set: [String!]
-}
-
-input PlotWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PlotWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PlotWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PlotWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  parentAuthorId: ID
-
-  """All values that are not equal to given value."""
-  parentAuthorId_not: ID
-
-  """All values that are contained in given list."""
-  parentAuthorId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  parentAuthorId_not_in: [ID!]
-
-  """All values less than the given value."""
-  parentAuthorId_lt: ID
-
-  """All values less than or equal the given value."""
-  parentAuthorId_lte: ID
-
-  """All values greater than the given value."""
-  parentAuthorId_gt: ID
-
-  """All values greater than or equal the given value."""
-  parentAuthorId_gte: ID
-
-  """All values containing the given string."""
-  parentAuthorId_contains: ID
-
-  """All values not containing the given string."""
-  parentAuthorId_not_contains: ID
-
-  """All values starting with the given string."""
-  parentAuthorId_starts_with: ID
-
-  """All values not starting with the given string."""
-  parentAuthorId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  parentAuthorId_ends_with: ID
-
-  """All values not ending with the given string."""
-  parentAuthorId_not_ends_with: ID
-  isCloned: Boolean
-
-  """All values that are not equal to given value."""
-  isCloned_not: Boolean
-  approved: Boolean
-
-  """All values that are not equal to given value."""
-  approved_not: Boolean
-  openingScene: String
-
-  """All values that are not equal to given value."""
-  openingScene_not: String
-
-  """All values that are contained in given list."""
-  openingScene_in: [String!]
-
-  """All values that are not contained in given list."""
-  openingScene_not_in: [String!]
-
-  """All values less than the given value."""
-  openingScene_lt: String
-
-  """All values less than or equal the given value."""
-  openingScene_lte: String
-
-  """All values greater than the given value."""
-  openingScene_gt: String
-
-  """All values greater than or equal the given value."""
-  openingScene_gte: String
-
-  """All values containing the given string."""
-  openingScene_contains: String
-
-  """All values not containing the given string."""
-  openingScene_not_contains: String
-
-  """All values starting with the given string."""
-  openingScene_starts_with: String
-
-  """All values not starting with the given string."""
-  openingScene_not_starts_with: String
-
-  """All values ending with the given string."""
-  openingScene_ends_with: String
-
-  """All values not ending with the given string."""
-  openingScene_not_ends_with: String
-  endingScene: String
-
-  """All values that are not equal to given value."""
-  endingScene_not: String
-
-  """All values that are contained in given list."""
-  endingScene_in: [String!]
-
-  """All values that are not contained in given list."""
-  endingScene_not_in: [String!]
-
-  """All values less than the given value."""
-  endingScene_lt: String
-
-  """All values less than or equal the given value."""
-  endingScene_lte: String
-
-  """All values greater than the given value."""
-  endingScene_gt: String
-
-  """All values greater than or equal the given value."""
-  endingScene_gte: String
-
-  """All values containing the given string."""
-  endingScene_contains: String
-
-  """All values not containing the given string."""
-  endingScene_not_contains: String
-
-  """All values starting with the given string."""
-  endingScene_starts_with: String
-
-  """All values not starting with the given string."""
-  endingScene_not_starts_with: String
-
-  """All values ending with the given string."""
-  endingScene_ends_with: String
-
-  """All values not ending with the given string."""
-  endingScene_not_ends_with: String
-  characters_every: CharacterWhereInput
-  characters_some: CharacterWhereInput
-  characters_none: CharacterWhereInput
-}
-
-input PlotWhereUniqueInput {
-  id: ID
-}
-
 type Query {
   stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story]!
-  submissions(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Submission]!
-  plots(where: PlotWhereInput, orderBy: PlotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Plot]!
-  genreRequests(where: GenreRequestWhereInput, orderBy: GenreRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GenreRequest]!
-  savedObjects(where: SavedObjectWhereInput, orderBy: SavedObjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SavedObject]!
-  themes(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Theme]!
-  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
-  ageRanges(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AgeRange]!
-  storyLocationses(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryLocations]!
+  contributions(where: ContributionWhereInput, orderBy: ContributionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Contribution]!
   story(where: StoryWhereUniqueInput!): Story
-  submission(where: SubmissionWhereUniqueInput!): Submission
-  plot(where: PlotWhereUniqueInput!): Plot
-  genreRequest(where: GenreRequestWhereUniqueInput!): GenreRequest
-  theme(where: ThemeWhereUniqueInput!): Theme
-  character(where: CharacterWhereUniqueInput!): Character
-  ageRange(where: AgeRangeWhereUniqueInput!): AgeRange
-  storyLocations(where: StoryLocationsWhereUniqueInput!): StoryLocations
+  contribution(where: ContributionWhereUniqueInput!): Contribution
   storiesConnection(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryConnection!
-  submissionsConnection(where: SubmissionWhereInput, orderBy: SubmissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubmissionConnection!
-  plotsConnection(where: PlotWhereInput, orderBy: PlotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlotConnection!
-  genreRequestsConnection(where: GenreRequestWhereInput, orderBy: GenreRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GenreRequestConnection!
-  savedObjectsConnection(where: SavedObjectWhereInput, orderBy: SavedObjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SavedObjectConnection!
-  themesConnection(where: ThemeWhereInput, orderBy: ThemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThemeConnection!
-  charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
-  ageRangesConnection(where: AgeRangeWhereInput, orderBy: AgeRangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AgeRangeConnection!
-  storyLocationsesConnection(where: StoryLocationsWhereInput, orderBy: StoryLocationsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryLocationsConnection!
+  contributionsConnection(where: ContributionWhereInput, orderBy: ContributionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ContributionConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1672,230 +443,24 @@ type Query {
   ): Node
 }
 
-type SavedObject {
-  userId: ID
-  objectId: ID
-  type: SavedObjectType
-}
-
-"""A connection to a list of items."""
-type SavedObjectConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [SavedObjectEdge]!
-  aggregate: AggregateSavedObject!
-}
-
-input SavedObjectCreateInput {
-  userId: ID
-  objectId: ID
-  type: SavedObjectType
-}
-
-"""An edge in a connection."""
-type SavedObjectEdge {
-  """The item at the end of the edge."""
-  node: SavedObject!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum SavedObjectOrderByInput {
-  userId_ASC
-  userId_DESC
-  objectId_ASC
-  objectId_DESC
-  type_ASC
-  type_DESC
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type SavedObjectPreviousValues {
-  userId: ID
-  objectId: ID
-  type: SavedObjectType
-}
-
-type SavedObjectSubscriptionPayload {
-  mutation: MutationType!
-  node: SavedObject
-  updatedFields: [String!]
-  previousValues: SavedObjectPreviousValues
-}
-
-input SavedObjectSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [SavedObjectSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [SavedObjectSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [SavedObjectSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: SavedObjectWhereInput
-}
-
-enum SavedObjectType {
-  Character
-  Plot
-  StoryLocation
-  Theme
-  Story
-}
-
-input SavedObjectUpdateInput {
-  userId: ID
-  objectId: ID
-  type: SavedObjectType
-}
-
-input SavedObjectWhereInput {
-  """Logical AND on all given filters."""
-  AND: [SavedObjectWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [SavedObjectWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [SavedObjectWhereInput!]
-  userId: ID
-
-  """All values that are not equal to given value."""
-  userId_not: ID
-
-  """All values that are contained in given list."""
-  userId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  userId_not_in: [ID!]
-
-  """All values less than the given value."""
-  userId_lt: ID
-
-  """All values less than or equal the given value."""
-  userId_lte: ID
-
-  """All values greater than the given value."""
-  userId_gt: ID
-
-  """All values greater than or equal the given value."""
-  userId_gte: ID
-
-  """All values containing the given string."""
-  userId_contains: ID
-
-  """All values not containing the given string."""
-  userId_not_contains: ID
-
-  """All values starting with the given string."""
-  userId_starts_with: ID
-
-  """All values not starting with the given string."""
-  userId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  userId_ends_with: ID
-
-  """All values not ending with the given string."""
-  userId_not_ends_with: ID
-  objectId: ID
-
-  """All values that are not equal to given value."""
-  objectId_not: ID
-
-  """All values that are contained in given list."""
-  objectId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  objectId_not_in: [ID!]
-
-  """All values less than the given value."""
-  objectId_lt: ID
-
-  """All values less than or equal the given value."""
-  objectId_lte: ID
-
-  """All values greater than the given value."""
-  objectId_gt: ID
-
-  """All values greater than or equal the given value."""
-  objectId_gte: ID
-
-  """All values containing the given string."""
-  objectId_contains: ID
-
-  """All values not containing the given string."""
-  objectId_not_contains: ID
-
-  """All values starting with the given string."""
-  objectId_starts_with: ID
-
-  """All values not starting with the given string."""
-  objectId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  objectId_ends_with: ID
-
-  """All values not ending with the given string."""
-  objectId_not_ends_with: ID
-  type: SavedObjectType
-
-  """All values that are not equal to given value."""
-  type_not: SavedObjectType
-
-  """All values that are contained in given list."""
-  type_in: [SavedObjectType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [SavedObjectType!]
-}
-
 type Story implements Node {
   id: ID!
+  authorId: ID
+  nonAuthorId: ID
   parentStoryId: ID
   author: String
+  coAuthors: [ID!]!
   isCloned: Boolean
-  profileId: ID
+  isForked: Boolean
+  contributionPending: Boolean
   title: String!
   description: String
   content: String
-  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
-  genre: Genre
-  approved: Boolean
-  isPublished: Boolean
+  share: Boolean
   views: Int
   likes: Int
   clones: Int
-  submission: ID
-  ageRange(where: AgeRangeWhereInput): AgeRange
+  contributions: Int
 }
 
 """A connection to a list of items."""
@@ -1908,23 +473,27 @@ type StoryConnection {
   aggregate: AggregateStory!
 }
 
+input StoryCreatecoAuthorsInput {
+  set: [ID!]
+}
+
 input StoryCreateInput {
+  authorId: ID
+  nonAuthorId: ID
   parentStoryId: ID
   author: String
   isCloned: Boolean
-  profileId: ID
+  isForked: Boolean
+  contributionPending: Boolean
   title: String!
   description: String
   content: String
-  genre: Genre
-  approved: Boolean
-  isPublished: Boolean
+  share: Boolean
   views: Int
   likes: Int
   clones: Int
-  submission: ID
-  characters: CharacterCreateManyInput
-  ageRange: AgeRangeCreateOneInput
+  contributions: Int
+  coAuthors: StoryCreatecoAuthorsInput
 }
 
 """An edge in a connection."""
@@ -1936,424 +505,39 @@ type StoryEdge {
   cursor: String!
 }
 
-type StoryLocations implements Node {
-  id: ID!
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  location: String
-  timeOfStory: String
-  description: String
-  landmarks: [String!]!
-}
-
-"""A connection to a list of items."""
-type StoryLocationsConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [StoryLocationsEdge]!
-  aggregate: AggregateStoryLocations!
-}
-
-input StoryLocationsCreateInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  location: String
-  timeOfStory: String
-  description: String
-  landmarks: StoryLocationsCreatelandmarksInput
-}
-
-input StoryLocationsCreatelandmarksInput {
-  set: [String!]
-}
-
-input StoryLocationsCreateManyInput {
-  create: [StoryLocationsCreateInput!]
-  connect: [StoryLocationsWhereUniqueInput!]
-}
-
-"""An edge in a connection."""
-type StoryLocationsEdge {
-  """The item at the end of the edge."""
-  node: StoryLocations!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum StoryLocationsOrderByInput {
-  id_ASC
-  id_DESC
-  parentAuthorId_ASC
-  parentAuthorId_DESC
-  isCloned_ASC
-  isCloned_DESC
-  approved_ASC
-  approved_DESC
-  location_ASC
-  location_DESC
-  timeOfStory_ASC
-  timeOfStory_DESC
-  description_ASC
-  description_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type StoryLocationsPreviousValues {
-  id: ID!
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  location: String
-  timeOfStory: String
-  description: String
-  landmarks: [String!]!
-}
-
-type StoryLocationsSubscriptionPayload {
-  mutation: MutationType!
-  node: StoryLocations
-  updatedFields: [String!]
-  previousValues: StoryLocationsPreviousValues
-}
-
-input StoryLocationsSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StoryLocationsSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StoryLocationsSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StoryLocationsSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: StoryLocationsWhereInput
-}
-
-input StoryLocationsUpdateDataInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  location: String
-  timeOfStory: String
-  description: String
-  landmarks: StoryLocationsUpdatelandmarksInput
-}
-
-input StoryLocationsUpdateInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  location: String
-  timeOfStory: String
-  description: String
-  landmarks: StoryLocationsUpdatelandmarksInput
-}
-
-input StoryLocationsUpdatelandmarksInput {
-  set: [String!]
-}
-
-input StoryLocationsUpdateManyInput {
-  create: [StoryLocationsCreateInput!]
-  connect: [StoryLocationsWhereUniqueInput!]
-  disconnect: [StoryLocationsWhereUniqueInput!]
-  delete: [StoryLocationsWhereUniqueInput!]
-  update: [StoryLocationsUpdateWithWhereUniqueNestedInput!]
-  upsert: [StoryLocationsUpsertWithWhereUniqueNestedInput!]
-}
-
-input StoryLocationsUpdateWithWhereUniqueNestedInput {
-  where: StoryLocationsWhereUniqueInput!
-  data: StoryLocationsUpdateDataInput!
-}
-
-input StoryLocationsUpsertWithWhereUniqueNestedInput {
-  where: StoryLocationsWhereUniqueInput!
-  update: StoryLocationsUpdateDataInput!
-  create: StoryLocationsCreateInput!
-}
-
-input StoryLocationsWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StoryLocationsWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StoryLocationsWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StoryLocationsWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  parentAuthorId: ID
-
-  """All values that are not equal to given value."""
-  parentAuthorId_not: ID
-
-  """All values that are contained in given list."""
-  parentAuthorId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  parentAuthorId_not_in: [ID!]
-
-  """All values less than the given value."""
-  parentAuthorId_lt: ID
-
-  """All values less than or equal the given value."""
-  parentAuthorId_lte: ID
-
-  """All values greater than the given value."""
-  parentAuthorId_gt: ID
-
-  """All values greater than or equal the given value."""
-  parentAuthorId_gte: ID
-
-  """All values containing the given string."""
-  parentAuthorId_contains: ID
-
-  """All values not containing the given string."""
-  parentAuthorId_not_contains: ID
-
-  """All values starting with the given string."""
-  parentAuthorId_starts_with: ID
-
-  """All values not starting with the given string."""
-  parentAuthorId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  parentAuthorId_ends_with: ID
-
-  """All values not ending with the given string."""
-  parentAuthorId_not_ends_with: ID
-  isCloned: Boolean
-
-  """All values that are not equal to given value."""
-  isCloned_not: Boolean
-  approved: Boolean
-
-  """All values that are not equal to given value."""
-  approved_not: Boolean
-  location: String
-
-  """All values that are not equal to given value."""
-  location_not: String
-
-  """All values that are contained in given list."""
-  location_in: [String!]
-
-  """All values that are not contained in given list."""
-  location_not_in: [String!]
-
-  """All values less than the given value."""
-  location_lt: String
-
-  """All values less than or equal the given value."""
-  location_lte: String
-
-  """All values greater than the given value."""
-  location_gt: String
-
-  """All values greater than or equal the given value."""
-  location_gte: String
-
-  """All values containing the given string."""
-  location_contains: String
-
-  """All values not containing the given string."""
-  location_not_contains: String
-
-  """All values starting with the given string."""
-  location_starts_with: String
-
-  """All values not starting with the given string."""
-  location_not_starts_with: String
-
-  """All values ending with the given string."""
-  location_ends_with: String
-
-  """All values not ending with the given string."""
-  location_not_ends_with: String
-  timeOfStory: String
-
-  """All values that are not equal to given value."""
-  timeOfStory_not: String
-
-  """All values that are contained in given list."""
-  timeOfStory_in: [String!]
-
-  """All values that are not contained in given list."""
-  timeOfStory_not_in: [String!]
-
-  """All values less than the given value."""
-  timeOfStory_lt: String
-
-  """All values less than or equal the given value."""
-  timeOfStory_lte: String
-
-  """All values greater than the given value."""
-  timeOfStory_gt: String
-
-  """All values greater than or equal the given value."""
-  timeOfStory_gte: String
-
-  """All values containing the given string."""
-  timeOfStory_contains: String
-
-  """All values not containing the given string."""
-  timeOfStory_not_contains: String
-
-  """All values starting with the given string."""
-  timeOfStory_starts_with: String
-
-  """All values not starting with the given string."""
-  timeOfStory_not_starts_with: String
-
-  """All values ending with the given string."""
-  timeOfStory_ends_with: String
-
-  """All values not ending with the given string."""
-  timeOfStory_not_ends_with: String
-  description: String
-
-  """All values that are not equal to given value."""
-  description_not: String
-
-  """All values that are contained in given list."""
-  description_in: [String!]
-
-  """All values that are not contained in given list."""
-  description_not_in: [String!]
-
-  """All values less than the given value."""
-  description_lt: String
-
-  """All values less than or equal the given value."""
-  description_lte: String
-
-  """All values greater than the given value."""
-  description_gt: String
-
-  """All values greater than or equal the given value."""
-  description_gte: String
-
-  """All values containing the given string."""
-  description_contains: String
-
-  """All values not containing the given string."""
-  description_not_contains: String
-
-  """All values starting with the given string."""
-  description_starts_with: String
-
-  """All values not starting with the given string."""
-  description_not_starts_with: String
-
-  """All values ending with the given string."""
-  description_ends_with: String
-
-  """All values not ending with the given string."""
-  description_not_ends_with: String
-}
-
-input StoryLocationsWhereUniqueInput {
-  id: ID
-}
-
 enum StoryOrderByInput {
   id_ASC
   id_DESC
+  authorId_ASC
+  authorId_DESC
+  nonAuthorId_ASC
+  nonAuthorId_DESC
   parentStoryId_ASC
   parentStoryId_DESC
   author_ASC
   author_DESC
   isCloned_ASC
   isCloned_DESC
-  profileId_ASC
-  profileId_DESC
+  isForked_ASC
+  isForked_DESC
+  contributionPending_ASC
+  contributionPending_DESC
   title_ASC
   title_DESC
   description_ASC
   description_DESC
   content_ASC
   content_DESC
-  genre_ASC
-  genre_DESC
-  approved_ASC
-  approved_DESC
-  isPublished_ASC
-  isPublished_DESC
+  share_ASC
+  share_DESC
   views_ASC
   views_DESC
   likes_ASC
   likes_DESC
   clones_ASC
   clones_DESC
-  submission_ASC
-  submission_DESC
+  contributions_ASC
+  contributions_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -2362,20 +546,22 @@ enum StoryOrderByInput {
 
 type StoryPreviousValues {
   id: ID!
+  authorId: ID
+  nonAuthorId: ID
   parentStoryId: ID
   author: String
+  coAuthors: [ID!]!
   isCloned: Boolean
-  profileId: ID
+  isForked: Boolean
+  contributionPending: Boolean
   title: String!
   description: String
   content: String
-  genre: Genre
-  approved: Boolean
-  isPublished: Boolean
+  share: Boolean
   views: Int
   likes: Int
   clones: Int
-  submission: ID
+  contributions: Int
 }
 
 type StorySubscriptionPayload {
@@ -2417,23 +603,27 @@ input StorySubscriptionWhereInput {
   node: StoryWhereInput
 }
 
+input StoryUpdatecoAuthorsInput {
+  set: [ID!]
+}
+
 input StoryUpdateInput {
+  authorId: ID
+  nonAuthorId: ID
   parentStoryId: ID
   author: String
   isCloned: Boolean
-  profileId: ID
+  isForked: Boolean
+  contributionPending: Boolean
   title: String
   description: String
   content: String
-  genre: Genre
-  approved: Boolean
-  isPublished: Boolean
+  share: Boolean
   views: Int
   likes: Int
   clones: Int
-  submission: ID
-  characters: CharacterUpdateManyInput
-  ageRange: AgeRangeUpdateOneInput
+  contributions: Int
+  coAuthors: StoryUpdatecoAuthorsInput
 }
 
 input StoryWhereInput {
@@ -2485,6 +675,86 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  authorId: ID
+
+  """All values that are not equal to given value."""
+  authorId_not: ID
+
+  """All values that are contained in given list."""
+  authorId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  authorId_not_in: [ID!]
+
+  """All values less than the given value."""
+  authorId_lt: ID
+
+  """All values less than or equal the given value."""
+  authorId_lte: ID
+
+  """All values greater than the given value."""
+  authorId_gt: ID
+
+  """All values greater than or equal the given value."""
+  authorId_gte: ID
+
+  """All values containing the given string."""
+  authorId_contains: ID
+
+  """All values not containing the given string."""
+  authorId_not_contains: ID
+
+  """All values starting with the given string."""
+  authorId_starts_with: ID
+
+  """All values not starting with the given string."""
+  authorId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  authorId_ends_with: ID
+
+  """All values not ending with the given string."""
+  authorId_not_ends_with: ID
+  nonAuthorId: ID
+
+  """All values that are not equal to given value."""
+  nonAuthorId_not: ID
+
+  """All values that are contained in given list."""
+  nonAuthorId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  nonAuthorId_not_in: [ID!]
+
+  """All values less than the given value."""
+  nonAuthorId_lt: ID
+
+  """All values less than or equal the given value."""
+  nonAuthorId_lte: ID
+
+  """All values greater than the given value."""
+  nonAuthorId_gt: ID
+
+  """All values greater than or equal the given value."""
+  nonAuthorId_gte: ID
+
+  """All values containing the given string."""
+  nonAuthorId_contains: ID
+
+  """All values not containing the given string."""
+  nonAuthorId_not_contains: ID
+
+  """All values starting with the given string."""
+  nonAuthorId_starts_with: ID
+
+  """All values not starting with the given string."""
+  nonAuthorId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  nonAuthorId_ends_with: ID
+
+  """All values not ending with the given string."""
+  nonAuthorId_not_ends_with: ID
   parentStoryId: ID
 
   """All values that are not equal to given value."""
@@ -2569,46 +839,14 @@ input StoryWhereInput {
 
   """All values that are not equal to given value."""
   isCloned_not: Boolean
-  profileId: ID
+  isForked: Boolean
 
   """All values that are not equal to given value."""
-  profileId_not: ID
+  isForked_not: Boolean
+  contributionPending: Boolean
 
-  """All values that are contained in given list."""
-  profileId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  profileId_not_in: [ID!]
-
-  """All values less than the given value."""
-  profileId_lt: ID
-
-  """All values less than or equal the given value."""
-  profileId_lte: ID
-
-  """All values greater than the given value."""
-  profileId_gt: ID
-
-  """All values greater than or equal the given value."""
-  profileId_gte: ID
-
-  """All values containing the given string."""
-  profileId_contains: ID
-
-  """All values not containing the given string."""
-  profileId_not_contains: ID
-
-  """All values starting with the given string."""
-  profileId_starts_with: ID
-
-  """All values not starting with the given string."""
-  profileId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  profileId_ends_with: ID
-
-  """All values not ending with the given string."""
-  profileId_not_ends_with: ID
+  """All values that are not equal to given value."""
+  contributionPending_not: Boolean
   title: String
 
   """All values that are not equal to given value."""
@@ -2729,24 +967,10 @@ input StoryWhereInput {
 
   """All values not ending with the given string."""
   content_not_ends_with: String
-  genre: Genre
+  share: Boolean
 
   """All values that are not equal to given value."""
-  genre_not: Genre
-
-  """All values that are contained in given list."""
-  genre_in: [Genre!]
-
-  """All values that are not contained in given list."""
-  genre_not_in: [Genre!]
-  approved: Boolean
-
-  """All values that are not equal to given value."""
-  approved_not: Boolean
-  isPublished: Boolean
-
-  """All values that are not equal to given value."""
-  isPublished_not: Boolean
+  share_not: Boolean
   views: Int
 
   """All values that are not equal to given value."""
@@ -2813,557 +1037,35 @@ input StoryWhereInput {
 
   """All values greater than or equal the given value."""
   clones_gte: Int
-  submission: ID
+  contributions: Int
 
   """All values that are not equal to given value."""
-  submission_not: ID
+  contributions_not: Int
 
   """All values that are contained in given list."""
-  submission_in: [ID!]
+  contributions_in: [Int!]
 
   """All values that are not contained in given list."""
-  submission_not_in: [ID!]
+  contributions_not_in: [Int!]
 
   """All values less than the given value."""
-  submission_lt: ID
+  contributions_lt: Int
 
   """All values less than or equal the given value."""
-  submission_lte: ID
+  contributions_lte: Int
 
   """All values greater than the given value."""
-  submission_gt: ID
+  contributions_gt: Int
 
   """All values greater than or equal the given value."""
-  submission_gte: ID
-
-  """All values containing the given string."""
-  submission_contains: ID
-
-  """All values not containing the given string."""
-  submission_not_contains: ID
-
-  """All values starting with the given string."""
-  submission_starts_with: ID
-
-  """All values not starting with the given string."""
-  submission_not_starts_with: ID
-
-  """All values ending with the given string."""
-  submission_ends_with: ID
-
-  """All values not ending with the given string."""
-  submission_not_ends_with: ID
-  characters_every: CharacterWhereInput
-  characters_some: CharacterWhereInput
-  characters_none: CharacterWhereInput
-  ageRange: AgeRangeWhereInput
+  contributions_gte: Int
 }
 
 input StoryWhereUniqueInput {
   id: ID
 }
 
-type Submission implements Node {
-  id: ID!
-  flag: Boolean
-  validationApproval: Boolean
-  platformApproval: Boolean
-}
-
-"""A connection to a list of items."""
-type SubmissionConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [SubmissionEdge]!
-  aggregate: AggregateSubmission!
-}
-
-input SubmissionCreateInput {
-  flag: Boolean
-  validationApproval: Boolean
-  platformApproval: Boolean
-}
-
-"""An edge in a connection."""
-type SubmissionEdge {
-  """The item at the end of the edge."""
-  node: Submission!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum SubmissionOrderByInput {
-  id_ASC
-  id_DESC
-  flag_ASC
-  flag_DESC
-  validationApproval_ASC
-  validationApproval_DESC
-  platformApproval_ASC
-  platformApproval_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type SubmissionPreviousValues {
-  id: ID!
-  flag: Boolean
-  validationApproval: Boolean
-  platformApproval: Boolean
-}
-
-type SubmissionSubscriptionPayload {
-  mutation: MutationType!
-  node: Submission
-  updatedFields: [String!]
-  previousValues: SubmissionPreviousValues
-}
-
-input SubmissionSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [SubmissionSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [SubmissionSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [SubmissionSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: SubmissionWhereInput
-}
-
-input SubmissionUpdateInput {
-  flag: Boolean
-  validationApproval: Boolean
-  platformApproval: Boolean
-}
-
-input SubmissionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [SubmissionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [SubmissionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [SubmissionWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  flag: Boolean
-
-  """All values that are not equal to given value."""
-  flag_not: Boolean
-  validationApproval: Boolean
-
-  """All values that are not equal to given value."""
-  validationApproval_not: Boolean
-  platformApproval: Boolean
-
-  """All values that are not equal to given value."""
-  platformApproval_not: Boolean
-}
-
-input SubmissionWhereUniqueInput {
-  id: ID
-}
-
 type Subscription {
   story(where: StorySubscriptionWhereInput): StorySubscriptionPayload
-  submission(where: SubmissionSubscriptionWhereInput): SubmissionSubscriptionPayload
-  plot(where: PlotSubscriptionWhereInput): PlotSubscriptionPayload
-  genreRequest(where: GenreRequestSubscriptionWhereInput): GenreRequestSubscriptionPayload
-  savedObject(where: SavedObjectSubscriptionWhereInput): SavedObjectSubscriptionPayload
-  theme(where: ThemeSubscriptionWhereInput): ThemeSubscriptionPayload
-  character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
-  ageRange(where: AgeRangeSubscriptionWhereInput): AgeRangeSubscriptionPayload
-  storyLocations(where: StoryLocationsSubscriptionWhereInput): StoryLocationsSubscriptionPayload
-}
-
-type Theme implements Node {
-  id: ID!
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  themeType: String
-  description: String
-}
-
-"""A connection to a list of items."""
-type ThemeConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [ThemeEdge]!
-  aggregate: AggregateTheme!
-}
-
-input ThemeCreateInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  themeType: String
-  description: String
-}
-
-input ThemeCreateManyInput {
-  create: [ThemeCreateInput!]
-  connect: [ThemeWhereUniqueInput!]
-}
-
-"""An edge in a connection."""
-type ThemeEdge {
-  """The item at the end of the edge."""
-  node: Theme!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum ThemeOrderByInput {
-  id_ASC
-  id_DESC
-  parentAuthorId_ASC
-  parentAuthorId_DESC
-  isCloned_ASC
-  isCloned_DESC
-  approved_ASC
-  approved_DESC
-  themeType_ASC
-  themeType_DESC
-  description_ASC
-  description_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type ThemePreviousValues {
-  id: ID!
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  themeType: String
-  description: String
-}
-
-type ThemeSubscriptionPayload {
-  mutation: MutationType!
-  node: Theme
-  updatedFields: [String!]
-  previousValues: ThemePreviousValues
-}
-
-input ThemeSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ThemeSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ThemeSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ThemeSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: ThemeWhereInput
-}
-
-input ThemeUpdateDataInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  themeType: String
-  description: String
-}
-
-input ThemeUpdateInput {
-  parentAuthorId: ID
-  isCloned: Boolean
-  approved: Boolean
-  themeType: String
-  description: String
-}
-
-input ThemeUpdateManyInput {
-  create: [ThemeCreateInput!]
-  connect: [ThemeWhereUniqueInput!]
-  disconnect: [ThemeWhereUniqueInput!]
-  delete: [ThemeWhereUniqueInput!]
-  update: [ThemeUpdateWithWhereUniqueNestedInput!]
-  upsert: [ThemeUpsertWithWhereUniqueNestedInput!]
-}
-
-input ThemeUpdateWithWhereUniqueNestedInput {
-  where: ThemeWhereUniqueInput!
-  data: ThemeUpdateDataInput!
-}
-
-input ThemeUpsertWithWhereUniqueNestedInput {
-  where: ThemeWhereUniqueInput!
-  update: ThemeUpdateDataInput!
-  create: ThemeCreateInput!
-}
-
-input ThemeWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ThemeWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ThemeWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ThemeWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  parentAuthorId: ID
-
-  """All values that are not equal to given value."""
-  parentAuthorId_not: ID
-
-  """All values that are contained in given list."""
-  parentAuthorId_in: [ID!]
-
-  """All values that are not contained in given list."""
-  parentAuthorId_not_in: [ID!]
-
-  """All values less than the given value."""
-  parentAuthorId_lt: ID
-
-  """All values less than or equal the given value."""
-  parentAuthorId_lte: ID
-
-  """All values greater than the given value."""
-  parentAuthorId_gt: ID
-
-  """All values greater than or equal the given value."""
-  parentAuthorId_gte: ID
-
-  """All values containing the given string."""
-  parentAuthorId_contains: ID
-
-  """All values not containing the given string."""
-  parentAuthorId_not_contains: ID
-
-  """All values starting with the given string."""
-  parentAuthorId_starts_with: ID
-
-  """All values not starting with the given string."""
-  parentAuthorId_not_starts_with: ID
-
-  """All values ending with the given string."""
-  parentAuthorId_ends_with: ID
-
-  """All values not ending with the given string."""
-  parentAuthorId_not_ends_with: ID
-  isCloned: Boolean
-
-  """All values that are not equal to given value."""
-  isCloned_not: Boolean
-  approved: Boolean
-
-  """All values that are not equal to given value."""
-  approved_not: Boolean
-  themeType: String
-
-  """All values that are not equal to given value."""
-  themeType_not: String
-
-  """All values that are contained in given list."""
-  themeType_in: [String!]
-
-  """All values that are not contained in given list."""
-  themeType_not_in: [String!]
-
-  """All values less than the given value."""
-  themeType_lt: String
-
-  """All values less than or equal the given value."""
-  themeType_lte: String
-
-  """All values greater than the given value."""
-  themeType_gt: String
-
-  """All values greater than or equal the given value."""
-  themeType_gte: String
-
-  """All values containing the given string."""
-  themeType_contains: String
-
-  """All values not containing the given string."""
-  themeType_not_contains: String
-
-  """All values starting with the given string."""
-  themeType_starts_with: String
-
-  """All values not starting with the given string."""
-  themeType_not_starts_with: String
-
-  """All values ending with the given string."""
-  themeType_ends_with: String
-
-  """All values not ending with the given string."""
-  themeType_not_ends_with: String
-  description: String
-
-  """All values that are not equal to given value."""
-  description_not: String
-
-  """All values that are contained in given list."""
-  description_in: [String!]
-
-  """All values that are not contained in given list."""
-  description_not_in: [String!]
-
-  """All values less than the given value."""
-  description_lt: String
-
-  """All values less than or equal the given value."""
-  description_lte: String
-
-  """All values greater than the given value."""
-  description_gt: String
-
-  """All values greater than or equal the given value."""
-  description_gte: String
-
-  """All values containing the given string."""
-  description_contains: String
-
-  """All values not containing the given string."""
-  description_not_contains: String
-
-  """All values starting with the given string."""
-  description_starts_with: String
-
-  """All values not starting with the given string."""
-  description_not_starts_with: String
-
-  """All values ending with the given string."""
-  description_ends_with: String
-
-  """All values not ending with the given string."""
-  description_not_ends_with: String
-}
-
-input ThemeWhereUniqueInput {
-  id: ID
+  contribution(where: ContributionSubscriptionWhereInput): ContributionSubscriptionPayload
 }
