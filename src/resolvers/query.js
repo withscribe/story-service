@@ -35,12 +35,23 @@ async function storyById (_, args, context, info) {
     )
 }
 
-function storiesByProfileId (_, args, context, info) {
+function storiesByAuthorId (_, args, context, info) {
     const payload = verifyToken(context)
     return context.prisma.query.stories(
         {
             where: {
-                profileId: args.profileId
+                authorId: args.authorId
+            }
+        }
+    )
+}
+
+function storiesByNonAuthorId (_, args, context, info) {
+    const payload = verifyToken(context)
+    return context.prisma.query.stories(
+        {
+            where: {
+                nonAuthorId: args.nonAuthorId
             }
         }
     )
@@ -101,7 +112,8 @@ module.exports = {
     allStories,
     stories,
     storyById,
-    storiesByProfileId,
+    storiesByAuthorId,
+    storiesByNonAuthorId,
     searchByKeyword,
     searchByTitle,
     searchByDescription,
