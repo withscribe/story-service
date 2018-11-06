@@ -1,0 +1,36 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:latest
+
+pipelines:
+  default:
+    - step:
+        name: Starting Deployment Pipeline
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - echo "Starting deployment pipeline..."
+          - echo "Deployment pipeline started."
+    - step:
+        name: Deploy to Production
+        deployment: production   # can be test, staging or production.
+        trigger: manual  # Uncomment to make this a manual deployment.
+        script:
+          - echo "Connecting to production server..."
+          - ssh -tt root@159.89.121.100 << EOF
+          - echo "Connected to production server."
+          - cd scribe-story-service
+          - echo "Updating application..."
+          - git pull
+          - npm install
+          - prisma deploy
+          - echo "Application updated."
+          - echo "Launching production server..."
+          - npm restart
+          - exit $?
+          - EOF
+          - echo "Production server started successfully."
+          - echo "Production environment deployed successfully!"
