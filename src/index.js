@@ -1,5 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')
-const { Prisma } = require('prisma-binding')
+const { prisma } = require('./generated/prisma-client')
+const ora = require('ora')
+
 const Query = require('./resolvers/query');
 const Mutation = require('./resolvers/mutation');
 
@@ -13,10 +15,7 @@ const server = new GraphQLServer({
   resolvers,
   context: req => ({
     ...req,
-    prisma: new Prisma({
-      typeDefs: 'src/generated/prisma.graphql',
-      endpoint: 'http://localhost:4466',
-    }),
+    prisma
   }),
 })
 
@@ -28,5 +27,9 @@ const options = {
 }
 
 server.start(options, ({ port }) => {
-  console.log(`GraphQL server is running on http://localhost:4000`)
-})
+  const spinner = ora().start()
+  setTimeout(function() {
+      console.log(`Story service has started! Open on port: ${port}`)
+      spinner.stop()
+  }, 1000);
+});

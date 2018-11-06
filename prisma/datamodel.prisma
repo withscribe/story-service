@@ -14,6 +14,7 @@ type Story {
   share: Boolean @default(value: "false")
   views: Int
   likes: Int
+  usersWhoLiked: [Likes!]!
   clones: Int
   contributions: Int
 }
@@ -21,8 +22,18 @@ type Story {
 type Contribution {
   id: ID! @unique
   forkId: ID
+  originalStoryId: ID
+  contributorName: String
   contributorProfileId: ID
   authorProfileId: ID
-  content: String
+  originalContent: String
+  contributionContent: String
   comment: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type Likes {
+  id: ID! @unique
+  guid: String @unique
 }

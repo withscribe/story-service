@@ -1,9 +1,4 @@
-# import Story from './generated/prisma.graphql'
-# import Submission from './generated/prisma.graphql'
-# import SavedObject from './generated/prisma.graphql'
-
 type Query {
-  #story queries
   allStories: [Story]
   stories(searchString: String!): [Story!]!
   storyById(storyID: ID!): Story
@@ -14,11 +9,10 @@ type Query {
   searchByTitle(title: String!): [Story]
   searchByDescription(description: String!): [Story]
   getContributionsById(authorProfileId: ID): [Contribution!]!
-  #character queries
+  getContributionById(id: ID!): Contribution
 }
 
 type Mutation { 
-  #story mutations
   submitStory(
     title: String!, 
     description: String!,
@@ -45,6 +39,7 @@ type Mutation {
 
   addLikeToStory(
     storyId: ID,
+    profileId: ID
   ) : Story
 
   removeLikeFromStory(
@@ -58,6 +53,8 @@ type Mutation {
 
   contributeRequest(
     storyId: ID,
+    contributorName: String
+    content: String,
   ): Contribution
 
   approveChanges (
@@ -68,4 +65,48 @@ type Mutation {
     contributionId: ID,
   ): Story
 }
+
+# Models
+
+type Story {
+  id: ID!
+  authorId: ID
+  nonAuthorId: ID
+  parentStoryId: ID,
+  author: String
+  coAuthors: [ID!]!
+  isCloned: Boolean
+  isForked: Boolean
+  contributionPending: Boolean
+  title: String!
+  description: String 
+  content: String
+  share: Boolean
+  views: Int
+  likes: Int
+  usersWhoLiked: [Likes!]!
+  clones: Int
+  contributions: Int
+}
+
+type Contribution {
+  id: ID!
+  forkId: ID
+  originalStoryId: ID
+  contributorName: String
+  contributorProfileId: ID
+  authorProfileId: ID
+  originalContent: String
+  contributionContent: String
+  comment: String
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Likes {
+  id: ID!
+  guid: String
+}
+
+scalar DateTime
 
