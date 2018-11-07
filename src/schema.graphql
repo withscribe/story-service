@@ -12,13 +12,13 @@ type Query {
   getContributionById(id: ID!): Contribution
 }
 
-type Mutation { 
+type Mutation {
   submitStory(
-    title: String!, 
+    title: String!,
     description: String!,
     author: String!
-    content: String, 
-    authorId: ID, 
+    content: String,
+    authorId: ID,
   ): Story
 
   updateStory(
@@ -79,7 +79,7 @@ type Story {
   isForked: Boolean
   contributionPending: Boolean
   title: String!
-  description: String 
+  description: String
   content: String
   share: Boolean
   views: Int
@@ -87,6 +87,7 @@ type Story {
   usersWhoLiked: [Likes!]!
   clones: Int
   contributions: Int
+  revisions: [Revision]
 }
 
 type Contribution {
@@ -99,6 +100,15 @@ type Contribution {
   originalContent: String
   contributionContent: String
   comment: String
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Revision {
+  id: ID!
+  title: String
+  description: String
+  content: String
   updatedAt: DateTime
   createdAt: DateTime
 }

@@ -6,16 +6,27 @@ async function submitStory (_, args, context, info) {
     return await context.prisma.createStory({
         title: args.title,
         author: args.author,
-        description: args.description, 
+        description: args.description,
         content: args.content,
         authorId: args.authorId,
         isCloned: false,
-        isForked: false    
+        isForked: false
     })
 }
 
 async function updateStory(_, args, context, info) {
     const payload = verifyToken(context);
+
+    const story = await context.prisma.story({id: args.id});
+
+    const revision = await context.prisma.createRevision(
+        {
+            title: story.title,
+            content: story.description,
+            description: story.content
+        }
+    );
+
     return await context.prisma.updateStory({
         where: {
             id: args.id
@@ -23,7 +34,8 @@ async function updateStory(_, args, context, info) {
         data: {
             title: args.title,
             description: args.description,
-            content: args.content
+            content: args.content,
+            revisions: {connect: {id: revision.id}}
         }
     })
 }
@@ -146,7 +158,7 @@ async function approveChanges(_, args, context, info) {
 
     // delete forked story
     await context.prisma.deleteStory({ id: forkedStory.id })
-    
+
     // delete the contribution
     await context.prisma.deleteContribution({ id: contribution.id })
 
