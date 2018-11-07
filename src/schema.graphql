@@ -4,6 +4,7 @@ type Query {
   storyById(storyID: ID!): Story
   storiesByAuthorId(authorId: ID!): [Story!]!
   storiesByNonAuthorId(nonAuthorId: ID!): [Story!]!
+  storiesByCommunityId(communityId: ID!): [Story!]!
   searchByKeyword(searchString: String!): [Story!]!
   searchByAuthor(username: String!): [Story!]!
   searchByTitle(title: String!): [Story]
@@ -92,7 +93,9 @@ type Story {
   usersWhoLiked: [Likes!]!
   clones: Int
   contributions: Int
-  revisions: [Revision!]!
+  revisions: [Revision]
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type Contribution {

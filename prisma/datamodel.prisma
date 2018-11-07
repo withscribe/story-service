@@ -18,6 +18,8 @@ type Story {
   clones: Int
   contributions: Int
   revisions: [Revision!]!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type Contribution {

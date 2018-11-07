@@ -1,8 +1,9 @@
-const { verifyToken } = require('../utils')
+const { verifyToken } = require('../utils');
+const { storyFragment } = require("../fragments/StoryFragment");
 
 async function allStories (_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.stories(_)
+    return await context.prisma.stories(_).$fragment(storyFragment)
 }
 
 function stories (_, args, context, info) {
@@ -14,7 +15,7 @@ function stories (_, args, context, info) {
                 { description: args.searchString },
             ]
         },
-    })
+    }).$fragment(storyFragment)
 }
 
 async function storyById (_, args, context, info) {
@@ -32,10 +33,10 @@ function storiesByAuthorId (_, args, context, info) {
                 { isCloned: false }
             ]
         }
-    })
+    }).$fragment(storyFragment)
 }
 
-function storiesByNonAuthorId (_, args, context, info) {
+function storiesByNonAuthorId(_, args, context, info) {
     const payload = verifyToken(context)
     return context.prisma.stories({
         where: {
@@ -49,7 +50,16 @@ function storiesByNonAuthorId (_, args, context, info) {
                 }
             ]
         }
-    })
+    }).$fragment(storyFragment)
+}
+
+function storiesByCommunityId(_, args, context, info) {
+    const payload = verifyToken(context)
+    return context.prisma.stories({
+        where: {
+            communityId: args.communityId
+        }
+    }).$fragment(storyFragment)
 }
 
 function searchByKeyword (_, args, context, info) {
@@ -62,7 +72,7 @@ function searchByKeyword (_, args, context, info) {
                 { content_contains: args.searchString },
             ]
         }
-    })
+    }).$fragment(storyFragment)
 }
 
 function searchByTitle (_, args, context, info) {
@@ -71,7 +81,7 @@ function searchByTitle (_, args, context, info) {
         where: {
             OR: [ { title_contains: args.searchString }, ]
         }
-    })
+    }).$fragment(storyFragment)
 }
 
 function searchByDescription (_, args, context, info) {
@@ -80,7 +90,7 @@ function searchByDescription (_, args, context, info) {
         where: {
             OR: [ { title_description: args.searchString }, ]
         }
-    })
+    }).$fragment(storyFragment)
 }
 
 function getContributionsById(_, args, context, info) {
@@ -89,12 +99,12 @@ function getContributionsById(_, args, context, info) {
         where: {
             authorProfileId: args.authorProfileId
         }
-    })
+    }).$fragment(storyFragment)
 }
 
 async function getContributionById(_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.contribution({ id: args.id })
+    return await context.prisma.contribution({ id: args.id }).$fragment(storyFragment)
 }
 
 module.exports = {
