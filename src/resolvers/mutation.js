@@ -2,7 +2,7 @@ const { verifyToken } = require('../utils')
 const Validation = require('../validation/validation');
 
 async function submitStory (_, args, context, info) {
-    const payload = verifyToken(context)
+    // const payload = verifyToken(context)
     return await context.prisma.createStory({
         title: args.title,
         author: args.author,
@@ -15,7 +15,7 @@ async function submitStory (_, args, context, info) {
 }
 
 async function updateStory(_, args, context, info) {
-    const payload = verifyToken(context);
+    // const payload = verifyToken(context);
 
     const story = await context.prisma.story({id: args.id});
 
@@ -40,8 +40,35 @@ async function updateStory(_, args, context, info) {
     })
 }
 
+async function revertStory(_, args, context, info) {
+    // const payload = verifyToken(context);
+
+    const story = await context.prisma.story({id: args.storyId});
+    const revision = await context.prisma.revision({id: args.revisionId});
+
+    const newRevision = await context.prisma.createRevision(
+        {
+            title: story.title,
+            content: story.description,
+            description: story.content
+        }
+    );
+
+    return await context.prisma.updateStory({
+        where: {
+            id: args.storyId
+        },
+        data: {
+            title: revision.title,
+            description: revision.description,
+            content: revision.content,
+            revisions: {connect: {id: newRevision.id}}
+        }
+    })
+}
+
 async function deleteStory(_, args, context, info) {
-    const payload = verifyToken(context);
+    // const payload = verifyToken(context);
     return await context.prisma.deleteStory({ id: args.id })
 }
 
@@ -173,6 +200,7 @@ async function rejectChanges(_, args, context, info) {
 module.exports = {
     submitStory,
     updateStory,
+    revertStory,
     deleteStory,
     cloneStory,
     addLikeToStory,

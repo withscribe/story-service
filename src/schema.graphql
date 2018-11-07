@@ -22,10 +22,15 @@ type Mutation {
   ): Story
 
   updateStory(
-    id: ID!
+    id: ID!,
     title: String,
     description: String,
     content: String
+  ): Story
+
+  revertStory(
+    storyId: ID!
+    revisionId: ID!
   ): Story
 
   deleteStory(
@@ -87,7 +92,7 @@ type Story {
   usersWhoLiked: [Likes!]!
   clones: Int
   contributions: Int
-  revisions: [Revision]
+  revisions: [Revision!]!
 }
 
 type Contribution {
@@ -119,4 +124,3 @@ type Likes {
 }
 
 scalar DateTime
-

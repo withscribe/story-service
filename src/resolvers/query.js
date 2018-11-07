@@ -3,19 +3,19 @@ const { verifyToken } = require('../utils')
 async function allStories (_, args, context, info) {
     const payload = verifyToken(context)
     return await context.prisma.stories(_)
-}  
+}
 
 function stories (_, args, context, info) {
     const payload = verifyToken(context)
     return context.prisma.stories({
         where: {
-            OR: [               
+            OR: [
                 { title: args.searchString },
-                { description: args.searchString },               
+                { description: args.searchString },
             ]
         },
     })
-}  
+}
 
 async function storyById (_, args, context, info) {
     const payload = verifyToken(context)
@@ -41,7 +41,7 @@ function storiesByNonAuthorId (_, args, context, info) {
         where: {
             AND: [
                 { nonAuthorId: args.nonAuthorId },
-                { 
+                {
                     OR: [
                         { isForked: true },
                         { isCloned: true }
@@ -56,10 +56,10 @@ function searchByKeyword (_, args, context, info) {
     const payload = verifyToken(context)
     return context.prisma.stories({
         where: {
-            OR: [               
+            OR: [
                 { title_contains: args.searchString },
-                { description_contains: args.searchString },   
-                { content_contains: args.searchString },              
+                { description_contains: args.searchString },
+                { content_contains: args.searchString },
             ]
         }
     })
