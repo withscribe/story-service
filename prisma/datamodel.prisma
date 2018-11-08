@@ -9,7 +9,7 @@ type Story {
   isForked: Boolean @default(value: "false")
   contributionPending: Boolean @default(value: "false")
   title: String!
-  description: String 
+  description: String
   content: String
   share: Boolean @default(value: "false")
   views: Int
@@ -17,6 +17,9 @@ type Story {
   usersWhoLiked: [Likes!]!
   clones: Int
   contributions: Int
+  revisions: [Revision!]!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type Contribution {
@@ -29,6 +32,15 @@ type Contribution {
   originalContent: String
   contributionContent: String
   comment: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type Revision {
+  id: ID! @unique
+  title: String
+  description: String
+  content: String
   updatedAt: DateTime!
   createdAt: DateTime!
 }
