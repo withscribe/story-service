@@ -117,5 +117,6 @@ module.exports = {
     searchByTitle,
     searchByDescription,
     getContributionsById,
-    getContributionById
+    getContributionById,
+    storiesByCommunityId
 }

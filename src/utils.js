@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-require('dotenv').config()
 
 function verifyToken(context) {
   const Authorization = context.request.get('Authorization')
