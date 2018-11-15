@@ -33,8 +33,8 @@ async function updateStory(_, args, context, info) {
             revisions: {
                 create : {
                     title: story.title,
-                    content: story.description,
-                    description: story.content
+                    description: story.description,
+                    content: story.content
                 }
             }
         }
@@ -58,8 +58,8 @@ async function revertStory(_, args, context, info) {
             revisions: {
                 create: {
                     title: story.title,
-                    content: story.description,
-                    description: story.content
+                    description: story.description,
+                    content: story.content
                 }
             }
         }
@@ -183,8 +183,8 @@ async function approveChanges(_, args, context, info) {
             revisions: {
                 create: {
                     title: originalStory.title,
-                    content: originalStory.description,
-                    description: originalStory.content
+                    description: originalStory.description,
+                    content: originalStory.content
                 }
             }
         }
