@@ -1,5 +1,6 @@
 const { verifyToken } = require('../utils');
 const { storyFragment } = require("../fragments/StoryFragment");
+const { revisionFragment } = require("../fragments/RevisionFragment");
 
 async function allStories (_, args, context, info) {
     const payload = verifyToken(context)
@@ -107,6 +108,11 @@ async function getContributionById(_, args, context, info) {
     return await context.prisma.contribution({ id: args.id }).$fragment(storyFragment)
 }
 
+async function revisionById (_, args, context, info) {
+    const payload = verifyToken(context)
+    return await context.prisma.revision({ id: args.revisionID }).$fragment(revisionFragment)
+}
+
 module.exports = {
     allStories,
     stories,
@@ -118,5 +124,6 @@ module.exports = {
     searchByDescription,
     getContributionsById,
     getContributionById,
-    storiesByCommunityId
+    storiesByCommunityId,
+    revisionById
 }
