@@ -165,7 +165,7 @@ async function contributeRequest(_, args, context, info) {
         contributorProfileId: forkedStory.nonAuthorId,
         authorProfileId: originalStory.authorId,
         originalContent: originalStory.content,
-        contributionContent: forkedStory.content,
+        contributionContent: args.content,
         comment: args.comment
     }).$fragment(contributionFragment)
 }
