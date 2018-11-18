@@ -1,5 +1,6 @@
 const { verifyToken } = require('../utils');
 const { storyFragment } = require("../fragments/StoryFragment");
+const { contributionFragment } = require("../fragments/contributionFragment");
 const { revisionFragment } = require("../fragments/RevisionFragment");
 
 async function allStories (_, args, context, info) {
@@ -100,12 +101,13 @@ function getContributionsById(_, args, context, info) {
         where: {
             authorProfileId: args.authorProfileId
         }
-    }).$fragment(storyFragment)
+    }).$fragment(contributionFragment)
 }
 
 async function getContributionById(_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.contribution({ id: args.id }).$fragment(storyFragment)
+    return await context.prisma.contribution({ id: args.id })
+        .$fragment(contributionFragment)
 }
 
 async function revisionById (_, args, context, info) {
