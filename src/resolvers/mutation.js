@@ -143,13 +143,14 @@ async function contributeRequest(_, args, context, info) {
     const payload = verifyToken(context)
 
     // get the forked story to retrieve parentStoryId, content etc..
-    const forkedStory = await context.prisma.story({ id: args.storyId })
+    const forkedStory = await context.prisma.story({ id: args.storyId }).$fragment(storyFragment)
 
-    const originalStory = await context.prisma.story({ id: forkedStory.parentStoryId })
+
+    const originalStory = await context.prisma.story({ id: forkedStory.parentStoryId }).$fragment(storyFragment)
 
     await context.prisma.updateStory({
         where: {
-            id: args.storyId
+            id: forkedStory.id
         },
         data: {
             contributionPending: true,
