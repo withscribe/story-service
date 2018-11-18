@@ -160,6 +160,7 @@ async function contributeRequest(_, args, context, info) {
     return await context.prisma.createContribution({
         forkId: forkedStory.id,
         contributorName: args.contributorName,
+        originalStoryId: originalStory.id,
         contributorProfileId: forkedStory.nonAuthorId,
         authorProfileId: originalStory.authorId,
         originalContent: originalStory.content,
