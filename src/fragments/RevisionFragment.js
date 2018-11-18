@@ -4,6 +4,7 @@ const revisionFragment = `
     title
     description
     content
+    createdAt
   }
 `
 
