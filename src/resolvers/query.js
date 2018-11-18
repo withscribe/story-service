@@ -1,5 +1,5 @@
 const { verifyToken } = require('../utils');
-const { storyFragment } = require("../fragments/storyFragment");
+const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");
 
 async function allStories (_, args, context, info) {

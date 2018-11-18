@@ -1,6 +1,6 @@
 const { verifyToken } = require('../utils')
 const Validation = require('../validation/validation');
-const { storyFragment } = require("../fragments/storyFragment");
+const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");
 
 async function submitStory (_, args, context, info) {
