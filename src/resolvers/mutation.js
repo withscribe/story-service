@@ -1,6 +1,7 @@
 const { verifyToken } = require('../utils')
 const Validation = require('../validation/validation');
-const { storyFragment } = require("../fragments/StoryFragment");
+const { storyFragment } = require("../fragments/storyFragment");
+const { contributionFragment } = require("../fragments/contributionFragment");
 
 async function submitStory (_, args, context, info) {
     const payload = verifyToken(context)
@@ -201,7 +202,7 @@ async function approveChanges(_, args, context, info) {
 
 async function rejectChanges(_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.deleteContribution({ id: args.contributionId }).$fragment(storyFragment)
+    return await context.prisma.deleteContribution({ id: args.contributionId }).$fragment(contributionFragment)
 }
 
 module.exports = {
