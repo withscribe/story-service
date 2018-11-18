@@ -21,7 +21,7 @@ function stories (_, args, context, info) {
 
 async function storyById (_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.story({ id: args.storyID })
+    return await context.prisma.story({ id: args.storyID }).$fragment(storyFragment)
 }
 
 function storiesByAuthorId (_, args, context, info) {
