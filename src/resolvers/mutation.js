@@ -108,6 +108,7 @@ async function addLikeToStory(_, args, context, info) {
 async function removeLikeFromStory(_, args, context, info) {
     const payload = verifyToken(context)
     const story = await context.prisma.story({ id: args.storyId }).$fragment(storyFragment)
+    const like = await context.prisma.likeses({ guid: args.storyId + args.profileId })
 
     if(story.likes > 0) {
         return await context.prisma.updateStory({
@@ -116,6 +117,7 @@ async function removeLikeFromStory(_, args, context, info) {
             },
             data: {
                 likes: story.likes - 1,
+                usersWhoLiked: { disconnect: { id: like.id } }
             }
         }).$fragment(storyFragment)
     }
