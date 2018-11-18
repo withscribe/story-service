@@ -165,7 +165,7 @@ async function contributeRequest(_, args, context, info) {
         originalContent: originalStory.content,
         contributionContent: forkedStory.content,
         comment: args.comment
-    }).$fragment(storyFragment)
+    }).$fragment(contributionFragment)
 }
 
 async function approveChanges(_, args, context, info) {
