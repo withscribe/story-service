@@ -112,7 +112,7 @@ async function getContributionById(_, args, context, info) {
 
 async function revisionById (_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.revision({ id: args.revisionID }).$fragment(revisionFragment)
+    return await context.prisma.revision({ id: args.id }).$fragment(revisionFragment)
 }
 
 module.exports = {
