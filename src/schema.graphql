@@ -11,6 +11,7 @@ type Query {
   searchByDescription(description: String!): [Story]
   getContributionsById(authorProfileId: ID): [Contribution!]!
   getContributionById(id: ID!): Contribution
+  revisionById(id: ID!): Revision
 }
 
 type Mutation {
