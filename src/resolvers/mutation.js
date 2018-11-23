@@ -117,7 +117,7 @@ async function removeLikeFromStory(_, args, context, info) {
             },
             data: {
                 likes: story.likes - 1,
-                usersWhoLiked: { disconnect: { id: like.id } }
+                usersWhoLiked: { delete: { id: like.id } }
             }
         }).$fragment(storyFragment)
     }
