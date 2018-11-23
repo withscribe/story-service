@@ -206,7 +206,11 @@ async function approveChanges(_, args, context, info) {
 
 async function rejectChanges(_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.deleteContribution({ id: args.contributionId }).$fragment(contributionFragment)
+    const contribution = await context.prisma.contribution({ id: args.contributionId }).$fragment(contributionFragment)
+    await context.prisma.deleteStory({ id: contribution.forkId })
+    const originalStory = await context.prisma.story({ id: contribution.originalStoryId }).$fragment(storyFragment)
+    await context.prisma.deleteContribution({ id: args.contributionId })
+    return originalStory
 }
 
 module.exports = {
