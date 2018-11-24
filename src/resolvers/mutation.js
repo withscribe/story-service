@@ -2,6 +2,7 @@ const { verifyToken } = require('../utils')
 const Validation = require('../validation/validation');
 const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");
+const { likesFragment } = require("../fragments/likesFragment");
 
 async function submitStory (_, args, context, info) {
     const payload = verifyToken(context)
@@ -91,7 +92,9 @@ async function cloneStory (_, args, context, info) {
 async function addLikeToStory(_, args, context, info) {
     const payload = verifyToken(context)
     const story = await context.prisma.story({ id: args.storyId })
-    const like = await context.prisma.createLikes({ guid: args.storyId + args.profileId })
+    const like = await context.prisma.createLikes({
+        guid: args.storyId + args.profileId
+    }).$fragment(likesFragment)
 
     return await context.prisma.updateStory({
         where: {
@@ -110,7 +113,7 @@ async function removeLikeFromStory(_, args, context, info) {
     const story = await context.prisma.story({ id: args.storyId }).$fragment(storyFragment)
 
     const guid = args.storyId + args.profileId
-    const likeToRemove = await context.prisma.likes({ guid: guid })
+    const likeToRemove = await context.prisma.likes({ guid: guid }).$fragment(likesFragment)
 
     if(story.likes > 0) {
         return await context.prisma.updateStory({
