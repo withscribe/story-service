@@ -12,11 +12,11 @@ type Story {
   description: String
   content: String
   share: Boolean @default(value: "false")
-  views: Int
-  likes: Int
+  views: Int @default(value: "0")
+  likes: Int @default(value: "0")
   usersWhoLiked: [Likes!]!
-  clones: Int
-  contributions: Int
+  clones: Int @default(value: "0")
+  contributions: Int @default(value: "0")
   revisions: [Revision!]!
   updatedAt: DateTime!
   createdAt: DateTime!
