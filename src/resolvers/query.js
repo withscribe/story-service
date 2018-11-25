@@ -4,8 +4,10 @@ const { contributionFragment } = require("../fragments/contributionFragment");
 const { revisionFragment } = require("../fragments/RevisionFragment");
 
 async function allStories (_, args, context, info) {
-    const payload = verifyToken(context)
-    return await context.prisma.stories(_).$fragment(storyFragment)
+    // const payload = verifyToken(context)
+    return await context.prisma.stories({
+        orderBy: 'id_DESC'
+    }).$fragment(storyFragment)
 }
 
 function stories (_, args, context, info) {
