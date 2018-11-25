@@ -6,15 +6,23 @@ const { likesFragment } = require("../fragments/likesFragment");
 
 async function submitStory (_, args, context, info) {
     const payload = verifyToken(context)
-    return await context.prisma.createStory({
-        title: args.title,
-        author: args.author,
-        description: args.description,
-        content: args.content,
-        authorId: args.authorId,
-        isCloned: false,
-        isForked: false
-    }).$fragment(storyFragment)
+    try {
+        if(content != null || content !== "") {
+            return await context.prisma.createStory({
+                title: args.title,
+                author: args.author,
+                description: args.description,
+                content: args.content,
+                authorId: args.authorId,
+                isCloned: false,
+                isForked: false
+            }).$fragment(storyFragment)
+        } else {
+            throw new NoContentError
+        }
+    } catch (err) {
+        throw new MutationError(err)
+    }
 }
 
 async function updateStory(_, args, context, info) {
@@ -230,4 +238,17 @@ module.exports = {
     contributeRequest,
     approveChanges,
     rejectChanges
+}
+
+
+class MutationError extends Error {
+    constructor(err) {
+        super(`Mutation failed. Please see error message.\n [Error] ${err.message}`)
+    }
+}
+
+class NoContentError extends Error {
+    constructor() {
+        super("Submit story failed because the story content was null or empty.")
+    }
 }
