@@ -20,6 +20,7 @@ type Story {
   revisions: [Revision!]!
   updatedAt: DateTime!
   createdAt: DateTime!
+  communityId: ID
 }
 
 type Contribution {
