@@ -7,7 +7,7 @@ const { likesFragment } = require("../fragments/likesFragment");
 async function submitStory (_, args, context, info) {
     const payload = verifyToken(context)
     try {
-        if(content != null || content !== "") {
+        if(args.content != null || args.content !== "") {
             return await context.prisma.createStory({
                 title: args.title,
                 author: args.author,
