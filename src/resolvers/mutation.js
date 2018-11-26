@@ -4,7 +4,7 @@ const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");
 const { likesFragment } = require("../fragments/likesFragment");
 
-async function submitStory (_, args, context, info) {
+async function createStory (_, args, context, info) {
     const payload = verifyToken(context)
     try {
         if(args.content != null || args.content !== "") {
@@ -15,7 +15,8 @@ async function submitStory (_, args, context, info) {
                 content: args.content,
                 authorId: args.authorId,
                 isCloned: false,
-                isForked: false
+                isForked: false,
+                communityId: args.communityId,
             }).$fragment(storyFragment)
         } else {
             throw new NoContentError
@@ -226,8 +227,34 @@ async function rejectChanges(_, args, context, info) {
     return originalStory
 }
 
+removeCommunityId = async (_, args, context, info) => {
+    const payload = verifyToken(context)
+
+    return updatedStory = await context.prisma.updateStory({
+        where: {
+            id: args.storyId
+        },
+        data: {
+            communityId: null
+        }
+    }).$fragment(storyFragment)
+}
+
+addCommunityId = async (_, args, context, info) => {
+    const payload = verifyToken(context)
+
+    return updatedStory = await context.prisma.updateStory({
+        where: {
+            id: args.storyId
+        },
+        data: {
+            communityId: args.communityId
+        }
+    }).$fragment(storyFragment)
+}
+
 module.exports = {
-    submitStory,
+    createStory,
     updateStory,
     revertStory,
     deleteStory,
@@ -237,7 +264,9 @@ module.exports = {
     forkStory,
     contributeRequest,
     approveChanges,
-    rejectChanges
+    rejectChanges,
+    addCommunityId,
+    removeCommunityId,
 }
 
 

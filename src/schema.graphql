@@ -15,12 +15,13 @@ type Query {
 }
 
 type Mutation {
-  submitStory(
+  createStory(
     title: String!,
     description: String!,
     author: String!
-    content: String,
+    content: String!,
     authorId: ID,
+    communityId: ID,
   ): Story
 
   updateStory(
@@ -72,6 +73,9 @@ type Mutation {
   rejectChanges (
     contributionId: ID,
   ): Story
+
+  addCommunityId(storyId: ID!, communityId: ID!): Story
+  removeCommunityId(storyId: ID!): Story
 }
 
 # Models
@@ -98,6 +102,7 @@ type Story {
   revisions: [Revision]
   createdAt: DateTime
   updatedAt: DateTime
+  communityId: ID
 }
 
 type Contribution {
