@@ -1,3 +1,6 @@
+// Author: Austin Howlett, Gerhard Knelsen
+// Description: Responsible for resolving all query (in relation to REST this would GET endpoints) schema endpoints (business logic)
+
 const { verifyToken } = require('../utils');
 const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");

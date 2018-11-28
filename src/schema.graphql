@@ -1,3 +1,6 @@
+# Author: Austin Howlett, Gerhard Knelsen
+# Description: GraphQL Schema - endpoints used in http calls (API definition)
+
 type Query {
   allStories: [Story]
   stories(searchString: String!): [Story!]!

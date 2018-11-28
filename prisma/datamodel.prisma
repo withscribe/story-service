@@ -1,3 +1,6 @@
+# Author: Austin Howlett, Gerhard Knelsen
+# Description: Database models
+
 type Story {
   id: ID! @unique
   authorId: ID
