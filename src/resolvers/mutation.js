@@ -2,7 +2,6 @@
 // Description: Responsible for resolving all mutation (in realtion to REST this would be POST,PUT,PATCH,DELETE) schema endpoints (business logic)
 
 const { verifyToken } = require('../utils')
-const Validation = require('../validation/validation');
 const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");
 const { likesFragment } = require("../fragments/likesFragment");
