@@ -31,6 +31,8 @@ const storyFragment = `
       title
       description
       content
+      createdAt
+      updatedAt
     }
   }
 `

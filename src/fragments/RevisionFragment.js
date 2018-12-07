@@ -8,6 +8,7 @@ const revisionFragment = `
     description
     content
     createdAt
+    updatedAt
   }
 `
 
