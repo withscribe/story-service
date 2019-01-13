@@ -1,18 +1,15 @@
-# Author: Austin Howlett, Gerhard Knelsen
-# Description: GraphQL Schema - endpoints used in http calls (API definition)
-
 type Query {
-  allStories: [Story]
-  stories(searchString: String!): [Story!]!
+  allStories(skip: Int, first: Int, last: Int, before: ID, after: ID): [Story]
+  stories(searchString: String!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story!]!
   storyById(storyID: ID!): Story
-  storiesByAuthorId(authorId: ID!): [Story!]!
-  storiesByNonAuthorId(nonAuthorId: ID!): [Story!]!
-  storiesByCommunityId(communityId: ID!): [Story!]!
-  searchByKeyword(searchString: String!): [Story!]!
-  searchByAuthor(username: String!): [Story!]!
-  searchByTitle(title: String!): [Story]
-  searchByDescription(description: String!): [Story]
-  getContributionsById(authorProfileId: ID): [Contribution!]!
+  storiesByAuthorId(authorId: ID!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story!]!
+  storiesByNonAuthorId(nonAuthorId: ID!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story!]!
+  storiesByCommunityId(communityId: ID!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story!]!
+  searchByKeyword(searchString: String!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story!]!
+  searchByAuthor(username: String!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story!]!
+  searchByTitle(title: String!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story]
+  searchByDescription(description: String!, skip: Int, first: Int, last: Int, before: ID, after: ID): [Story]
+  getContributionsById(authorProfileId: ID, skip: Int, first: Int, last: Int, before: ID, after: ID): [Contribution!]!
   getContributionById(id: ID!): Contribution
   revisionById(id: ID!): Revision
 }
