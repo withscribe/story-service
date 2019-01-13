@@ -1,6 +1,3 @@
-// Author: Austin Howlett
-// Description: Verifies the access token
-
 const jwt = require('jsonwebtoken')
 
 function verifyToken(context) {
