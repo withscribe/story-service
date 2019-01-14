@@ -5,6 +5,10 @@ const { revisionFragment } = require("../fragments/RevisionFragment");
 
 allStories = async (_, args, context, info) => {
   return await context.prisma.stories({
+    where: {
+      isCloned: false,
+      isForked: false,
+    },
     orderBy: 'id_DESC',
     first: args.first,
     last: args.last,
