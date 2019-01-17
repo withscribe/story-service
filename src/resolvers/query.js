@@ -3,6 +3,7 @@ const { storyFragment } = require("../fragments/StoryFragment");
 const { contributionFragment } = require("../fragments/contributionFragment");
 const { revisionFragment } = require("../fragments/RevisionFragment");
 
+// TODO: Review the permissions for these ... for now full access
 allStories = async (_, args, context, info) => {
   return await context.prisma.stories({
     where: {
@@ -19,7 +20,7 @@ allStories = async (_, args, context, info) => {
 }
 
 stories = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       OR: [
@@ -36,12 +37,12 @@ stories = (_, args, context, info) => {
 }
 
 storyById = async (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return await context.prisma.story({ id: args.storyID }).$fragment(storyFragment)
 }
 
 storiesByAuthorId = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       AND: [
@@ -59,7 +60,7 @@ storiesByAuthorId = (_, args, context, info) => {
 }
 
 storiesByNonAuthorId = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       AND: [
@@ -81,7 +82,7 @@ storiesByNonAuthorId = (_, args, context, info) => {
 }
 
 storiesByCommunityId = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       communityId: args.communityId,
@@ -95,7 +96,7 @@ storiesByCommunityId = (_, args, context, info) => {
 }
 
 searchByKeyword = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       OR: [
@@ -113,7 +114,7 @@ searchByKeyword = (_, args, context, info) => {
 }
 
 searchByTitle = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       OR: [
@@ -129,7 +130,7 @@ searchByTitle = (_, args, context, info) => {
 }
 
 searchByDescription = (_, args, context, info) => {
-  const payload = verifyToken(context)
+  //const payload = verifyToken(context)
   return context.prisma.stories({
     where: {
       OR: [
